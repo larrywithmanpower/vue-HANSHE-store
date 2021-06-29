@@ -170,8 +170,8 @@
           <div class="w-100 my-3 border-top border-secondary"></div>
         </div>
         <div class="col-auto me-auto">
-          <ul class="list-inline text-left fs-3">
-            <li class="list-inline-item text-center me-3 icon--hover">
+          <ul class="list-inline text-left fs-4 footer-icons">
+            <li class="list-inline-item text-center rounded-circle">
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
@@ -179,7 +179,7 @@
                 ><i class="bi bi-facebook"></i
               ></a>
             </li>
-            <li class="list-inline-item text-center me-3">
+            <li class="list-inline-item text-center rounded-circle">
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
@@ -187,7 +187,7 @@
                 ><i class="bi bi-instagram"></i
               ></a>
             </li>
-            <li class="list-inline-item text-center me-3">
+            <li class="list-inline-item text-center rounded-circle">
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
@@ -195,7 +195,7 @@
                 ><i class="bi bi-linkedin"></i
               ></a>
             </li>
-            <li class="list-inline-item text-center">
+            <li class="list-inline-item text-center rounded-circle">
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
@@ -248,7 +248,21 @@
   font-size: 2rem;
 }
 
-#tempaltemo_footer a:hover {
-  color: #68bb7d !important;
+#tempaltemo_footer {
+  a:hover {
+    color: #68bb7d;
+  }
+  ul.footer-icons li {
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    &:hover {
+    background-color: #cfd6e1;
+    transition: .5s;
+    i {
+      color:#212934;
+    }
+    }
+  }
 }
 </style>
