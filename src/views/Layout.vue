@@ -1,92 +1,78 @@
 <template>
   <section class="py-1 bg-dark text-white fs-7">
     <div class="container">
-      <div class="row text-center">
-        <div class="row">
-          <div class="col-md-4 pe-4 d-flex align-items-center">
-            <div class="me-2 d-flex justify-content-center align-items-center">
-              <i class="bi bi-telephone-fill"></i>
-            </div>
-            <a href="telto: + 1234 2345 67" class="link-light"
-              >+ 1234 2345 67</a
-            >
-          </div>
-          <div class="col-md-4 pe-4 d-flex align-items-center me-auto">
-            <div class="me-2 d-flex justify-content-center align-items-center">
-              <i class="bi bi-mailbox"></i>
-            </div>
-            <a href="mailto: mapower0708@gmail.com" class="link-light"
-              >hanshe@gmail.com</a
-            >
-          </div>
-          <div class="col-md-4 d-flex justify-content-end">
-            <a href="#" class="d-inline-block link-light">
-              <i class="bi bi-facebook me-3"></i>
-            </a>
-            <a href="#" class="d-inline-block"
-              ><i class="bi bi-instagram text-white me-3"></i
-            ></a>
-            <a href="#" class="d-inline-block"
-              ><i class="bi bi-linkedin text-white me-3"></i
-            ></a>
-            <a href="#" class="d-inline-block"
-              ><i class="bi bi-github text-white"></i
-            ></a>
-          </div>
+      <div class="row justify-content-between">
+          <ul class="col-md-4 pe-4 d-lg-flex align-items-center flex-wrap mb-0">
+            <li class="me-3 d-flex align-items-center">
+              <i class="bi bi-telephone-fill me-2"></i>
+              <a href="telto: + 1234 2345 67" class="link-light"
+                >+ 1234 2345 67</a
+              >
+            </li>
+            <li class="d-flex align-items-center">
+              <i class="bi bi-mailbox me-2"></i>
+              <a href="mailto: mapower0708@gmail.com" class="link-light"
+                >hanshe@gmail.com</a
+              >
+            </li>
+          </ul>
+          <ul class="col-md-6 d-flex justify-content-md-end list-unstyled mb-0">
+            <li>
+              <a href="#" class="d-inline-block link-light">
+                <i class="bi bi-facebook me-3"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="d-inline-block"
+                ><i class="bi bi-instagram text-white me-3"></i
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="d-inline-block"
+                ><i class="bi bi-linkedin text-white me-3"></i
+              ></a>
+            </li>
+            <li>
+              <a href="#" class="d-inline-block"
+                ><i class="bi bi-github text-white"></i
+              ></a>
+            </li>
+          </ul>
         </div>
-      </div>
     </div>
   </section>
+  <!-- navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow">
     <div class="container d-flex justify-content-between align-items-center">
       <router-link to="/" class="navbar-brand logoFont text-primary"
         >HanShe</router-link
       >
-      <button
-        class="navbar-toggler"
+      <button class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+        data-bs-target="#layoutNav"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="
-          align-self-center
-          collapse
-          navbar-collapse
-          flex-fill
-          d-lg-flex
-          justify-content-lg-between
-        "
-        id="navbarNav"
-      >
-        <div class="ms-auto">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link to="/" class="nav-link">Home</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link to="/about" class="nav-link">About</router-link>
-            </li>
-          </ul>
+      <div class="collapse navbar-collapse mx-lg-auto
+      d-lg-flex justify-content-lg-end align-self-center"
+      id="layoutNav">
+        <div class="navbar-nav">
+          <router-link to="/home" class="nav-link">首頁</router-link>
+          <router-link to="/about" class="nav-link">關於寒舍</router-link>
+          <router-link to="/products/category" class="nav-link">寒舍商品</router-link>
+          <a href="#" class="nav-link">Contact</a>
         </div>
         <div class="navbar">
-          <a href="#" class="nav-link link-secondary">
-            <i class="bi bi-cart-plus-fill">
-              <strong class="ps-1">{0}</strong>
-            </i>
-          </a>
+          <a href="#" class="nav-link"><i class="bi bi-cart-plus me-2"></i><small>[ 0 ]</small></a>
         </div>
       </div>
     </div>
   </nav>
   <router-view></router-view>
   <!-- footer -->
-  <footer class="bg-dark" id="tempaltemo_footer">
+  <footer class="bg-dark" id="layoutFooter">
     <div class="container">
       <div class="row">
         <div class="col-md-4 pt-5">
@@ -248,7 +234,16 @@
   font-size: 2rem;
 }
 
-#tempaltemo_footer {
+#layoutNav {
+  .nav-link {
+    &:hover,
+    &.active {
+      color: #69bb7e;
+    }
+  }
+}
+
+#layoutFooter {
   a:hover {
     color: #68bb7d;
   }
