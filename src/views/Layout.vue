@@ -42,12 +42,15 @@
     </div>
   </section>
   <!-- navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow">
+  <nav class="navbar navbar-expand-lg sticky-top"
+  :class="[classList.navbarTop, classList.navbarInner]"
+  id='nav-top'
+  >
     <div class="container d-flex justify-content-between align-items-center">
       <router-link to="/" class="navbar-brand logoFont text-primary"
         >HanShe</router-link
       >
-      <button class="navbar-toggler"
+      <button class="navbar-toggler btn-sm"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#layoutNav"
@@ -62,14 +65,18 @@
           <router-link to="/home" class="nav-link">首頁</router-link>
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
           <router-link to="/products/category" class="nav-link">寒舍商品</router-link>
-          <a href="#" class="nav-link">Contact</a>
+          <a href="#" class="nav-link">聯絡寒舍</a>
         </div>
         <div class="navbar">
-          <a href="#" class="nav-link"><i class="bi bi-cart-plus me-2"></i><small>[ 0 ]</small></a>
+          <a href="#" class="nav-link">
+            <i class="bi bi-cart-plus me-2"></i>
+            <small>[ 0 ]</small>
+          </a>
         </div>
       </div>
     </div>
   </nav>
+  <div id="main"></div>
   <router-view></router-view>
   <!-- footer -->
   <footer class="bg-dark" id="layoutFooter">
@@ -101,51 +108,33 @@
 
         <div class="col-md-4 pt-5">
           <h2 class="h3 text-light border-bottom pb-3 border-secondary">
-            產品資訊
+            寒舍資訊
           </h2>
           <ul class="list-unstyled text-light footer-link-list">
-            <li>
-              <a class="text-decoration-none link-light" href="#">Sport Wear</a>
+            <li class="">
+              <a class="text-decoration-none link-light" href="#">寒舍商品</a>
             </li>
-            <li>
-              <a class="text-decoration-none link-light" href="#"
-                >Men's Shoes</a
-              >
+            <li class="">
+              <a class="text-decoration-none link-light" href="#">關於寒舍</a>
             </li>
-            <li>
-              <a class="text-decoration-none link-light" href="#"
-                >Women's Shoes</a
-              >
+            <li class="">
+              <a class="text-decoration-none link-light" href="#">聯絡寒舍</a>
             </li>
-            <li>
-              <a class="text-decoration-none link-light" href="#"
-                >Popular Dress</a
-              >
-            </li>
-            <li>
-              <a class="text-decoration-none link-light" href="#"
-                >Gym Accessories</a
-              >
+            <li class="">
+              <a class="text-decoration-none link-light" href="#">FAQs</a>
             </li>
           </ul>
         </div>
 
         <div class="col-md-4 pt-5">
           <h2 class="h3 text-light border-bottom pb-3 border-secondary">
-            其他資訊
+            管理者資訊
           </h2>
           <ul class="list-unstyled text-light footer-link-list">
             <li>
-              <a class="text-decoration-none link-light" href="#">Home</a>
-            </li>
-            <li class="">
-              <a class="text-decoration-none link-light" href="#">About Us</a>
-            </li>
-            <li class="">
-              <a class="text-decoration-none link-light" href="#">FAQs</a>
-            </li>
-            <li class="">
-              <a class="text-decoration-none link-light" href="#">Contact</a>
+              <a class="text-decoration-none link-light" href="#">管理員後台
+                <i class="bi bi-person-fill"></i>
+              </a>
             </li>
           </ul>
         </div>
@@ -224,21 +213,58 @@
       </div>
     </div>
   </footer>
+  <!-- loginModal -->
+  <!-- <loginModal ref="loginModal"></loginModal> -->
 </template>
+
+<script>
+// import loginModal from '@/components/fronted/LoginModal.vue';
+
+export default {
+  data() {
+    return {
+      classList: {},
+    };
+  },
+  mounted() {
+    window.addEventListener('scroll', () => {
+      const windowY = window.scrollY;
+      const main = document.querySelector('#main');
+      if (windowY > main.offsetTop) {
+        this.classList = {
+          navbarTop: 'bg-light',
+          navbarInner: ['navbar-light', 'shadow'],
+        };
+      } else {
+        this.classList = {
+          navbarTop: 'bg-dark',
+          navbarInner: 'navbar-dark',
+        };
+      }
+    });
+  },
+  // components: {
+  //   loginModal,
+  // },
+};
+</script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+  $primary: #59AB6E;
 
 .logoFont {
   font-family: "Permanent Marker", cursive;
   font-size: 2rem;
 }
 
-#layoutNav {
-  .nav-link {
-    &:hover,
-    &.active {
-      color: #69bb7e;
+#nav-top {
+  transition: all .3s ease;
+  &.navbar-light,
+  &.navbar-dark {
+    & .nav-link:hover,
+    & .nav-link.active {
+      color: $primary;
     }
   }
 }

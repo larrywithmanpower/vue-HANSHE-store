@@ -1,4 +1,12 @@
 <template>
+  <Loading :active="state.isLoading">
+    <div class="loadingio-spinner-ripple-i0ld0lo9l1">
+      <div class="ldio-kc4k04s39o">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </Loading>
   <div class="row p-5">
     <div class="col-lg-6 mb-3">
       <img class="img-fluid" :src="product.detail.imageUrl" alt="product.detail.title">
@@ -27,7 +35,9 @@
       <small class="text-muted">類別：{{ product.detail.category }}</small><br>
       <small class="text-muted">庫存量：{{ product.detail.num }}</small>
       <hr class="bg-secondary">
-      <p>文案 -- 還沒做</p>
+      <p>{{ product.detail.description }}</p>
+      <hr class="bg-secondary">
+      <p>{{ product.detail.content }}</p>
     </div>
     <!-- nav pill -->
     <ul class="nav nav-pills nav-fill justify-content-center
@@ -80,13 +90,19 @@ export default {
       detail: {},
     });
 
+    const state = reactive({
+      isLoading: false,
+    });
+
     // get products
     const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/product/${product.id}`;
     onBeforeMount(async () => {
+      state.isLoading = true;
       axios.get(url).then((res) => {
         if (res.data.success) {
           product.detail = res.data.product;
           console.log(product.detail);
+          state.isLoading = false;
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.message);
@@ -96,6 +112,7 @@ export default {
 
     return {
       product,
+      state,
     };
   },
 };

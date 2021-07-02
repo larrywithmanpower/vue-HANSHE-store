@@ -1,21 +1,22 @@
 <template>
   <div class="banner d-flex justify-content-center align-items-center position-relative">
     <h2 class="display-4" data-aos="fade-up">
-      {{ route.name }}
+      {{ pageTitle }}
     </h2>
   </div>
+  <div class="container">ABOUT</div>
 </template>
 
 <script>
-import { useRoute } from 'vue-router';
 
 export default {
-  setup() {
-    const route = useRoute();
-
+  data() {
     return {
-      route,
+      pageTitle: '',
     };
+  },
+  created() {
+    this.pageTitle = this.$route.name;
   },
 };
 </script>

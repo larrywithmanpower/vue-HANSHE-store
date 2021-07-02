@@ -1,10 +1,18 @@
 <template>
+  <Loading :active="isLoading">
+    <div class="loadingio-spinner-ripple-i0ld0lo9l1">
+      <div class="ldio-kc4k04s39o">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </Loading>
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-9">
-        <h4>優惠碼 carsouel ??</h4>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-          <div class="col" v-for="item in filterCategories" :key="item.id">
+        <h4>search input with word </h4>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+          <div class="col" v-for="item in filterCategories" :key="item.id" data-aos="zoom-in">
             <div class="card card-product h-100">
               <div class="card-product__img">
                 <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
@@ -52,7 +60,7 @@
         </div>
       </div>
       <div class="col-lg-3">
-        <div class="list-group">
+        <div class="list-group rounded-0 mb-5 d-none d-lg-block">
           <h2
             class="
               text-center
@@ -67,18 +75,44 @@
           <a
             href="#"
             class="
-              list-group-item list-group-item-action list-group-item-primary
+              list-group-item list-group-item-action
+              border-0
               d-flex
               justify-content-between
+              list-group-item--hover
             "
             aria-current="true"
-            v-for="(item, index) in state.categories"
+            v-for="(item, index) in categories"
             :key="index"
-            @click.prevent="state.filterCategory = item"
-            :class="{ active: state.filterCategory === item }"
+            @click.prevent="filterCategory = item"
+            :class="{ active: filterCategory === item }"
           >
             {{ !item ? "所有商品" : item }}
-            <i class="bi bi-box-arrow-right"></i>
+            <i class="bi bi-chevron-right list-group-icon"></i>
+          </a>
+        </div>
+        <div class="list-group rounded-0">
+          <h2
+            class="
+              text-center
+              border-bottom border-3 border-primary
+              pb-2
+              mb-0
+              h4
+            "
+          >
+            最新資訊
+          </h2>
+          <a
+            href="#"
+            class="
+              list-group-item list-group-item-action
+              border-0
+              d-flex
+              justify-content-between
+              list-group-item--hover
+            ">
+            文章
           </a>
         </div>
       </div>
@@ -87,59 +121,63 @@
 </template>
 
 <script>
-import {
-  reactive, onBeforeMount, computed,
-} from 'vue';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
-
 export default {
-  setup() {
-    const state = reactive({
-      products: '',
+  data() {
+    return {
+      products: [],
       categories: ['', '休閒', '套裝', '靴子', 'V'],
       filterCategory: '',
-    });
-
-    // get products
-    const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
-    onBeforeMount(async () => {
-      axios.get(url).then((res) => {
+      isLoading: false,
+    };
+  },
+  created() {
+    this.getProducts();
+  },
+  methods: {
+    getProducts() {
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
+      this.isLoading = true;
+      this.$http.get(url).then((res) => {
         if (res.data.success) {
-          state.products = res.data.products;
-          console.log(state.products);
+          this.products = res.data.products;
+          console.log(this.products);
+          this.isLoading = false;
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.message);
         }
       });
-    });
-
-    // filter products
-    const filterCategories = computed(() => {
-      if (state.filterCategory) {
-        return state.products.filter((item) => item.category.match(state.filterCategory));
+    },
+  },
+  computed: {
+    filterCategories() {
+      if (this.filterCategory) {
+        return this.products.filter((item) => item.category.match(this.filterCategory));
       }
-      return state.products;
-    });
-
-    // goDetail
-    const router = useRouter();
-    const goDetail = (product) => {
-      router.push(`/products/product/${product.id}`);
-    };
-
-    return {
-      state,
-      filterCategories,
-      goDetail,
-    };
+      return this.products;
+    },
   },
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss">
   $primary: #59AB6E;
+  .list-group {
+    &-item--hover {
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: white;
+        background-color: $primary;
+        & .list-group-icon {
+          transition: 0.3s;
+          // using rotate() with turn can make animation
+          transform: rotate(1turn);
+        }
+      }
+    }
+  }
 
   .card-product {
     border: none;
