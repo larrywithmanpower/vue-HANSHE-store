@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 const routes = [
+  // fronted
   {
     path: '/',
     name: 'Layout',
@@ -34,6 +35,29 @@ const routes = [
             component: () => import('../views/fronted/SingleProduct.vue'),
           },
         ],
+      },
+    ],
+  },
+  // admin
+  {
+    path: '/admin',
+    name: '後台',
+    component: () => import('../views/Dashboard.vue'),
+    children: [
+      {
+        path: 'products',
+        name: 'Products',
+        component: () => import('../views/admin/Products.vue'),
+      },
+      {
+        path: 'order',
+        name: 'Order',
+        component: () => import('../views/admin/Order.vue'),
+      },
+      {
+        path: 'coupon',
+        name: 'Coupon',
+        component: () => import('../views/admin/Coupon.vue'),
       },
     ],
   },

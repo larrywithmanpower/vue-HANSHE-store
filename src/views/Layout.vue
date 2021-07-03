@@ -42,210 +42,24 @@
     </div>
   </section>
   <!-- navbar -->
-  <nav class="navbar navbar-expand-lg sticky-top"
-  :class="[classList.navbarTop, classList.navbarInner]"
-  id='nav-top'
-  >
-    <div class="container d-flex justify-content-between align-items-center">
-      <router-link to="/" class="navbar-brand logoFont text-primary"
-        >HanShe</router-link
-      >
-      <button class="navbar-toggler btn-sm"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#layoutNav"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse mx-lg-auto
-      d-lg-flex justify-content-lg-end align-self-center"
-      id="layoutNav">
-        <div class="navbar-nav">
-          <router-link to="/home" class="nav-link">首頁</router-link>
-          <router-link to="/about" class="nav-link">關於寒舍</router-link>
-          <router-link to="/products/category" class="nav-link">寒舍商品</router-link>
-          <a href="#" class="nav-link">聯絡寒舍</a>
-        </div>
-        <div class="navbar">
-          <a href="#" class="nav-link">
-            <i class="bi bi-cart-plus me-2"></i>
-            <small>[ 0 ]</small>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <Navbar></Navbar>
   <div id="main"></div>
   <router-view></router-view>
   <!-- footer -->
-  <footer class="bg-dark" id="layoutFooter">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 pt-5">
-          <h2 class="h2 text-success pb-3 logoFont mb-0">HANSHE</h2>
-          <ul class="list-unstyled text-light footer-link-list">
-            <li>
-              <i class="bi bi-house"></i>
-              123 Consectetur at ligula 10660
-            </li>
-            <li>
-              <i class="bi bi-telephone-fill me-1"></i>
-              <a class="text-decoration-none link-light" href="tel:1234 2345 67"
-                >1234 2345 67</a
-              >
-            </li>
-            <li>
-              <i class="bi bi-mailbox me-2"></i>
-              <a
-                class="text-decoration-none link-light"
-                href="mailto:info@company.com"
-                >info@company.com</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-md-4 pt-5">
-          <h2 class="h3 text-light border-bottom pb-3 border-secondary">
-            寒舍資訊
-          </h2>
-          <ul class="list-unstyled text-light footer-link-list">
-            <li class="">
-              <a class="text-decoration-none link-light" href="#">寒舍商品</a>
-            </li>
-            <li class="">
-              <a class="text-decoration-none link-light" href="#">關於寒舍</a>
-            </li>
-            <li class="">
-              <a class="text-decoration-none link-light" href="#">聯絡寒舍</a>
-            </li>
-            <li class="">
-              <a class="text-decoration-none link-light" href="#">FAQs</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-md-4 pt-5">
-          <h2 class="h3 text-light border-bottom pb-3 border-secondary">
-            管理者資訊
-          </h2>
-          <ul class="list-unstyled text-light footer-link-list">
-            <li>
-              <a class="text-decoration-none link-light" href="#">管理員後台
-                <i class="bi bi-person-fill"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="row text-light mb-4">
-        <div class="col-12 mb-3">
-          <div class="w-100 my-3 border-top border-secondary"></div>
-        </div>
-        <div class="col-auto me-auto">
-          <ul class="list-inline text-left fs-4 footer-icons">
-            <li class="list-inline-item text-center rounded-circle">
-              <a
-                class="text-light text-decoration-none"
-                target="_blank"
-                href="http://facebook.com/"
-                ><i class="bi bi-facebook"></i
-              ></a>
-            </li>
-            <li class="list-inline-item text-center rounded-circle">
-              <a
-                class="text-light text-decoration-none"
-                target="_blank"
-                href="https://www.instagram.com/"
-                ><i class="bi bi-instagram"></i
-              ></a>
-            </li>
-            <li class="list-inline-item text-center rounded-circle">
-              <a
-                class="text-light text-decoration-none"
-                target="_blank"
-                href="https://twitter.com/"
-                ><i class="bi bi-linkedin"></i
-              ></a>
-            </li>
-            <li class="list-inline-item text-center rounded-circle">
-              <a
-                class="text-light text-decoration-none"
-                target="_blank"
-                href="https://www.linkedin.com/"
-                ><i class="bi bi-github"></i
-              ></a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-auto">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="輸入Email訂閱最新資訊吧!!"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
-            <button
-              class="btn btn-primary text-white"
-              type="button"
-              id="button-addon2"
-            >
-              訂閱我們
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="w-100 bg-black py-3">
-      <div class="container">
-        <div class="row pt-2">
-          <div class="col-12">
-            <p class="text-left text-light">
-              Copyright © 2021 made by LarryH | 個人作品無任何商業用途
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <Footer></Footer>
   <!-- loginModal -->
-  <!-- <loginModal ref="loginModal"></loginModal> -->
 </template>
 
 <script>
 // import loginModal from '@/components/fronted/LoginModal.vue';
+import Navbar from '@/components/fronted/Navbar.vue';
+import Footer from '@/components/fronted/Footer.vue';
 
 export default {
-  data() {
-    return {
-      classList: {},
-    };
+  components: {
+    Navbar,
+    Footer,
   },
-  mounted() {
-    window.addEventListener('scroll', () => {
-      const windowY = window.scrollY;
-      const main = document.querySelector('#main');
-      if (windowY > main.offsetTop) {
-        this.classList = {
-          navbarTop: 'bg-light',
-          navbarInner: ['navbar-light', 'shadow'],
-        };
-      } else {
-        this.classList = {
-          navbarTop: 'bg-dark',
-          navbarInner: 'navbar-dark',
-        };
-      }
-    });
-  },
-  // components: {
-  //   loginModal,
-  // },
 };
 </script>
 

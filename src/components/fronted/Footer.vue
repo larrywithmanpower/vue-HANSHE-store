@@ -1,0 +1,164 @@
+<template>
+  <footer class="bg-dark" id="layoutFooter">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 pt-5">
+          <h2 class="h2 text-success pb-3 logoFont mb-0">HANSHE</h2>
+          <ul class="list-unstyled text-light footer-link-list">
+            <li>
+              <i class="bi bi-house"></i>
+              123 Consectetur at ligula 10660
+            </li>
+            <li>
+              <i class="bi bi-telephone-fill me-1"></i>
+              <a class="text-decoration-none link-light" href="tel:1234 2345 67"
+                >1234 2345 67</a
+              >
+            </li>
+            <li>
+              <i class="bi bi-mailbox me-2"></i>
+              <a
+                class="text-decoration-none link-light"
+                href="mailto:info@company.com"
+                >info@company.com</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-4 pt-5">
+          <h2 class="h3 text-light border-bottom pb-3 border-secondary">
+            寒舍資訊
+          </h2>
+          <ul class="list-unstyled text-light footer-link-list">
+            <li class="">
+              <a class="text-decoration-none link-light" href="#">寒舍商品</a>
+            </li>
+            <li class="">
+              <a class="text-decoration-none link-light" href="#">關於寒舍</a>
+            </li>
+            <li class="">
+              <a class="text-decoration-none link-light" href="#">聯絡寒舍</a>
+            </li>
+            <li class="">
+              <a class="text-decoration-none link-light" href="#">FAQs</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-md-4 pt-5">
+          <h2 class="h3 text-light border-bottom pb-3 border-secondary">
+            管理者資訊
+          </h2>
+          <ul class="list-unstyled text-light footer-link-list">
+            <li class="">
+              <button type="button" class="btn btn-sm btn-outline-primary
+              text-white border-white"
+              data-bs-toggle="LoginModal"
+              data-bs-target="#LoginModal"
+              @click="openModal">
+                管理員後台
+                <i class="bi bi-person-fill"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row text-light mb-4">
+        <div class="col-12 mb-3">
+          <div class="w-100 my-3 border-top border-secondary"></div>
+        </div>
+        <div class="col-auto me-auto">
+          <ul class="list-inline text-left fs-4 footer-icons">
+            <li class="list-inline-item text-center rounded-circle">
+              <a
+                class="text-light text-decoration-none"
+                target="_blank"
+                href="http://facebook.com/"
+                ><i class="bi bi-facebook"></i
+              ></a>
+            </li>
+            <li class="list-inline-item text-center rounded-circle">
+              <a
+                class="text-light text-decoration-none"
+                target="_blank"
+                href="https://www.instagram.com/"
+                ><i class="bi bi-instagram"></i
+              ></a>
+            </li>
+            <li class="list-inline-item text-center rounded-circle">
+              <a
+                class="text-light text-decoration-none"
+                target="_blank"
+                href="https://twitter.com/"
+                ><i class="bi bi-linkedin"></i
+              ></a>
+            </li>
+            <li class="list-inline-item text-center rounded-circle">
+              <a
+                class="text-light text-decoration-none"
+                target="_blank"
+                href="https://www.linkedin.com/"
+                ><i class="bi bi-github"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-auto">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="輸入Email訂閱最新資訊吧!!"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+            />
+            <button
+              class="btn btn-primary text-white"
+              type="button"
+              id="button-addon2"
+            >
+              訂閱我們
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-100 bg-black py-3">
+      <div class="container">
+        <div class="row pt-2">
+          <div class="col-12">
+            <p class="text-left text-light">
+              Copyright © 2021 made by LarryH | 個人作品無任何商業用途
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <LoginModal ref="LoginModal" id="LoginModal"></LoginModal>
+</template>
+
+<script>
+import LoginModal from '@/components/fronted/LoginModal.vue';
+
+export default {
+  components: {
+    LoginModal,
+  },
+  methods: {
+    openModal() {
+      this.$refs.LoginModal.showModal();
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+  #layoutFooter a:hover{
+    transition: all .3s ease;
+  }
+</style>
