@@ -26,23 +26,20 @@
           mx-lg-auto
           d-lg-flex
           justify-content-lg-end
-          align-self-center
+          align-items-center
         "
         id="layoutNav"
       >
         <div class="navbar-nav">
           <router-link to="/home" class="nav-link">首頁</router-link>
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
-          <router-link to="/products/category" class="nav-link"
-            >寒舍商品</router-link
+          <router-link to="/products/category" class="nav-link">寒舍商品</router-link
           >
           <a href="#" class="nav-link">聯絡寒舍</a>
-        </div>
-        <div class="navbar">
-          <a href="#" class="nav-link">
+          <router-Link to="/products/cart" class="nav-link">
             <i class="bi bi-cart-plus me-2"></i>
-            <small>[ 0 ]</small>
-          </a>
+            <small>[ {{ carts.length }} ]</small>
+          </router-Link>
         </div>
       </div>
     </div>
@@ -51,6 +48,7 @@
 
 <script>
 export default {
+  props: ['carts'],
   data() {
     return {
       classList: {},
@@ -75,3 +73,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .btn-outline-primary:hover {
+    color: #fff;
+  }
+
+</style>

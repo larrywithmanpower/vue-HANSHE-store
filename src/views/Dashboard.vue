@@ -21,7 +21,7 @@
         id="menu"
       >
         <li class="nav-item">
-          <routerLink to="/admin/products" class="nav-link text-truncate">
+          <routerLink to="/admin" class="nav-link text-truncate">
             <i class="fs-5 bi-house"></i
             ><span class="ms-1 d-none d-sm-inline">Home</span>
           </routerLink>

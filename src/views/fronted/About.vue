@@ -1,6 +1,6 @@
 <template>
   <div class="banner d-flex justify-content-center align-items-center position-relative">
-    <h2 class="display-4" data-aos="fade-up">
+    <h2 class="display-4 routeFont" data-aos="fade-up">
       {{ pageTitle }}
     </h2>
   </div>

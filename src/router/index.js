@@ -34,6 +34,11 @@ const routes = [
             name: '商品細節',
             component: () => import('../views/fronted/SingleProduct.vue'),
           },
+          {
+            path: 'cart',
+            name: '購物車',
+            component: () => import('../views/fronted/Cart.vue'),
+          },
         ],
       },
     ],
@@ -45,8 +50,8 @@ const routes = [
     component: () => import('../views/Dashboard.vue'),
     children: [
       {
-        path: 'products',
-        name: 'Products',
+        path: 'adminProducts',
+        name: 'AdminProducts',
         component: () => import('../views/admin/Products.vue'),
       },
       {

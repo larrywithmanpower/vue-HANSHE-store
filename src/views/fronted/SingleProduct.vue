@@ -1,5 +1,5 @@
 <template>
-  <Loading :active="state.isLoading">
+  <Loading :active="isLoading">
     <div class="loadingio-spinner-ripple-i0ld0lo9l1">
       <div class="ldio-kc4k04s39o">
         <div></div>
@@ -8,11 +8,11 @@
     </div>
   </Loading>
   <div class="row p-5">
-    <div class="col-lg-6 mb-3">
-      <img class="img-fluid" :src="product.detail.imageUrl" alt="product.detail.title">
+    <div class="col-md-6 mb-3">
+      <img class="img-fluid" :src="product.imageUrl" alt="product.title">
     </div>
-    <div class="col-lg-6 px-5">
-      <h3>{{ product.detail.title }}</h3>
+    <div class="col-md-6 px-5">
+      <h3>{{ product.title }}</h3>
       <ul class="d-flex list-unstyled align-items-center">
         <li class="text-warning me-3">
           <span class="me-1">5.0</span>
@@ -31,13 +31,29 @@
           <span class="badge bg-success">有庫存</span>
         </li>
       </ul>
-      <h2 class="text-primary">$ {{ product.detail.price }}</h2>
-      <small class="text-muted">類別：{{ product.detail.category }}</small><br>
-      <small class="text-muted">庫存量：{{ product.detail.num }}</small>
+      <h2 class="text-primary">$ {{ product.price }}</h2>
+      <small class="text-muted">類別：{{ product.category }}</small><br>
+      <small class="text-muted">庫存量：{{ product.num }}</small>
       <hr class="bg-secondary">
-      <p>{{ product.detail.description }}</p>
+      <p>{{ product.description }}</p>
       <hr class="bg-secondary">
-      <p>{{ product.detail.content }}</p>
+      <div class="input-group mb-4">
+        <button class="btn btn-primary" type="button"
+        @click="qty --">
+          <i class="bi bi-dash"></i>
+        </button>
+        <input type="text" class="form-control text-center"
+        min="1"
+        v-model.Number="qty">
+        <button class="btn btn-primary" type="button"
+        @click="qty ++"
+        >
+          <i class="bi bi-plus"></i>
+        </button>
+        <button class="btn btn-outline-primary" type="button"
+        @click="addCart(product.id)"
+        >加入購物車</button>
+      </div>
     </div>
     <!-- nav pill -->
     <ul class="nav nav-pills nav-fill justify-content-center
@@ -78,42 +94,53 @@
 </template>
 
 <script>
-import { useRoute } from 'vue-router';
-import { reactive, onBeforeMount } from 'vue';
-import axios from 'axios';
 
 export default {
-  setup() {
-    const route = useRoute();
-    const product = reactive({
-      id: route.params.id,
-      detail: {},
-    });
-
-    const state = reactive({
+  data() {
+    return {
+      id: this.$route.params.id,
+      product: {},
+      qty: 1,
       isLoading: false,
-    });
-
-    // get products
-    const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/product/${product.id}`;
-    onBeforeMount(async () => {
-      state.isLoading = true;
-      axios.get(url).then((res) => {
+    };
+  },
+  inject: ['emitter'],
+  created() {
+    this.getProduct();
+  },
+  methods: {
+    getProduct() {
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;
+      this.isLoading = true;
+      this.$http.get(url).then((res) => {
         if (res.data.success) {
-          product.detail = res.data.product;
-          console.log(product.detail);
-          state.isLoading = false;
+          this.product = res.data.product;
+          this.isLoading = false;
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.message);
         }
       });
-    });
-
-    return {
-      product,
-      state,
-    };
+    },
+    addCart(id) {
+      this.isLoading = true;
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
+      const data = {
+        product_id: id,
+        qty: this.qty,
+      };
+      this.$http.post(url, { data }).then((res) => {
+        if (res.data.success) {
+          // eslint-disable-next-line no-alert
+          alert(`${id}成功加入購物車`);
+          this.emitter.emit('update-cart');
+          this.isLoading = false;
+        } else {
+          // eslint-disable-next-line no-alert
+          alert('購物車加入失敗');
+        }
+      });
+    },
   },
 };
 </script>

@@ -1,10 +1,21 @@
 <template>
   <div class="banner d-flex justify-content-center align-items-center position-relative">
-    <h2 class="display-4 text-white" data-aos="fade-up">
-      {{ pageTitle }}
+    <h2 class="display-4 text-white routeFont" data-aos="fade-up"
+    v-if="pageTitle === '寒舍商品'">
+    <!-- 使用mitt來解決取route不動的問題 -->
+      寒舍商品
+    </h2>
+    <h2 class="display-4 text-white routeFont" data-aos="fade-up"
+    v-else>
+    <!-- 使用mitt來解決取route不動的問題 -->
+      購物車
     </h2>
   </div>
   <router-view></router-view>
+  <div class="container">
+    <h2>熱銷商品</h2>
+    <p>swiper</p>
+  </div>
 </template>
 
 <script>
@@ -14,8 +25,11 @@ export default {
       pageTitle: '',
     };
   },
+  inject: ['emitter'],
   created() {
-    this.pageTitle = this.$route.name;
+    this.emitter.on('page-title', (pageTitle) => {
+      this.pageTitle = pageTitle;
+    });
   },
 };
 </script>

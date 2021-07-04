@@ -12,7 +12,8 @@
       <div class="col-lg-9">
         <h4>search input with word </h4>
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
-          <div class="col" v-for="item in filterCategories" :key="item.id" data-aos="zoom-in">
+          <div class="col" v-for="item in filterCategories" :key="item.id" data-aos="zoom-in"
+          data-aos-once="true">
             <div class="card card-product h-100">
               <div class="card-product__img">
                 <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
@@ -128,10 +129,14 @@ export default {
       categories: ['', '休閒', '套裝', '靴子', 'V'],
       filterCategory: '',
       isLoading: false,
+      pageTitle: '',
     };
   },
+  inject: ['emitter'],
   created() {
     this.getProducts();
+    this.pageTitle = this.$route.name;
+    this.emitter.emit('page-title', this.pageTitle);
   },
   methods: {
     getProducts() {
@@ -147,6 +152,9 @@ export default {
           alert(res.data.message);
         }
       });
+    },
+    goDetail(item) {
+      this.$router.push(`/products/product/${item.id}`);
     },
   },
   computed: {
