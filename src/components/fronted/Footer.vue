@@ -1,5 +1,9 @@
 <template>
-  <footer class="bg-dark" id="layoutFooter">
+  <footer class="bg-dark position-relative mt-3" id="layoutFooter">
+    <a href="#" class="to-top"
+    :class="isTop ? 'goTopAfter' : ''"
+    @click.prevent="goTop()"
+    ></a>
     <div class="container">
       <div class="row">
         <div class="col-md-4 pt-5">
@@ -38,9 +42,6 @@
               <a class="text-decoration-none link-light" href="#">關於寒舍</a>
             </li>
             <li class="">
-              <a class="text-decoration-none link-light" href="#">聯絡寒舍</a>
-            </li>
-            <li class="">
               <a class="text-decoration-none link-light" href="#">FAQs</a>
             </li>
           </ul>
@@ -52,11 +53,13 @@
           </h2>
           <ul class="list-unstyled text-light footer-link-list">
             <li class="">
-              <button type="button" class="btn btn-sm btn-outline-primary
-              text-white border-white"
-              data-bs-toggle="LoginModal"
-              data-bs-target="#LoginModal"
-              @click="openModal">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-primary text-white border-white"
+                data-bs-toggle="LoginModal"
+                data-bs-target="#LoginModal"
+                @click="openModal"
+              >
                 管理員後台
                 <i class="bi bi-person-fill"></i>
               </button>
@@ -149,16 +152,74 @@ export default {
   components: {
     LoginModal,
   },
+  data() {
+    return {
+      scrollNum: 0,
+      isTop: false,
+    };
+  },
+  mounted() {
+    window.addEventListener('scroll', () => {
+      const top = document.documentElement.scrollTop
+        || document.body.scrollTop
+        || window.pageYOffset;
+      this.scrollNum = top;
+      if (top >= 100) {
+        this.isTop = true;
+      } else {
+        this.isTop = false;
+      }
+    });
+  },
   methods: {
     openModal() {
       this.$refs.LoginModal.showModal();
+    },
+    goTop() {
+      document.documentElement.scrollTop = 0;
     },
   },
 };
 </script>
 
 <style lang="scss">
-  #layoutFooter a:hover{
-    transition: all .3s ease;
-  }
+$primary: #59ab6e;
+#layoutFooter a:hover {
+  transition: all 0.3s ease;
+}
+
+.to-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  color: white;
+  display: inline-block; /* or block */
+  position: relative;
+  text-decoration: none;
+  border-color: transparent;
+  transition: all 0.3s ease-out;
+}
+.to-top:before {
+  content: "▲";
+  font-size: 2em;
+  position: absolute;
+  text-align: center;
+  top: -17px;
+  left: 50%;
+  margin-left: -0.7em;
+  border: solid 0.13em white;
+  border-radius: 0;
+  width: 2em;
+  height: 2em;
+  line-height: 1.5em;
+  border-color: inherit;
+  transition: transform 0.5s ease-in;
+}
+.to-top:hover {
+  color: $primary;
+  border-color: #fff;
+}
+.to-top:hover:before {
+  transform: rotate(360deg);
+}
 </style>

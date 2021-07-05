@@ -1,5 +1,6 @@
 <template>
-  <section class="py-1 bg-dark text-white fs-7">
+  <section class="py-1 bg-dark
+  text-white fs-7 d-md-block d-none">
     <div class="container">
       <div class="row justify-content-between">
           <ul class="col-md-4 pe-4 d-lg-flex align-items-center flex-wrap mb-0">

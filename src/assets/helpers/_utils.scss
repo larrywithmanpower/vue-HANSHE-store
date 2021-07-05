@@ -6,7 +6,7 @@
   font-family: "Permanent Marker", cursive;
   font-size: 2rem;
 }
-
+// 頁面title
 .routeFont {
   font-family: 'Noto Sans TC', sans-serif;
 }
@@ -15,13 +15,13 @@
   background-size: cover;
   background-position: center center;
 }
-
+// 主色按鈕內文字顏色
 .btn-primary {
   & i {
     color: #fff;  
   }
 }
-
+// 購物車表單
 .table {
   & .thead-primary tr th {
     padding: 20px 10px;
@@ -30,7 +30,23 @@
   }
 }
 
-// fronted loading
+// animation
+.transition-1 {
+  transition: all .3s ease;
+}
+
+.scale-hover .nav-link{
+  transition: .3s ease;
+  transform: scale(1);
+  &:hover {
+  transform: scale(1.3);
+  @media (max-width: 768px) {
+    transform: none;
+  }
+  }
+}
+
+// fronted loading效果
 @keyframes ldio-kc4k04s39o {
   0% {
     top: 96px;

@@ -1,8 +1,8 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg sticky-top"
-    :class="[classList.navbarTop, classList.navbarInner]"
+    class="navbar navbar-expand-lg"
     id="nav-top"
+    :class="[classList.navbarTop, classList.navbarInner]"
   >
     <div class="container d-flex justify-content-between align-items-center">
       <router-link to="/" class="navbar-brand logoFont text-primary"
@@ -30,12 +30,11 @@
         "
         id="layoutNav"
       >
-        <div class="navbar-nav">
+        <div class="navbar-nav scale-hover">
           <router-link to="/home" class="nav-link">首頁</router-link>
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
           <router-link to="/products/category" class="nav-link">寒舍商品</router-link
           >
-          <a href="#" class="nav-link">聯絡寒舍</a>
           <router-Link to="/products/cart" class="nav-link">
             <i class="bi bi-cart-plus me-2"></i>
             <small>[ {{ carts.length }} ]</small>
@@ -51,25 +50,31 @@ export default {
   props: ['carts'],
   data() {
     return {
-      classList: {},
+      classList: '',
     };
   },
-  mounted() {
-    window.addEventListener('scroll', () => {
+  methods: {
+    navbarTransition() {
       const windowY = window.scrollY;
       const main = document.querySelector('#main');
       if (windowY > main.offsetTop) {
         this.classList = {
           navbarTop: 'bg-light',
-          navbarInner: ['navbar-light', 'shadow'],
+          navbarInner: ['navbar-light', 'shadow', 'fixed-top'],
         };
       } else {
         this.classList = {
           navbarTop: 'bg-dark',
-          navbarInner: 'navbar-dark',
+          navbarInner: ['navbar-dark', 'fw-bold', 'sticky-top'],
         };
       }
-    });
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.navbarTransition);
+  },
+  unmounted() { // 離開頁面後移除監聽事件
+    window.removeEventListener('scroll', this.navbarTransition);
   },
 };
 </script>

@@ -11,18 +11,27 @@
       購物車
     </h2>
   </div>
-  <router-view></router-view>
+  <router-view :props-products='products'
+  :props-categories='categories'
+  ></router-view>
   <div class="container">
     <h2>熱銷商品</h2>
-    <p>swiper</p>
+    <SwiperCoverFlow :props-products='products'></SwiperCoverFlow>
   </div>
 </template>
 
 <script>
+import SwiperCoverFlow from '@/components/fronted/SwiperCoverFlow.vue';
+
 export default {
+  components: {
+    SwiperCoverFlow,
+  },
   data() {
     return {
       pageTitle: '',
+      products: [],
+      categories: [],
     };
   },
   inject: ['emitter'],
@@ -30,6 +39,28 @@ export default {
     this.emitter.on('page-title', (pageTitle) => {
       this.pageTitle = pageTitle;
     });
+    this.getProducts();
+    this.emitter.on('get-products', this.getProducts);
+  },
+  methods: {
+    getProducts() {
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
+      this.$http.get(url).then((res) => {
+        if (res.data.success) {
+          this.products = res.data.products;
+          this.getCategories();
+        } else {
+          // eslint-disable-next-line no-alert
+          alert(res.data.message);
+        }
+      }).catch((err) => { console.log(err); });
+    },
+    getCategories() {
+      const categories = new Set();
+      this.products.forEach((item) => categories.add(item.category));
+      console.log(categories);
+      this.categories = [...categories];
+    },
   },
 };
 </script>
@@ -40,5 +71,8 @@ export default {
     background-size: cover;
     background-position: bottom;
     height: 400px;
+    @media (max-width: 768px) {
+      height: 300px;
+    }
   }
 </style>

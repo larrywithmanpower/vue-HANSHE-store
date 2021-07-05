@@ -51,7 +51,7 @@
           </tr>
         </tbody>
       </table>
-      <button class="btn btn-outline-danger w-100"
+      <button class="btn btn-outline-danger w-50"
       v-show="carts.length !== 0"
       @click="delAllCarts()"
       >清空購物車</button>

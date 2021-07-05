@@ -122,11 +122,13 @@
 </template>
 
 <script>
+
 export default {
+  props: ['propsProducts', 'propsCategories'],
   data() {
     return {
       products: [],
-      categories: ['', '休閒', '套裝', '靴子', 'V'],
+      categories: [],
       filterCategory: '',
       isLoading: false,
       pageTitle: '',
@@ -134,25 +136,21 @@ export default {
   },
   inject: ['emitter'],
   created() {
-    this.getProducts();
     this.pageTitle = this.$route.name;
     this.emitter.emit('page-title', this.pageTitle);
+    this.emitter.emit('get-products');
+  },
+  mounted() {
+  },
+  watch: {
+    propsProducts() {
+      this.products = this.propsProducts;
+    },
+    propsCategories() {
+      this.categories = this.propsCategories;
+    },
   },
   methods: {
-    getProducts() {
-      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
-      this.isLoading = true;
-      this.$http.get(url).then((res) => {
-        if (res.data.success) {
-          this.products = res.data.products;
-          console.log(this.products);
-          this.isLoading = false;
-        } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
-        }
-      });
-    },
     goDetail(item) {
       this.$router.push(`/products/product/${item.id}`);
     },
