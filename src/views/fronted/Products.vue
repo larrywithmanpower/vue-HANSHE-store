@@ -16,19 +16,18 @@
   ></router-view>
   <div class="container">
     <h2>熱銷商品</h2>
-    <SwiperCoverFlow
+    <HotProducts class="text-start"
     :props-products='products'
-    :props-hot='hotProducts'
-    ></SwiperCoverFlow>
+    ></HotProducts>
   </div>
 </template>
 
 <script>
-import SwiperCoverFlow from '@/components/fronted/SwiperCoverFlow.vue';
+import HotProducts from '@/components/fronted/HotProducts.vue';
 
 export default {
   components: {
-    SwiperCoverFlow,
+    HotProducts,
   },
   data() {
     return {
@@ -53,7 +52,6 @@ export default {
         if (res.data.success) {
           this.products = res.data.products;
           this.getCategories();
-          this.getHot();
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.message);
@@ -65,13 +63,6 @@ export default {
       this.products.forEach((item) => categories.add(item.category));
       // console.log(categories);
       this.categories = [...categories];
-    },
-    getHot() {
-      this.products.forEach((item) => {
-        if (item.is_hot === 1) {
-          this.hotProducts.push(item);
-        }
-      });
     },
   },
 };
