@@ -24,16 +24,17 @@
             <i class="bi bi-star-fill me-1"></i>
           </span>
         </li>
-        <li class="me-3">
+        <li class="me-3" v-if="product.is_hot">
           <span class="badge bg-danger">熱賣品</span>
         </li>
         <li>
-          <span class="badge bg-success">有庫存</span>
+          <span class="badge bg-success"  v-if="product.storageNum > 0">有庫存</span>
+          <span class="badge bg-secondary" v-else>無庫存</span>
         </li>
       </ul>
       <h2 class="text-primary">$ {{ product.price }}</h2>
       <small class="text-muted">類別：{{ product.category }}</small><br>
-      <small class="text-muted">庫存量：{{ product.num }}</small>
+      <small class="text-muted">庫存量：{{ product.storageNum }}</small>
       <hr class="bg-secondary">
       <p>{{ product.description }}</p>
       <hr class="bg-secondary">
@@ -96,6 +97,7 @@
 <script>
 
 export default {
+  props: ['propsProducts', 'propsCategories'],
   data() {
     return {
       id: this.$route.params.id,

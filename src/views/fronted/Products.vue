@@ -16,7 +16,10 @@
   ></router-view>
   <div class="container">
     <h2>熱銷商品</h2>
-    <SwiperCoverFlow :props-products='products'></SwiperCoverFlow>
+    <SwiperCoverFlow
+    :props-products='products'
+    :props-hot='hotProducts'
+    ></SwiperCoverFlow>
   </div>
 </template>
 
@@ -32,6 +35,7 @@ export default {
       pageTitle: '',
       products: [],
       categories: [],
+      hotProducts: [],
     };
   },
   inject: ['emitter'],
@@ -49,6 +53,7 @@ export default {
         if (res.data.success) {
           this.products = res.data.products;
           this.getCategories();
+          this.getHot();
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.message);
@@ -58,8 +63,15 @@ export default {
     getCategories() {
       const categories = new Set();
       this.products.forEach((item) => categories.add(item.category));
-      console.log(categories);
+      // console.log(categories);
       this.categories = [...categories];
+    },
+    getHot() {
+      this.products.forEach((item) => {
+        if (item.is_hot === 1) {
+          this.hotProducts.push(item);
+        }
+      });
     },
   },
 };

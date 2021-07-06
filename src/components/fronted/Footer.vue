@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-dark position-relative mt-3" id="layoutFooter">
-    <a href="#" class="to-top"
+    <a href="#" class="to-top text-secondary"
     :class="isTop ? 'goTopAfter' : ''"
     @click.prevent="goTop()"
     ></a>
@@ -201,14 +201,14 @@ $primary: #59ab6e;
 }
 .to-top:before {
   content: "▲";
-  font-size: 2em;
+  font-size: 1.5em;
   position: absolute;
   text-align: center;
   top: -17px;
   left: 50%;
-  margin-left: -0.7em;
-  border: solid 0.13em white;
-  border-radius: 0;
+  margin-left: -1em;
+  border: solid 0.13em gray;
+  border-radius: 50%;
   width: 2em;
   height: 2em;
   line-height: 1.5em;

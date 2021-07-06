@@ -19,7 +19,7 @@
     :pagination="true"
     class="mySwiper"
   >
-    <template v-for="item in products" :key="item.id">
+    <template v-for="item in propsHot" :key="item.id">
       <swiper-slide>
         <div class="card card-product h-100">
           <div class="card-product__img">
@@ -75,7 +75,7 @@ import SwiperCore, { EffectCoverflow, Pagination, Autoplay } from 'swiper/core';
 SwiperCore.use([EffectCoverflow, Autoplay, Pagination]);
 
 export default {
-  props: ['propsProducts'],
+  props: ['propsProducts', 'propsHot'],
   components: {
     Swiper,
     SwiperSlide,
@@ -83,14 +83,21 @@ export default {
   data() {
     return {
       products: [],
+      hotProducts: [],
     };
   },
   watch: {
     propsProducts() {
       this.products = this.propsProducts;
     },
+    propsHot() {
+      this.hotProducts = this.propsHot;
+    },
   },
   methods: {
+    goDetail(item) {
+      this.$router.push(`/products/product/${item.id}`);
+    },
   },
 };
 </script>
