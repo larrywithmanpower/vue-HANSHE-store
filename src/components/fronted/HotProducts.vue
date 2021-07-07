@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       products: [],
+      product: {},
     };
   },
   watch: {
@@ -62,6 +63,12 @@ export default {
   computed: {
     filterHot() {
       return this.propsProducts.filter((item) => item.is_hot);
+    },
+  },
+  methods: {
+    //! 無法轉到單一商品頁面
+    goDetail(item) {
+      this.$router.push({ path: `/products/product/${item.id}` });
     },
   },
 };

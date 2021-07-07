@@ -14,11 +14,13 @@
   <router-view :props-products='products'
   :props-categories='categories'
   ></router-view>
-  <div class="container">
-    <h2>熱銷商品</h2>
-    <HotProducts class="text-start"
-    :props-products='products'
-    ></HotProducts>
+  <div class="bg-light py-3">
+    <div class="container">
+      <h2 class="text-danger"><i class="bi bi-bookmark-star"></i>熱銷商品</h2>
+      <HotProducts class="text-start"
+      :props-products='products'
+      ></HotProducts>
+    </div>
   </div>
 </template>
 

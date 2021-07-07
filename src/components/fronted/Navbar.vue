@@ -30,7 +30,7 @@
         "
         id="layoutNav"
       >
-        <div class="navbar-nav scale-hover">
+        <div class="navbar-nav">
           <router-link to="/home" class="nav-link">首頁</router-link>
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
           <router-link to="/products/category" class="nav-link">寒舍商品</router-link
@@ -80,6 +80,19 @@ export default {
 </script>
 
 <style lang="scss">
+  $primary: #59AB6E;
+
+  #nav-top {
+    transition: all .5s ease-in-out;
+    &.navbar-light,
+    &.navbar-dark {
+      & .nav-link:hover,
+      & .nav-link.active {
+        color: $primary;
+      }
+    }
+  }
+
   .btn-outline-primary:hover {
     color: #fff;
   }

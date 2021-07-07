@@ -23,10 +23,15 @@
                 管理人員帳號
               </label>
             </div>
-            <div class="form-floating">
-              <input type="password"
+            <div class="form-floating position-relative">
+              <input :type="isChecked ? 'text' : 'password'"
               class="form-control" id="floatingPassword" placeholder="Password"
               v-model="user.password">
+              <i class="bi bi-eye position-absolute top-50 end-0 translate-middle"
+              @click="showPassword" v-if="isChecked"></i>
+              <i class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle"
+              ref="showPassword"
+              @click="showPassword" v-if="!isChecked"></i>
               <label for="floatingPassword">
                 <i class="bi bi-shield-lock"></i>
                 管理人員密碼
@@ -50,6 +55,7 @@ export default {
   data() {
     return {
       loginModal: {},
+      isChecked: false,
       user: {
         username: '',
         password: '',
@@ -65,6 +71,13 @@ export default {
     },
     hideModal() {
       this.loginModal.hide();
+    },
+    showPassword() {
+      if (!this.isChecked) {
+        this.isChecked = true;
+      } else {
+        this.isChecked = false;
+      }
     },
     login() {
       const url = `${process.env.VUE_APP_URL}/admin/signin`;

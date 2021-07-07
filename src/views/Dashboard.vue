@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+
     <div class="row flex-nowrap">
       <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
         <div
@@ -60,6 +61,12 @@
               <router-link to="/admin/coupon" class="nav-link d-flex align-items-center">
                 <i class="fs-4 bi-bookmark"></i>
                 <span class="ms-1 d-none d-sm-inline">優惠劵管理</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/admin/article" class="nav-link d-flex align-items-center">
+                <i class="fs-4 bi-newspaper"></i>
+                <span class="ms-1 d-none d-sm-inline">文章管理</span>
               </router-link>
             </li>
           </ul>

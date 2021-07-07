@@ -19,13 +19,14 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in products" :key="item.id">
-            <th scope="row">1</th>
+            <th scope="row">{{ index + 1 }}</th>
             <td class="d-flex align-items-center">
               <img :src="item.imageUrl" :alt="`第${index + 1}圖`"
               class="img-fluid me-3"
               width="150"
               >
-              <span>
+                <span>
+                <small class="text-warning">{{ item.rate }}</small><br>
                 {{ item.title }}<br>
                 <small class="text-muted"
                 v-if="item.sex === 'male'">男鞋</small>
@@ -51,12 +52,19 @@
                 >編輯</button>
                 <button class="btn btn-outline-danger"
                 type="button"
+                @click="openModal('delete', item)"
                 >刪除</button>
               </div>
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="d-flex justify-content-center">
+      <Pagination
+      :page="pagination"
+      @get-page="getProducts"
+      ></Pagination>
     </div>
   </div>
 
@@ -65,14 +73,21 @@
   :is-new="isNew"
   @update-product="updateProduct"
   :tempProduct="tempProduct"></ProductModal>
+
+  <DelModal ref="DelModal" id="DelModal" :item="tempProduct"
+  @delete="deleteProduct"></DelModal>
 </template>
 
 <script>
 import ProductModal from '@/components/admin/ProductModal.vue';
+import DelModal from '@/components/DelModal.vue';
+import Pagination from '@/components/Pagination.vue';
 
 export default {
   components: {
     ProductModal,
+    DelModal,
+    Pagination,
   },
   inject: ['emitter'],
   data() {
@@ -83,6 +98,7 @@ export default {
         imagesUrl: [],
       },
       isNew: false,
+      pagination: {},
     };
   },
   created() {
@@ -120,6 +136,13 @@ export default {
             ...item,
           };
           this.$refs.ProductModal.showModal();
+          break;
+        case 'delete':
+          this.isNew = false;
+          this.tempProduct = {
+            ...item,
+          };
+          this.$refs.DelModal.showModal();
           break;
         default:
           break;
@@ -170,6 +193,24 @@ export default {
           console.log(err);
         });
       }
+    },
+    deleteProduct(tempProduct) {
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${tempProduct.id}`;
+      this.$http.delete(url).then((res) => {
+        if (res.data.success) {
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: res.data.message,
+          });
+          this.getProducts();
+          this.$refs.DelModal.hideModal();
+        } else {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: res.data.message,
+          });
+        }
+      });
     },
   },
 };

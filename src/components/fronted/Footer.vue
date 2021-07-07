@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-dark position-relative mt-3" id="layoutFooter">
+  <footer class="bg-dark position-relative" id="layoutFooter">
     <a href="#" class="to-top text-secondary"
     :class="isTop ? 'goTopAfter' : ''"
     @click.prevent="goTop()"
@@ -52,10 +52,10 @@
             管理者資訊
           </h2>
           <ul class="list-unstyled text-light footer-link-list">
-            <li class="">
+            <li>
               <button
                 type="button"
-                class="btn btn-sm btn-outline-primary text-white border-white"
+                class="btn btn-sm btn-outline-primary text-white border-0"
                 data-bs-toggle="LoginModal"
                 data-bs-target="#LoginModal"
                 @click="openModal"
@@ -204,7 +204,7 @@ $primary: #59ab6e;
   font-size: 1.5em;
   position: absolute;
   text-align: center;
-  top: -17px;
+  top: -35px;
   left: 50%;
   margin-left: -1em;
   border: solid 0.13em gray;
@@ -214,12 +214,13 @@ $primary: #59ab6e;
   line-height: 1.5em;
   border-color: inherit;
   transition: transform 0.5s ease-in;
-}
-.to-top:hover {
-  color: $primary;
-  border-color: #fff;
+  background-color: #fff;
+  box-shadow: 1px 1px 1px $primary;
+
 }
 .to-top:hover:before {
+  color: $primary;
+  border-color: #fff;
   transform: rotate(360deg);
 }
 </style>

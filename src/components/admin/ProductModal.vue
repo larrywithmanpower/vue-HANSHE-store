@@ -153,16 +153,55 @@
                 </div>
               </div>
               <hr />
-              <div class="form-group mb-3">
-                <label for="storageNum">庫存</label>
-                <input
-                  v-model.number="editProduct.storageNum"
-                  id="storageNum"
-                  type="number"
-                  min="0"
-                  class="form-control"
-                  placeholder="請輸入庫存"
-                />
+              <div class="row">
+                <div class="form-group col-6 mb-3">
+                  <label for="storageNum">庫存</label>
+                  <input
+                    v-model.number="editProduct.storageNum"
+                    id="storageNum"
+                    type="number"
+                    min="0"
+                    class="form-control"
+                    placeholder="請輸入庫存"
+                  />
+                </div>
+                <div class="form-check col-6">
+                  <p class="mb-1">星等</p>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                    type="radio" id="rate1" value="1.0"
+                    v-model="editProduct.rate">
+                    <label class="form-check-label" for="rate1">1.0</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                    type="radio" id="rate2" value="2.0"
+                    v-model="editProduct.rate">
+                    <label class="form-check-label"
+                    for="rate2">2.0</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                    type="radio" id="rate3" value="3.0"
+                    v-model="editProduct.rate">
+                    <label class="form-check-label"
+                    for="rate3">3.0</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                    type="radio" id="rate4" value="4.0"
+                    v-model="editProduct.rate">
+                    <label class="form-check-label"
+                    for="rate4">4.0</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input"
+                    type="radio" id="rate5" value="5.0"
+                    v-model="editProduct.rate">
+                    <label class="form-check-label"
+                    for="rate5">5.0</label>
+                  </div>
+                </div>
               </div>
               <div class="form-group mb-3">
                 <label for="description">產品描述</label>
