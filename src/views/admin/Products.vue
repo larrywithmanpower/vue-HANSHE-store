@@ -96,6 +96,7 @@ export default {
       products: [],
       tempProduct: {
         imagesUrl: [],
+        storageNum: 0,
       },
       isNew: false,
       pagination: {},

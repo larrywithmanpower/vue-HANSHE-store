@@ -15,13 +15,41 @@
       <h3>{{ product.title }}</h3>
       <ul class="d-flex list-unstyled align-items-center">
         <li class="text-warning me-3">
-          <span class="me-1">5.0</span>
-          <span>
+          <span class="me-1">{{ product.rate }}</span>
+          <span v-if="product.rate === '5.0'">
             <i class="bi bi-star-fill me-1"></i>
             <i class="bi bi-star-fill me-1"></i>
             <i class="bi bi-star-fill me-1"></i>
             <i class="bi bi-star-fill me-1"></i>
             <i class="bi bi-star-fill me-1"></i>
+          </span>
+          <span  v-else-if="product.rate === '4.0'">
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star me-1"></i>
+          </span>
+          <span   v-else-if="product.rate === '3.0'">
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star me-1"></i>
+            <i class="bi bi-star me-1"></i>
+          </span>
+          <span   v-else-if="product.rate === '2.0'">
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star me-1"></i>
+            <i class="bi bi-star me-1"></i>
+            <i class="bi bi-star me-1"></i>
+          </span>
+          <span   v-else-if="product.rate === '1.0'">
+            <i class="bi bi-star-fill me-1"></i>
+            <i class="bi bi-star me-1"></i>
+            <i class="bi bi-star me-1"></i>
+            <i class="bi bi-star me-1"></i>
+            <i class="bi bi-star me-1"></i>
           </span>
         </li>
         <li class="me-3" v-if="product.is_hot">
@@ -40,19 +68,22 @@
       <hr class="bg-secondary">
       <div class="input-group mb-4">
         <button class="btn btn-primary" type="button"
-        @click="qty --">
+        @click="qty --" :disabled="product.storageNum === 0">
           <i class="bi bi-dash"></i>
         </button>
         <input type="text" class="form-control text-center"
         min="1"
-        v-model.Number="qty">
+        v-model.Number="qty"
+        :disabled="product.storageNum === 0">
         <button class="btn btn-primary" type="button"
         @click="qty ++"
+        :disabled="product.storageNum === 0"
         >
           <i class="bi bi-plus"></i>
         </button>
         <button class="btn btn-outline-primary" type="button"
         @click="addCart(product.id)"
+        :disabled="product.storageNum === 0"
         >加入購物車</button>
       </div>
     </div>

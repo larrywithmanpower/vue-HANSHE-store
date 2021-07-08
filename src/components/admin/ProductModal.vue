@@ -306,7 +306,9 @@ export default {
   data() {
     return {
       productModal: {},
-      editProduct: {},
+      editProduct: {
+        storageNum: 0,
+      },
     };
   },
   mounted() {
