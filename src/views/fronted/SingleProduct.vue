@@ -100,7 +100,7 @@ export default {
   props: ['propsProducts', 'propsCategories'],
   data() {
     return {
-      id: this.$route.params.id,
+      id: '',
       product: {},
       qty: 1,
       isLoading: false,
@@ -108,7 +108,16 @@ export default {
   },
   inject: ['emitter'],
   created() {
+    const { id } = this.$route.params;
+    this.id = id;
     this.getProduct();
+  },
+  watch: {
+    // * 監聽 $router id 值變化後，使用 $router.go(0) 重新刷新頁面
+    $route() {
+      this.id = this.$route.params.id;
+      this.$router.go(0);
+    },
   },
   methods: {
     getProduct() {

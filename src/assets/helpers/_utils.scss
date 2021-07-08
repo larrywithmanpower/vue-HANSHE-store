@@ -46,6 +46,38 @@
   }
 }
 
+// 產品列表 including Category and HotProducts(may change)
+.card-product {
+  border: none;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 7px 15px -5px rgb(146, 146, 146);
+    .card-title {
+      color: $primary;
+    }
+  }
+  &__img {
+    position: relative;
+  }
+  &__imgOverlay {
+    background: rgba(255, 254, 254, 0.5);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 30px 5px;
+    transform: translateY(30px);
+    opacity: 0;
+    z-index: -1;
+    transition: all .48s ease;
+  }
+  &:hover .card-product__imgOverlay{
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(0);
+  }
+}
+
 // fronted loading效果
 @keyframes ldio-kc4k04s39o {
   0% {

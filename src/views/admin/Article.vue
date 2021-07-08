@@ -23,7 +23,12 @@
         <tbody>
           <tr v-for="article in articles" :key="article.id">
             <td>{{ article.title }}</td>
-            <td>{{ article.description }}</td>
+            <td >
+              <a href="#"
+              ata-bs-toggle="PreviewModal"
+              data-bs-target="#PreviewModal"
+              @click.prevent="openModal('preview', article)">預覽內容</a>
+            </td>
             <td>{{ article.author }}</td>
             <td>{{ new Date(article.create_at * 1000).toLocaleDateString() }}</td>
             <td>
@@ -63,10 +68,17 @@
   ref="DelModal"
   :item="tempArticle"
   @delete="deleteArticle"></DelModal>
+
+  <PreviewModal
+  ref="PreviewModal"
+  id="PreviewModal"
+  :props-article="tempArticle"
+  ></PreviewModal>
 </template>
 
 <script>
 import ArticleModal from '@/components/admin/ArticleModal.vue';
+import PreviewModal from '@/components/admin/PreviewModal.vue';
 import DelModal from '@/components/DelModal.vue';
 
 export default {
@@ -85,6 +97,7 @@ export default {
   components: {
     ArticleModal,
     DelModal,
+    PreviewModal,
   },
   created() {
     this.getArticles();
@@ -130,6 +143,10 @@ export default {
         case 'delete':
           this.tempArticle = { ...article };
           this.$refs.DelModal.showModal();
+          break;
+        case 'preview':
+          this.tempArticle = { ...article };
+          this.$refs.PreviewModal.showModal();
           break;
         default:
           break;

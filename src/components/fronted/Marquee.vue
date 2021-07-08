@@ -1,10 +1,10 @@
 <template>
   <div
-    class="text-white w-100"
+    class="text-white container"
     @mouseover="stop"
     @mouseout="lang"
   >
-    {{ mag }}
+    <p class="mb-0">{{ mag }}</p>
   </div>
 </template>
 
@@ -12,7 +12,7 @@
 export default {
   data() {
     return {
-      mag: '本次優惠活動優惠號碼：xxxxx !!!    ',
+      mag: '---本次優惠活動優惠號碼：xxxxx !!---疫情關係，本店將實施店內人流管制，請人客配合，感謝!!!',
       intervalId: null,
     };
   },

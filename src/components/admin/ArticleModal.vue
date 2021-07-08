@@ -110,13 +110,6 @@
                 </div>
                 <hr>
                 <div class="form-group mb-3">
-                    <label for="description">文章內容</label>
-                    <textarea v-model="tempArticle.description" id="description" type="text"
-                    class="form-control" placeholder="請撰寫內文"
-                    rows="10"
-                    ></textarea>
-                </div>
-                <div class="form-group mb-3">
                     <label for="content">文章類別</label>
                     <textarea
                     v-model="tempArticle.content"
@@ -126,6 +119,18 @@
                     rows="1"
                     >
                     </textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="description">文章內容</label><br>
+                    <!-- <textarea v-model="tempArticle.description" id="description" type="text"
+                    class="form-control" placeholder="請撰寫內文"
+                    rows="10"
+                    ></textarea> -->
+                    <p v-html="tempArticle.description"></p>
+                    <ckeditor :editor="editor"
+                    v-model="tempArticle.description"
+                    :config="editorConfig"
+                    ></ckeditor>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
@@ -152,6 +157,7 @@
 
 <script>
 import { Modal } from 'bootstrap';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   props: ['article', 'isNew'],
@@ -159,6 +165,39 @@ export default {
     return {
       articleModal: {},
       tempArticle: {},
+      editor: ClassicEditor,
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+        // 刪除工具列的功能
+        placeholder: '請輸入文章...',
+        // 當編輯器內容為空時顯示此字串
+        initialData: '<h2>我是預設字串</h2>',
+        // 初始化載入文字
+        heading: {
+        // 設定 Heading 內的樣式，可新增多個
+          options: [
+            {
+              model: 'paragraph',
+              title: 'Paragraph',
+              class: 'ck-heading_paragraph',
+            },
+            {
+              model: 'heading1',
+              view: 'h2',
+              title: 'Heading 1',
+              class: 'ck-heading_heading1',
+            },
+            {
+              model: 'heading2',
+              view: 'h3',
+              title: 'Heading 2',
+              class: 'ck-heading_heading2',
+            },
+          ],
+        },
+        language: 'tw',
+        // 設定語言
+      },
     };
   },
   mounted() {
