@@ -159,8 +159,10 @@ export default {
           this.product = res.data.product;
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
         }
       });
     },
@@ -173,13 +175,17 @@ export default {
       };
       this.$http.post(url, { data }).then((res) => {
         if (res.data.success) {
-          // eslint-disable-next-line no-alert
-          alert(`${id}成功加入購物車`);
+          this.$swal({
+            title: res.data.message,
+            icon: 'success',
+          });
           this.emitter.emit('update-cart');
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert('購物車加入失敗');
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
         }
       });
     },

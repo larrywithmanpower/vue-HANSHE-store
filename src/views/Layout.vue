@@ -1,8 +1,8 @@
 <template>
-  <section class="bg-dark
+  <!-- <section class="bg-dark
   text-start">
     <Marguee></Marguee>
-  </section>
+  </section> -->
   <!-- navbar -->
   <Navbar :carts="carts"></Navbar>
   <div id="main"></div>
@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import Marguee from '@/components/fronted/Marquee.vue';
 import Navbar from '@/components/fronted/Navbar.vue';
 import Footer from '@/components/fronted/Footer.vue';
 import emitter from '@/methods/emitter';
@@ -22,7 +21,6 @@ export default {
   components: {
     Navbar,
     Footer,
-    Marguee,
   },
   provide() {
     return {

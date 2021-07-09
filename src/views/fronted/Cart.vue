@@ -7,6 +7,12 @@
       </div>
     </div>
   </Loading>
+  <div class="banner d-flex justify-content-center align-items-center position-relative">
+    <h2 class="display-4 text-white routeFont" data-aos="fade-up">
+    <!-- 使用mitt來解決取route不動的問題 -->
+      {{pageTitle}}
+    </h2>
+  </div>
   <div class="table-responsive col-10 mx-auto my-5">
       <table class="table table-sm text-center align-middle">
         <thead class="bg-primary thead-primary">
@@ -15,14 +21,14 @@
             <th></th>
             <th>品名</th>
             <th width="20%">數量</th>
-            <th  width="20%">單價</th>
+            <th width="20%">單價</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in carts" :key="item.id">
             <td>
               <button
-                class="btn btn-sm btn-danger"
+                class="btn btn-sm btn-outline-danger"
                 type="button"
                 @click="delCartItem(item.id)"
               >
@@ -105,14 +111,18 @@ export default {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart/${id}`;
       this.$http.delete(url).then((res) => {
         if (res.data.success) {
-          // eslint-disable-next-line no-alert
-          alert(`成功刪除${id}商品`);
+          this.$swal({
+            title: res.data.message,
+            icon: 'success',
+          });
           this.isLoading = false;
           this.emitter.emit('update-cart');
           this.getCarts();
         } else {
-          // eslint-disable-next-line no-alert
-          alert('刪除失敗');
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
         }
       });
     },
@@ -121,13 +131,17 @@ export default {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/carts`;
       this.$http.delete(url).then((res) => {
         if (res.data.success) {
-          // eslint-disable-next-line no-alert
-          alert('成功清空物車');
+          this.$swal({
+            title: res.data.message,
+            icon: 'success',
+          });
           this.isLoading = false;
           this.getCarts();
         } else {
-          // eslint-disable-next-line no-alert
-          alert('清空失敗');
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
           this.isLoading = false;
         }
       });
@@ -135,3 +149,15 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .banner {
+    background-image: url(https://images.unsplash.com/photo-1530601925101-42efae542166?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80);
+    background-size: cover;
+    background-position: center bottom;
+    height: 400px;
+    @media (max-width: 768px) {
+      height: 300px;
+    }
+  }
+</style>

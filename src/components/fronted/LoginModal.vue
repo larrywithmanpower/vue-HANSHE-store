@@ -89,7 +89,7 @@ export default {
           const { token, expired } = res.data;
           // ! 存取token至cookie
           document.cookie = `myToken=${token}; expires=${new Date(expired)}`;
-          this.$router.push('/admin');
+          this.$router.push('/admin/adminProducts');
           this.loginModal.hide();
         } else {
           // eslint-disable-next-line no-alert

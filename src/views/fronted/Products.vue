@@ -1,14 +1,8 @@
 <template>
   <div class="banner d-flex justify-content-center align-items-center position-relative">
-    <h2 class="display-4 text-white routeFont" data-aos="fade-up"
-    v-if="pageTitle === '寒舍商品'">
+    <h2 class="display-4 text-white routeFont" data-aos="fade-up">
     <!-- 使用mitt來解決取route不動的問題 -->
-      寒舍商品
-    </h2>
-    <h2 class="display-4 text-white routeFont" data-aos="fade-up"
-    v-else>
-    <!-- 使用mitt來解決取route不動的問題 -->
-      購物車
+      {{pageTitle}}
     </h2>
   </div>
   <router-view :props-products='products'

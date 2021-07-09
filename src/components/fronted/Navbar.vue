@@ -35,7 +35,7 @@
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
           <router-link to="/products/category" class="nav-link">寒舍商品</router-link
           >
-          <router-Link to="/products/cart" class="nav-link">
+          <router-Link to="/cart" class="nav-link">
             <i class="bi bi-cart-plus me-2"></i>
             <small>[ {{ carts.length }} ]</small>
           </router-Link>
