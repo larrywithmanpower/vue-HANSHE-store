@@ -11,7 +11,7 @@
     <div class="row">
       <!-- list -->
       <div class="col-lg-3">
-        <div class="list-group rounded-0 mb-5 d-none d-lg-block">
+        <div class="list-group rounded-0 mb-5">
           <h2
             class="
               text-center
@@ -70,7 +70,7 @@
       <!-- products -->
       <div class="col-lg-9">
         <h4>search input with word </h4>
-        <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-3">
           <div class="col" v-for="item in filterCategories" :key="item.id" data-aos="zoom-in"
           data-aos-once="true">
             <div class="card card-product h-100">

@@ -18,7 +18,7 @@
         <thead class="bg-primary thead-primary">
           <tr>
             <th></th>
-            <th></th>
+            <th class="d-none d-md-block"></th>
             <th>品名</th>
             <th width="20%">數量</th>
             <th width="20%">單價</th>
@@ -35,14 +35,14 @@
                 <i class="bi bi-x"></i>
               </button>
             </td>
-            <td>
+            <td class="d-none d-md-block">
               <img class="img-fluid"
               :src="item.product.imageUrl"
               :alt="item.id"
               style="width: 180px; heigth: 180px"
               >
             </td>
-            <td>{{ item.product.title }}</td>
+            <td class="fs-7 fs-sm-6`">{{ item.product.title }}</td>
             <td>
               <div class="input-group input-group-sm">
                   <input type="number"

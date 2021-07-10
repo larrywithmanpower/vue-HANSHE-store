@@ -29,9 +29,9 @@
                 <small class="text-warning">{{ item.rate }}</small><br>
                 {{ item.title }}<br>
                 <small class="text-muted"
-                v-if="item.sex === 'male'">男鞋</small>
+                v-if="item.sex === 'male'">男</small>
                 <small class="text-muted"
-                v-else-if="item.sex === 'female'">女鞋</small>
+                v-else-if="item.sex === 'female'">女</small>
                 <small class="text-muted"
                 v-else-if="item.sex === 'neutral'">中性</small>
                 <br>
@@ -106,7 +106,7 @@ export default {
     this.getProducts();
   },
   methods: {
-    getProducts(page = 1) {
+    getProducts(page) {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       this.isLoading = true;
       this.$http.get(url).then((res) => {
@@ -159,7 +159,7 @@ export default {
               style: 'success',
               title: res.data.message,
             });
-            this.getProducts();
+            this.getProducts(res.data.pagination.current_page);
             this.$refs.ProductModal.hideModal();
           } else {
             this.emitter.emit('push-message', {
@@ -178,7 +178,7 @@ export default {
           this.$refs.ProductModal.hideModal();
           if (res.data.success) {
             console.log(res.data.message);
-            this.getProducts();
+            this.getProducts(res.data.pagination.current_page);
             this.emitter.emit('push-message', {
               style: 'success',
               title: res.data.message,
@@ -203,7 +203,7 @@ export default {
             style: 'success',
             title: res.data.message,
           });
-          this.getProducts();
+          this.getProducts(res.data.pagination.current_page);
           this.$refs.DelModal.hideModal();
         } else {
           this.emitter.emit('push-message', {

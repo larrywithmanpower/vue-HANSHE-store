@@ -65,7 +65,7 @@ export default {
       } else {
         this.classList = {
           navbarTop: 'bg-dark',
-          navbarInner: ['navbar-dark', 'fw-bold', 'sticky-top'],
+          navbarInner: ['navbar-dark', 'fw-bold'],
         };
       }
     },

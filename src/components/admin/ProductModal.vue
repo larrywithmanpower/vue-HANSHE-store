@@ -252,12 +252,25 @@
                     >熱銷</label
                   >
                 </div>
-                <div class="form-check col-7">
+                <div class="form-check col-2">
+                  <input
+                    v-model="editProduct.is_new"
+                    id="is_new"
+                    class="form-check-input"
+                    type="checkbox"
+                    :true-value="1"
+                    :false-value="0"
+                  />
+                  <label class="form-check-label" for="is_new"
+                    >新品</label
+                  >
+                </div>
+                <div class="form-check col-6">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input"
                     type="radio" name="inlineRadioOptions" id="male" value="male"
                     v-model="editProduct.sex">
-                    <label class="form-check-label" for="male">男鞋</label>
+                    <label class="form-check-label" for="male">男</label>
                   </div>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input"
@@ -270,7 +283,7 @@
                     <input class="form-check-input"
                     type="radio" name="inlineRadioOptions" id="female" value="female"
                     v-model="editProduct.sex">
-                    <label class="form-check-label" for="female">女鞋</label>
+                    <label class="form-check-label" for="female">女</label>
                   </div>
                 </div>
               </div>
