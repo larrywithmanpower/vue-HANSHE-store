@@ -34,24 +34,6 @@ export default {
       finalTotal: '',
     };
   },
-  created() {
-    this.getCarts();
-    emitter.on('update-cart', () => {
-      this.getCarts();
-    });
-  },
-  methods: {
-    getCarts() {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
-      this.$http.get(url).then((res) => {
-        console.log(res);
-        this.carts = res.data.data.carts;
-        this.finalTotal = res.data.data.final_total;
-        this.isLoading = false;
-      });
-    },
-  },
 };
 </script>
 

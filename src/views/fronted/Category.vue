@@ -142,9 +142,6 @@ export default {
   created() {
     this.pageTitle = this.$route.name;
     this.emitter.emit('page-title', this.pageTitle);
-    this.emitter.emit('get-products');
-  },
-  mounted() {
   },
   watch: {
     propsProducts() {
@@ -167,6 +164,7 @@ export default {
       };
       this.$http.post(url, { data }).then((res) => {
         if (res.data.success) {
+          this.emitter.emit('update-cart');
           this.$swal({
             title: res.data.message,
             icon: 'success',

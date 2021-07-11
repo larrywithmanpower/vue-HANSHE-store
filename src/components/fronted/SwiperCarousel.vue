@@ -67,7 +67,7 @@ export default {
   .bg-carousel {
     background-size: cover;
     width: auto;
-    height: 600px;
+    height: 500px;
     background-position: center center;
   }
 

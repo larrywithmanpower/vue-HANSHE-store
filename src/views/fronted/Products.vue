@@ -39,7 +39,6 @@ export default {
       this.pageTitle = pageTitle;
     });
     this.getProducts();
-    this.emitter.on('get-products', this.getProducts);
   },
   methods: {
     getProducts() {

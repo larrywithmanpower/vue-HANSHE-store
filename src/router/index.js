@@ -40,6 +40,28 @@ const routes = [
         path: 'cart',
         name: '購物車',
         component: () => import('../views/fronted/Cart.vue'),
+        children: [
+          {
+            path: 'cartList',
+            name: '已選購商品',
+            component: () => import('../views/fronted/CartList.vue'),
+          },
+          {
+            path: 'cartOrder',
+            name: '訂單資訊',
+            component: () => import('../views/fronted/CartOrder.vue'),
+          },
+          {
+            path: 'cartPayment/:id',
+            name: '付款確認',
+            component: () => import('../views/fronted/CartPayment.vue'),
+          },
+        ],
+      },
+      {
+        path: 'finished',
+        name: '付款完成',
+        component: () => import('../views/fronted/Finished.vue'),
       },
     ],
   },

@@ -156,6 +156,7 @@ export default {
       this.isLoading = true;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
+          this.emitter.emit('update-cart');
           this.product = res.data.product;
           this.isLoading = false;
         } else {

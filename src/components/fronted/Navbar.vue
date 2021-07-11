@@ -35,7 +35,7 @@
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
           <router-link to="/products/category" class="nav-link">寒舍商品</router-link
           >
-          <router-Link to="/cart" class="nav-link">
+          <router-Link to="/cart/cartList" class="nav-link">
             <i class="bi bi-cart-plus me-2"></i>
             <small>[ {{ carts.length }} ]</small>
           </router-Link>
@@ -47,10 +47,11 @@
 
 <script>
 export default {
-  props: ['carts'],
+  inject: ['emitter'],
   data() {
     return {
       classList: '',
+      carts: [],
     };
   },
   methods: {
@@ -69,9 +70,17 @@ export default {
         };
       }
     },
+    getCarts() {
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
+      this.$http.get(url).then((res) => {
+        this.carts = res.data.data.carts;
+        this.finalTotal = res.data.data.final_total;
+      });
+    },
   },
   mounted() {
     window.addEventListener('scroll', this.navbarTransition);
+    this.emitter.on('update-cart', this.getCarts);
   },
   unmounted() { // 離開頁面後移除監聽事件
     window.removeEventListener('scroll', this.navbarTransition);
