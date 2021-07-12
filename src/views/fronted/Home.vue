@@ -1,5 +1,7 @@
 <template>
   <Carousel></Carousel>
+  <section class="container py-5">
+  </section>
 </template>
 
 <script>

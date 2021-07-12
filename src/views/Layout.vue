@@ -4,7 +4,10 @@
     <Marguee></Marguee>
   </section> -->
   <!-- navbar -->
-  <Navbar :carts="carts"></Navbar>
+  <div class="position-relative">
+      <Navbar :carts="carts"></Navbar>
+
+  </div>
   <div id="main"></div>
   <router-view></router-view>
   <!-- footer -->
@@ -39,7 +42,7 @@ export default {
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
-  $primary: #59AB6E;
+  $primary: #C03F19;
 
 .logoFont {
   font-family: "Permanent Marker", cursive;
@@ -48,7 +51,7 @@ export default {
 
 #layoutFooter {
   a:hover {
-    color: #68bb7d;
+    color: $primary;
   }
   ul.footer-icons li {
     width: 2em;

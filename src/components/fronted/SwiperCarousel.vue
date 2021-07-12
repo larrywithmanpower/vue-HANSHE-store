@@ -69,6 +69,9 @@ export default {
     width: auto;
     height: 500px;
     background-position: center center;
+    @media (max-width: 768px) {
+      height: 300px;
+    }
   }
 
   .text-bg {

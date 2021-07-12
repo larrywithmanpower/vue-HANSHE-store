@@ -16,6 +16,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 import 'swiper/swiper.scss';
 import 'swiper/components/effect-coverflow/effect-coverflow.min.css';
 import 'swiper/components/pagination/pagination.min.css';
+import 'swiper/components/navigation/navigation.min.css';
 
 // CKEditor
 import CKEditor from '@ckeditor/ckeditor5-vue';

@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg"
+    class="navbar navbar-expand-lg start-0 end-0"
     id="nav-top"
     :class="[classList.navbarTop, classList.navbarInner]"
   >
@@ -65,8 +65,8 @@ export default {
         };
       } else {
         this.classList = {
-          navbarTop: 'bg-dark',
-          navbarInner: ['navbar-dark', 'fw-bold'],
+          navbarTop: ['bg-transparent'],
+          navbarInner: ['navbar-dark', 'fw-bold', 'py-3', 'position-absolute', 'z-index-2', 'h5'],
         };
       }
     },
@@ -89,12 +89,23 @@ export default {
 </script>
 
 <style lang="scss">
-  $primary: #59AB6E;
+  $primary: #d33809;
+  .z-index-2 {
+    z-index: 2;
+  }
 
   #nav-top {
     transition: all .5s ease-in-out;
-    &.navbar-light,
     &.navbar-dark {
+      .nav-link {
+        color: $primary;
+      }
+      & .nav-link:hover,
+      & .nav-link.active {
+        color: #fff;
+      }
+    }
+    &.navbar-light {
       & .nav-link:hover,
       & .nav-link.active {
         color: $primary;

@@ -7,7 +7,8 @@
       </div>
     </div>
   </Loading>
-  <div class="table-responsive mx-auto my-3">
+
+  <div class="table-responsive mx-auto my-3" v-if="carts.length > 0">
     <table class="table table-sm table-borderless text-center border-light align-middle">
       <thead class="bg-primary thead-primary">
         <tr>
@@ -85,6 +86,14 @@
       </tbody>
     </table>
   </div>
+  <section class="d-flex justify-content-center" v-else>
+    <div class="card" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title text-danger">老闆跟你說：你的購物車很空!!</h5>
+        <router-link to="/products/category" class="card-link stretched-link">還不快去買</router-link>
+      </div>
+    </div>
+  </section>
   <section class="d-flex justify-content-end">
     <div class="card" style="width: 18rem;">
       <div class="card-body lh-lg">
@@ -191,3 +200,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .card {
+    transition: all .3s ease-in-out;
+    &:hover {
+      box-shadow: 3px 5px 8px gray;
+    }
+  }
+</style>

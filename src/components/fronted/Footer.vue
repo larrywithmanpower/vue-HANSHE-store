@@ -7,26 +7,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 pt-5">
-          <h2 class="h2 text-success pb-3 logoFont mb-0">HANSHE</h2>
-          <ul class="list-unstyled text-light footer-link-list">
-            <li>
-              <i class="bi bi-house"></i>
-              123 Consectetur at ligula 10660
-            </li>
-            <li>
-              <i class="bi bi-telephone-fill me-1"></i>
-              <a class="text-decoration-none link-light" href="tel:1234 2345 67"
-                >1234 2345 67</a
-              >
-            </li>
-            <li>
-              <i class="bi bi-mailbox me-2"></i>
-              <a
-                class="text-decoration-none link-light"
-                href="mailto:info@company.com"
-                >info@company.com</a
-              >
-            </li>
+          <h2 class="h2 text-white pb-3 logoFont mb-0">HANSHE</h2>
+          <ul class="text-white">
+            <li>客戶至上</li>
+            <li>品質第一</li>
+            <li>服務迅速</li>
           </ul>
         </div>
 
@@ -36,10 +21,13 @@
           </h2>
           <ul class="list-unstyled text-light footer-link-list">
             <li class="">
-              <a class="text-decoration-none link-light" href="#">寒舍商品</a>
+              <router-link to="/products/category"
+              class="text-decoration-none link-light" href="#">寒舍商品</router-link>
             </li>
             <li class="">
-              <a class="text-decoration-none link-light" href="#">關於寒舍</a>
+              <router-link to="/about"
+              class="text-decoration-none link-light"
+              href="#">關於寒舍</router-link>
             </li>
             <li class="">
               <a class="text-decoration-none link-light" href="#">FAQs</a>
@@ -183,7 +171,7 @@ export default {
 </script>
 
 <style lang="scss">
-$primary: #59ab6e;
+$primary: #C03F19;
 #layoutFooter a:hover {
   transition: all 0.3s ease;
 }
