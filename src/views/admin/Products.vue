@@ -100,6 +100,7 @@ export default {
       },
       isNew: false,
       pagination: {},
+      currentPage: '',
     };
   },
   created() {
@@ -113,6 +114,7 @@ export default {
         if (res.data.success) {
           this.products = res.data.products;
           this.pagination = res.data.pagination;
+          this.currentPage = res.data.pagination.current_page;
           // console.log(this.products);
           this.isLoading = false;
         } else {
@@ -159,7 +161,7 @@ export default {
               style: 'success',
               title: res.data.message,
             });
-            this.getProducts(res.data.pagination.current_page);
+            this.getProducts(this.currentPage);
             this.$refs.ProductModal.hideModal();
           } else {
             this.emitter.emit('push-message', {
@@ -177,8 +179,7 @@ export default {
         this.$http.put(url, { data: tempProduct }).then((res) => {
           this.$refs.ProductModal.hideModal();
           if (res.data.success) {
-            console.log(res.data.message);
-            this.getProducts(res.data.pagination.current_page);
+            this.getProducts(this.currentPage);
             this.emitter.emit('push-message', {
               style: 'success',
               title: res.data.message,

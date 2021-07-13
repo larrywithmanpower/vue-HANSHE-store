@@ -21,6 +21,9 @@ import 'swiper/components/navigation/navigation.min.css';
 // CKEditor
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
+// vue-lightbox
+import VueEasyLightbox from 'vue-easy-lightbox';
+
 // VueSweetalert2
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -66,6 +69,7 @@ createApp(App)
   .use(VueAxios, axios)
   .use(CKEditor)
   .use(VueSweetalert2, options)
+  .use(VueEasyLightbox)
   .component('Loading', Loading)
   .component('Form', Form)
   .component('Field', Field)

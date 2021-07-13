@@ -7,7 +7,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 pt-5">
-          <h2 class="h2 text-white pb-3 logoFont mb-0">HANSHE</h2>
+          <h2 class="h2 text-primary pb-3 logoFont mb-0">HANSHE</h2>
           <ul class="text-white">
             <li>客戶至上</li>
             <li>品質第一</li>

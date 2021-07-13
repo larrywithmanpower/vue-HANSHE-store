@@ -63,6 +63,11 @@ const routes = [
         name: '付款完成',
         component: () => import('../views/fronted/Finished.vue'),
       },
+      {
+        path: 'blog/:id',
+        name: 'Blog',
+        component: () => import('../views/fronted/Blog.vue'),
+      },
     ],
   },
   // admin

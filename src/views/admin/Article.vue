@@ -135,6 +135,7 @@ export default {
           this.isNew = false;
           console.log(article);
           this.tempArticle = {
+            imagesUrl: [],
             ...article,
             content: '新品文章',
           };

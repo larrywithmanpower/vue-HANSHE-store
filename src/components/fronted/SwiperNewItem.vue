@@ -1,27 +1,29 @@
 <template>
   <swiper
-    :effect="'coverflow'"
-    :grabCursor="true"
-    :centeredSlides="true"
-    :slidesPerView="'auto'"
-    :coverflowEffect="{
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-      slideShadows: true,
-    }"
+    :spaceBetween="40"
+    :breakpoints='{
+      "640": {
+        "slidesPerView": 2,
+        "spaceBetween": 20
+      },
+      "768": {
+        "slidesPerView": 3,
+        "spaceBetween": 40
+      },
+      "1024": {
+        "slidesPerView": 4,
+        "spaceBetween": 50
+      }
+    }'
     :autoplay='
       {
         "delay": 5000,
         "disableOnInteraction": false,
       }'
-    :pagination="true"
     class="mySwiper"
   >
-    <template v-for="item in products" :key="item.id">
+    <template v-for="item in filterNew" :key="item.id">
       <swiper-slide>
-        <template v-if="item.is_hot">
           <div class="card card-product h-100">
             <div class="card-product__img">
               <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
@@ -39,11 +41,6 @@
                   @click="goDetail(item)"
                   >
                     <i class="bi bi-search"></i>
-                  </button>
-                </li>
-                <li class="me-3">
-                  <button class="btn btn-primary text-white">
-                    <i class="bi bi-cart"></i>
                   </button>
                 </li>
                 <li>
@@ -65,19 +62,18 @@
               </p>
             </div>
           </div>
-        </template>
       </swiper-slide>
     </template>
   </swiper>
 </template>
+
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import SwiperCore, { EffectCoverflow, Pagination, Autoplay } from 'swiper/core';
+import SwiperCore, { Pagination, Autoplay } from 'swiper/core';
 
-SwiperCore.use([EffectCoverflow, Autoplay, Pagination]);
+SwiperCore.use([Autoplay, Pagination]);
 
 export default {
-  props: ['propsProducts', 'propsHot'],
   components: {
     Swiper,
     SwiperSlide,
@@ -87,17 +83,28 @@ export default {
       products: [],
     };
   },
-  watch: {
-    propsProducts() {
-      this.products = this.propsProducts;
-    },
-    propsHot() {
-      this.hotProducts = this.propsHot;
-    },
+  created() {
+    this.getProducts();
   },
   methods: {
+    getProducts() {
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
+      this.$http.get(url).then((res) => {
+        if (res.data.success) {
+          this.products = res.data.products;
+        } else {
+          // eslint-disable-next-line no-alert
+          alert(res.data.message);
+        }
+      }).catch((err) => { console.log(err); });
+    },
     goDetail(item) {
       this.$router.push(`/products/product/${item.id}`);
+    },
+  },
+  computed: {
+    filterNew() {
+      return this.products.filter((item) => item.is_new);
     },
   },
 };
