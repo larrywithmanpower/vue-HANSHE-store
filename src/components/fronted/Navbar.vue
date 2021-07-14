@@ -81,6 +81,8 @@ export default {
   mounted() {
     window.addEventListener('scroll', this.navbarTransition);
     this.emitter.on('update-cart', this.getCarts);
+    // ! 要加上下面那行，不然重新整理會沒有值
+    this.getCarts();
   },
   unmounted() { // 離開頁面後移除監聽事件
     window.removeEventListener('scroll', this.navbarTransition);

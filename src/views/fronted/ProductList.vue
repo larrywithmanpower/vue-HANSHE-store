@@ -22,12 +22,28 @@
               list-group-item--hover
             "
             aria-current="true"
+            @click.prevent="filterCategory = ''"
+            :class="{ active: filterCategory === '' }"
+          >
+            所有商品
+            <i class="bi bi-chevron-right list-group-icon"></i>
+          </a>
+          <a
+            href="#"
+            class="
+              list-group-item list-group-item-action
+              border-0
+              d-flex
+              justify-content-between
+              list-group-item--hover
+            "
+            aria-current="true"
             v-for="(item, index) in categories"
             :key="index"
             @click.prevent="filterCategory = item"
             :class="{ active: filterCategory === item }"
           >
-            {{ !item ? "所有商品" : item }}
+            {{ item }}
             <i class="bi bi-chevron-right list-group-icon"></i>
           </a>
         </div>
