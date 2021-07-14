@@ -82,6 +82,7 @@ export default {
     $route() {
       this.id = this.$route.params.id;
       this.$router.go(0);
+      this.getArticle();
     },
   },
   created() {

@@ -19,7 +19,8 @@
               </button>
             </li>
             <li class="me-3">
-              <button class="btn btn-primary text-white">
+              <button class="btn btn-primary text-white"
+              @click="addCart(item.id)">
                 <i class="bi bi-cart"></i>
               </button>
             </li>
@@ -49,10 +50,12 @@
 <script>
 export default {
   props: ['propsProducts'],
+  inject: ['emitter'],
   data() {
     return {
       products: [],
       product: {},
+      qty: 1,
     };
   },
   watch: {
@@ -66,9 +69,31 @@ export default {
     },
   },
   methods: {
-    //! 無法轉到單一商品頁面
     goDetail(item) {
       this.$router.push({ path: `/products/product/${item.id}` });
+    },
+    addCart(id) {
+      this.isLoading = true;
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
+      const data = {
+        product_id: id,
+        qty: this.qty,
+      };
+      this.$http.post(url, { data }).then((res) => {
+        if (res.data.success) {
+          this.$swal({
+            title: res.data.message,
+            icon: 'success',
+          });
+          this.emitter.emit('update-cart');
+          this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+        }
+      });
     },
   },
 };

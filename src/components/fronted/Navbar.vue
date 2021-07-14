@@ -33,7 +33,7 @@
         <div class="navbar-nav">
           <router-link to="/home" class="nav-link">首頁</router-link>
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
-          <router-link to="/products/category" class="nav-link">寒舍商品</router-link
+          <router-link to="/products/productList" class="nav-link">寒舍商品</router-link
           >
           <router-Link to="/cart/cartList" class="nav-link">
             <i class="bi bi-cart-plus me-2"></i>

@@ -25,9 +25,9 @@ const routes = [
         component: () => import('../views/fronted/Products.vue'),
         children: [
           {
-            path: 'category',
+            path: 'productList',
             name: '寒舍商品',
-            component: () => import('../views/fronted/Category.vue'),
+            component: () => import('../views/fronted/ProductList.vue'),
           },
           {
             path: 'product/:id',

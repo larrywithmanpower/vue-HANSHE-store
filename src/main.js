@@ -41,6 +41,7 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 
 import App from './App.vue';
 import router from './router';
+import toCurrency from './methods/toCurrency';
 
 // setting VueSweetalert2
 const options = {
@@ -64,14 +65,16 @@ configure({
 // 強制設定中文
 setLocale('zh_TW');
 
-createApp(App)
-  .use(router)
-  .use(VueAxios, axios)
-  .use(CKEditor)
-  .use(VueSweetalert2, options)
-  .use(VueEasyLightbox)
-  .component('Loading', Loading)
-  .component('Form', Form)
-  .component('Field', Field)
-  .component('ErrorMessage', ErrorMessage)
-  .mount('#app');
+const app = createApp(App);
+app.use(router);
+app.use(VueAxios, axios);
+app.use(CKEditor);
+app.use(VueSweetalert2, options);
+app.use(VueEasyLightbox);
+app.component('Loading', Loading);
+app.component('Form', Form);
+app.component('Field', Field);
+app.component('ErrorMessage', ErrorMessage);
+app.config.globalProperties.$toCurrency = toCurrency;
+
+app.mount('#app');

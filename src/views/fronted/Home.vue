@@ -4,7 +4,9 @@
     <h2 class="text-center text-primary py-4">
       <span class="border-bottom border-primary border-2 pb-2">為何選擇寒舍</span>
     </h2>
-    <Lightbox></Lightbox>
+    <div class="">
+      <Lightbox></Lightbox>
+    </div>
   </section>
   <section class="pt-5 pb-4 bg-white">
     <div class="container">
@@ -16,10 +18,10 @@
   </section>
   <section class="bg-light">
     <div class="container py-5">
-      <h2 class="text-center text-primary mb-4">
+      <h2 class="text-center text-primary mb-5">
         <span class="border-bottom border-primary border-2 pb-2">最新情報</span>
       </h2>
-      <Bolg class="py-3"></Bolg>
+      <Bolg></Bolg>
     </div>
   </section>
 </template>

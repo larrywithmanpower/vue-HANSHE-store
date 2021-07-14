@@ -7,120 +7,126 @@
       </div>
     </div>
   </Loading>
-  <div class="row p-5">
-    <div class="col-md-6 mb-3">
-      <img class="img-fluid" :src="product.imageUrl" alt="product.title">
-    </div>
-    <div class="col-md-6 px-5">
-      <h3>{{ product.title }}</h3>
-      <ul class="d-flex list-unstyled align-items-center">
-        <li class="text-warning me-3">
-          <span class="me-1">{{ product.rate }}</span>
-          <span v-if="product.rate === '5.0'">
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-          </span>
-          <span  v-else-if="product.rate === '4.0'">
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star me-1"></i>
-          </span>
-          <span   v-else-if="product.rate === '3.0'">
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star me-1"></i>
-            <i class="bi bi-star me-1"></i>
-          </span>
-          <span   v-else-if="product.rate === '2.0'">
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star me-1"></i>
-            <i class="bi bi-star me-1"></i>
-            <i class="bi bi-star me-1"></i>
-          </span>
-          <span   v-else-if="product.rate === '1.0'">
-            <i class="bi bi-star-fill me-1"></i>
-            <i class="bi bi-star me-1"></i>
-            <i class="bi bi-star me-1"></i>
-            <i class="bi bi-star me-1"></i>
-            <i class="bi bi-star me-1"></i>
-          </span>
+  <div class="container">
+    <div class="row py-5">
+      <div class="col-md-6 mb-3">
+        <img class="img-fluid" :src="product.imageUrl" alt="product.title">
+      </div>
+      <div class="col-md-6 px-5">
+        <h3>{{ product.title }}</h3>
+        <ul class="d-flex list-unstyled align-items-center">
+          <li class="text-warning me-3">
+            <span class="me-1">{{ product.rate }}</span>
+            <span v-if="product.rate === '5.0'">
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+            </span>
+            <span  v-else-if="product.rate === '4.0'">
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star me-1"></i>
+            </span>
+            <span   v-else-if="product.rate === '3.0'">
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star me-1"></i>
+              <i class="bi bi-star me-1"></i>
+            </span>
+            <span   v-else-if="product.rate === '2.0'">
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star me-1"></i>
+              <i class="bi bi-star me-1"></i>
+              <i class="bi bi-star me-1"></i>
+            </span>
+            <span   v-else-if="product.rate === '1.0'">
+              <i class="bi bi-star-fill me-1"></i>
+              <i class="bi bi-star me-1"></i>
+              <i class="bi bi-star me-1"></i>
+              <i class="bi bi-star me-1"></i>
+              <i class="bi bi-star me-1"></i>
+            </span>
+          </li>
+          <li class="me-3" v-if="product.is_hot">
+            <span class="badge bg-danger">熱賣品</span>
+          </li>
+          <li>
+            <span class="badge bg-success"  v-if="product.storageNum > 0">有庫存</span>
+            <span class="badge bg-secondary" v-else>無庫存</span>
+          </li>
+        </ul>
+        <h2 class="text-primary">$ {{ product.price }}</h2>
+        <small class="text-muted">類別：{{ product.category }}</small><br>
+        <small class="text-muted">庫存量：{{ product.storageNum }}</small>
+        <hr class="bg-secondary">
+        <p>{{ product.description }}</p>
+        <hr class="bg-secondary">
+        <div class="input-group mb-4">
+          <button class="btn btn-primary" type="button"
+          @click="qty --" :disabled="product.storageNum === 0">
+            <i class="bi bi-dash"></i>
+          </button>
+          <input type="text" class="form-control text-center"
+          min="1"
+          v-model.Number="qty"
+          :disabled="product.storageNum === 0">
+          <button class="btn btn-primary" type="button"
+          @click="qty ++"
+          :disabled="product.storageNum === 0"
+          >
+            <i class="bi bi-plus"></i>
+          </button>
+          <button class="btn btn-outline-primary d-none d-md-block" type="button"
+          @click="addCart(product.id)"
+          :disabled="product.storageNum === 0"
+          >加入購物車</button>
+        </div>
+        <button class="btn btn-outline-primary d-block d-md-none w-100" type="button"
+          @click="addCart(product.id)"
+          :disabled="product.storageNum === 0"
+          >加入購物車</button>
+      </div>
+      <!-- nav pill -->
+      <!-- <ul class="nav nav-pills nav-fill justify-content-center
+      mb-3 px-2 col-12"
+      id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active"
+          id="pills-home-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-home"
+          type="button" role="tab" aria-controls="pills-home" aria-selected="true">商品介紹</button>
         </li>
-        <li class="me-3" v-if="product.is_hot">
-          <span class="badge bg-danger">熱賣品</span>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="pills-profile-tab"
+          data-bs-toggle="pill"
+          data-bs-target="#pills-profile"
+          type="button"
+          role="tab" aria-controls="pills-profile" aria-selected="false">尺碼規格表</button>
         </li>
-        <li>
-          <span class="badge bg-success"  v-if="product.storageNum > 0">有庫存</span>
-          <span class="badge bg-secondary" v-else>無庫存</span>
+        <li class="nav-item"
+        role="presentation">
+          <button class="nav-link" id="pills-contact-tab"
+          data-bs-toggle="pill" data-bs-target="#pills-contact"
+          type="button"
+          role="tab" aria-controls="pills-contact" aria-selected="false">評價</button>
         </li>
       </ul>
-      <h2 class="text-primary">$ {{ product.price }}</h2>
-      <small class="text-muted">類別：{{ product.category }}</small><br>
-      <small class="text-muted">庫存量：{{ product.storageNum }}</small>
-      <hr class="bg-secondary">
-      <p>{{ product.description }}</p>
-      <hr class="bg-secondary">
-      <div class="input-group mb-4">
-        <button class="btn btn-primary" type="button"
-        @click="qty --" :disabled="product.storageNum === 0">
-          <i class="bi bi-dash"></i>
-        </button>
-        <input type="text" class="form-control text-center"
-        min="1"
-        v-model.Number="qty"
-        :disabled="product.storageNum === 0">
-        <button class="btn btn-primary" type="button"
-        @click="qty ++"
-        :disabled="product.storageNum === 0"
-        >
-          <i class="bi bi-plus"></i>
-        </button>
-        <button class="btn btn-outline-primary" type="button"
-        @click="addCart(product.id)"
-        :disabled="product.storageNum === 0"
-        >加入購物車</button>
-      </div>
-    </div>
-    <!-- nav pill -->
-    <ul class="nav nav-pills nav-fill justify-content-center
-    mb-3 px-2 col-12"
-    id="pills-tab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active"
-        id="pills-home-tab"
-        data-bs-toggle="pill"
-        data-bs-target="#pills-home"
-        type="button" role="tab" aria-controls="pills-home" aria-selected="true">商品介紹</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="pills-profile-tab"
-        data-bs-toggle="pill"
-        data-bs-target="#pills-profile"
-        type="button"
-        role="tab" aria-controls="pills-profile" aria-selected="false">尺碼規格表</button>
-      </li>
-      <li class="nav-item"
-      role="presentation">
-        <button class="nav-link" id="pills-contact-tab"
-        data-bs-toggle="pill" data-bs-target="#pills-contact"
-        type="button"
-        role="tab" aria-controls="pills-contact" aria-selected="false">評價</button>
-      </li>
-    </ul>
-    <div class="tab-content"
-      id="pills-tabContent">
-      <div class="tab-pane fade show active"
-      id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
-      <div class="tab-pane fade"
-      id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-      <div class="tab-pane fade"
-      id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+      <div class="tab-content"
+        id="pills-tabContent">
+        <div class="tab-pane fade show active"
+        id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+        <div class="tab-pane fade"
+        id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+        <div class="tab-pane fade"
+        id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -148,6 +154,7 @@ export default {
     $route() {
       this.id = this.$route.params.id;
       this.$router.go(0);
+      this.getPorduct();
     },
   },
   methods: {
@@ -158,6 +165,7 @@ export default {
         if (res.data.success) {
           this.emitter.emit('update-cart');
           this.product = res.data.product;
+          console.log(this.$router);
           this.isLoading = false;
         } else {
           this.$swal({

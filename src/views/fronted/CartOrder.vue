@@ -130,10 +130,12 @@ export default {
       this.$http.post(url, { data: { user, message } })
         .then((res) => {
           if (res.data.success) {
-            console.log(res);
+            // console.log(res);
             const id = res.data.orderId;
-            // eslint-disable-next-line no-alert
-            alert(res.data.message);
+            this.$swal({
+              title: res.data.message,
+              icon: 'success',
+            });
             //! VeeValidate內建函式
             this.$refs.form.resetForm();
             this.form.message = '';
@@ -143,8 +145,10 @@ export default {
             this.emitter.emit('update-cart');
             this.$router.push(`/cart/cartPayment/${id}`);
           } else {
-            // eslint-disable-next-line no-alert
-            alert(res.data.message);
+            this.$swal({
+              title: res.data.message,
+              icon: 'error',
+            });
           }
         })
         .catch((err) => {

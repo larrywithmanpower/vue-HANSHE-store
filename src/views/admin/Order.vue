@@ -100,6 +100,7 @@ export default {
       isEdit: false,
       pagination: {},
       isLoading: false,
+      currentPage: '',
     };
   },
   inject: ['emitter'],
@@ -112,13 +113,14 @@ export default {
     this.getOrders();
   },
   methods: {
-    getOrders(page = 1) {
+    getOrders(page) {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.orders = res.data.orders;
           this.pagination = res.data.pagination;
+          this.currentPage = res.data.pagination.current_page;
           // console.log(this.orders);
           this.isLoading = false;
         } else {
@@ -156,7 +158,7 @@ export default {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`;
       this.$http.put(url, { data: paid }).then((res) => {
         if (res.data.success) {
-          this.getOrders();
+          this.getOrders(this.currentPage);
           this.emitter.emit('push-message', {
             style: 'success',
             title: res.data.message,
@@ -180,7 +182,7 @@ export default {
             style: 'success',
             title: res.data.message,
           });
-          this.getOrders();
+          this.getOrders(this.currentPage);
           this.$refs.delModal.hideModal();
         } else {
           this.emitter.emit('push-message', {

@@ -6,36 +6,39 @@
   </div>
   <section class="container py-3 text-primary">
         <div class="row text-center pt-5 pb-3">
-            <div class="col-lg-6 m-auto">
-                <h1 class="h1">寒舍使命</h1>
-            </div>
+          <h2 class="text-center text-primary mb-4">
+            <span class="border-bottom border-primary border-2 pb-2">寒舍使命</span>
+          </h2>
         </div>
         <div class="row">
             <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-primary text-center"><i class="bi bi-truck"></i></div>
-                    <h2 class="h5 mt-4 text-center">宅配到府</h2>
+              <div class="h-100 py-5 services-icon services-icon--hover shadow">
+                <div class="h1 text-primary text-center
+                ">
+                  <i class="bi bi-truck"></i>
                 </div>
+                <h2 class="h5 mt-4 text-center">宅配到府</h2>
+              </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon-wap shadow">
-                    <div class="h1 text-priamry text-center">
-                      <i class="bi bi-arrow-left-right"></i>
-                    </div>
-                    <h2 class="h5 mt-4 text-center">最高品質</h2>
-                </div>
+              <div class="h-100 py-5 services-icon services-icon--hover shadow">
+                  <div class="h1 text-priamry text-center">
+                    <i class="bi bi-arrow-left-right"></i>
+                  </div>
+                  <h2 class="h5 mt-4 text-center">最高品質</h2>
+              </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon-wap shadow">
+                <div class="h-100 py-5 services-icon services-icon--hover shadow">
                     <div class="h1 text-primary text-center"><i class="bi bi-percent"></i></div>
                     <h2 class="h5 mt-4 text-center">最多優惠</h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon-wap shadow">
+                <div class="h-100 py-5 services-icon services-icon--hover shadow">
                     <div class="h1 text-primary text-center">
                       <i class="bi bi-telephone-inbound"></i>
                     </div>
@@ -156,6 +159,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  $primary: #C03F19;
   .banner {
     background-image: url(https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80);
     background-size: cover;
@@ -163,6 +167,18 @@ export default {
     height: 400px;
     @media (max-width: 768px) {
       height: 300px;
+    }
+  }
+
+  .services-icon {
+    transition: all.3s ease;
+    border-radius: 10px;
+    &--hover:hover {
+      background-color: $primary;
+      color: #fff;
+      .bi {
+        color: #fff;
+      }
     }
   }
 

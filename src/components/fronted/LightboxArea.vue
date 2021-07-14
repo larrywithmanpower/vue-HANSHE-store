@@ -1,6 +1,6 @@
 <template>
   <section class="row">
-    <div class="col-3" v-for="(src, index) in imgs"
+    <div class="col-lg-3 col-md-4 col-6 g-0" v-for="(src, index) in imgs"
       :key="index"
       >
       <div class="card"
@@ -54,6 +54,55 @@ export default {
       ], // Img Url , string or Array
       visible: false,
       index: 0, // default: 0
+      fullWidth: 0,
+      fullHeight: 0,
+    };
+  },
+  watch: {
+    fullWidth() {
+      this.fullWidth = window.innerWidth;
+      console.log(this.fullWidth);
+      if (this.fullWidth > 414 && this.fullWidth < 1024) {
+        this.imgs = [
+          {
+            src: 'https://images.unsplash.com/photo-1584385154237-bd214e10f671?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjB8fHNob2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+            title: '運動好鞋',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1611507692634-6fd5e10e8900?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fHNob2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+            title: '穿搭容易',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1601138187846-c817edbb7d63?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTgwfHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+            title: '生活品味',
+          },
+        ];
+      } else {
+        this.imgs = [
+          {
+            src: 'https://images.unsplash.com/photo-1584385154237-bd214e10f671?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjB8fHNob2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+            title: '運動好鞋',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1611507692634-6fd5e10e8900?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Njd8fHNob2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+            title: '穿搭容易',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1604733077610-1dbf9397baa5?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTd8fHNob2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+            title: '時尚潮流',
+          },
+          {
+            src: 'https://images.unsplash.com/photo-1601138187846-c817edbb7d63?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTgwfHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
+            title: '生活品味',
+          },
+        ];
+      }
+    },
+  },
+  mounted() {
+    this.fullWidth = window.innerWidth;
+    window.onresize = () => {
+      this.fullWidth = window.innerWidth;
     };
   },
   methods: {
@@ -103,6 +152,12 @@ export default {
   align-items: flex-end;
   transition: 0.4s ease-out;
   box-shadow: 0 7px 10px rgba(#000, 0.5);
+  @media (max-width: 768px) {
+    width: 230px;
+  }
+  @media (max-width: 414px) {
+    width: 180px;
+  }
   &:hover {
     transform: translateY(20px);
     //     change opacity to 1 during hover

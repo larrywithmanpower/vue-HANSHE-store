@@ -73,6 +73,7 @@ export default {
     return {
       couponModal: {},
       tempCoupon: {},
+      due_date: '',
     };
   },
   mounted() {

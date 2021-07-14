@@ -140,7 +140,7 @@ export default {
               style: 'success',
               title: res.data.message,
             });
-            this.$refs.CouponModal.closeModal();
+            this.$refs.CouponModal.hideModal();
           } else {
             this.emitter.emit('push-message', {
               style: 'danger',

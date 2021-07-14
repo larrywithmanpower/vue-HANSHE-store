@@ -3,21 +3,21 @@
       <ul class="pagination pagination-primary">
           <li class="page-item"
               :class="{ 'disabled': !page.has_pre }">
-              <a class="page-link link-success" href="#"
+              <a class="page-link link-primary" href="#"
                 @click.prevent="$emit('get-page', page.current_page - 1)">Previous</a>
           </li>
           <li class="page-item"
               v-for="item in page.total_pages" :key="item"
               :class="{ 'active': item === page.current_page }"
               >
-              <a class="page-link link-success"
+              <a class="page-link link-primary"
               href="#"
               @click.prevent="$emit('get-page', item)">{{ item }}</a>
           </li>
           <li class="page-item"
               :class="{ 'disabled': !page.has_next }">
               <a
-              class="page-link link-success"
+              class="page-link link-primary"
               href="#"
               @click.prevent="$emit('get-page', page.current_page + 1)"
               >
@@ -29,9 +29,6 @@
 </template>
 
 <style>
-  .page-item.active .page-link {
-      background-color: #198754 !important;
-  }
   .page-link:focus {
       box-shadow: 0 0 0 0.25rem #19875400;
   }

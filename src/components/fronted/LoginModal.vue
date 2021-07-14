@@ -83,8 +83,10 @@ export default {
       const url = `${process.env.VUE_APP_URL}/admin/signin`;
       this.$http.post(url, this.user).then((res) => {
         if (res.data.success) {
-          // eslint-disable-next-line no-alert
-          alert('登入成功');
+          this.$swal({
+            title: res.data.message,
+            icon: 'success',
+          });
           // ! 解構取得token與expired
           const { token, expired } = res.data;
           // ! 存取token至cookie
@@ -92,8 +94,10 @@ export default {
           this.$router.push('/admin/adminProducts');
           this.loginModal.hide();
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
           this.$router.push('/home');
         }
       }).catch((err) => {

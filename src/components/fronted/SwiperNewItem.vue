@@ -17,7 +17,7 @@
     }'
     :autoplay='
       {
-        "delay": 5000,
+        "delay": 2500,
         "disableOnInteraction": false,
       }'
     class="mySwiper"
@@ -43,6 +43,12 @@
                     <i class="bi bi-search"></i>
                   </button>
                 </li>
+                <li class="me-3">
+                  <button class="btn btn-primary text-white"
+                  @click="addCart(item.id)">
+                    <i class="bi bi-cart"></i>
+                  </button>
+                </li>
                 <li>
                   <button class="btn btn-primary text-white">
                     <i class="bi bi-heart"></i>
@@ -58,7 +64,7 @@
                 {{ item.title }}
               </h5>
               <p class="card-text font-monospace fs-4">
-                <small class="text-muted">$ {{ item.price }}</small>
+                <small class="text-muted">$ {{ $toCurrency(item.price) }}</small>
               </p>
             </div>
           </div>
@@ -78,9 +84,11 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  inject: ['emitter'],
   data() {
     return {
       products: [],
+      qty: 1,
     };
   },
   created() {
@@ -97,6 +105,29 @@ export default {
           alert(res.data.message);
         }
       }).catch((err) => { console.log(err); });
+    },
+    addCart(id) {
+      this.isLoading = true;
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
+      const data = {
+        product_id: id,
+        qty: this.qty,
+      };
+      this.$http.post(url, { data }).then((res) => {
+        if (res.data.success) {
+          this.$swal({
+            title: res.data.message,
+            icon: 'success',
+          });
+          this.emitter.emit('update-cart');
+          this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+        }
+      });
     },
     goDetail(item) {
       this.$router.push(`/products/product/${item.id}`);
