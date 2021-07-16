@@ -23,11 +23,11 @@
           <h4 class="card-title">{{ article.title }}</h4>
         </div>
         <div class="card-body">
-          <p class="card-text" v-html="article.description">
+          <p class="card-text ellipsis" v-html="article.description">
           </p>
           <a href="#" class="card-link stretched-link"
           @click.prevent="goToBlog(article)"
-          >Card link</a>
+          >看更多...</a>
         </div>
       </div>
     </div>

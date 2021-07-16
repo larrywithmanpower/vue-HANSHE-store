@@ -24,7 +24,7 @@
   >
     <template v-for="item in filterNew" :key="item.id">
       <swiper-slide>
-          <div class="card card-product h-100">
+          <div class="card border-0 card-product h-100">
             <div class="card-product__img">
               <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
               <ul

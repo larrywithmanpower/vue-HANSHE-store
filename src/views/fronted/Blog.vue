@@ -30,9 +30,6 @@
           name="q" placeholder="找文章 ..."
           v-model="searchArticles"
           >
-          <button type="submit" class="input-group-text bg-primary text-light">
-              <i class="bi bi-search text-white"></i>
-          </button>
         </div>
         <div class="list-group rounded-0">
           <h2

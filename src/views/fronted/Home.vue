@@ -16,7 +16,7 @@
       <SwiperNewItem></SwiperNewItem>
     </div>
   </section>
-  <section class="bg-light">
+  <section class="bg-info">
     <div class="container py-5">
       <h2 class="text-center text-primary mb-5">
         <span class="border-bottom border-primary border-2 pb-2">最新情報</span>
