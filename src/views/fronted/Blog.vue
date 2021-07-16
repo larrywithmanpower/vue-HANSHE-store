@@ -27,7 +27,9 @@
         <div class="input-group mb-4">
           <input type="text"
           class="form-control"
-          name="q" placeholder="找文章 ...">
+          name="q" placeholder="找文章 ..."
+          v-model="searchArticles"
+          >
           <button type="submit" class="input-group-text bg-primary text-light">
               <i class="bi bi-search text-white"></i>
           </button>
@@ -45,17 +47,17 @@
             最新資訊
           </h2>
           <div class="card mb-3"
-          v-for="(item, index) in filterArticles"
+          v-for="(item, index) in searchArticle"
           :key="index">
             <img :src="item.imageUrl" class="card-img-top" :alt="item.id">
             <div class="card-body">
               <h5 class="card-title">{{ item.title }}</h5>
-              <p class="card-text text-truncate"
+              <p class="card-text ellipsis"
               v-html="item.description"></p>
               <p class="card-text">
                 <a href="#"
                 class="stretched-link text-danger"
-                @click.prevent="goToPage(item.id)"></a>
+                @click.prevent="goToPage(item.id)">看更多...</a>
               </p>
             </div>
           </div>
@@ -75,6 +77,7 @@ export default {
       id: '',
       isLoading: false,
       filterArticles: [],
+      searchArticles: '',
     };
   },
   watch: {
@@ -126,6 +129,14 @@ export default {
     },
     goToPage(id) {
       this.$router.push(`/blog/${id}`);
+    },
+  },
+  computed: {
+    searchArticle() {
+      if (this.searchArticles) {
+        return this.articles.filter((item) => item.title.match(this.searchArticles));
+      }
+      return this.filterArticles;
     },
   },
 };
