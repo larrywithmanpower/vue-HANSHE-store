@@ -8,23 +8,11 @@
   <router-view :props-products='products'
   :props-categories='categories'
   ></router-view>
-  <div class="bg-light">
-    <div class="container py-5">
-      <h2 class="text-danger mb-4 border-bottom pb-3"><i class="bi bi-bookmark-star"></i>熱銷商品</h2>
-      <HotProducts class="text-start"
-      :props-products='products'
-      ></HotProducts>
-    </div>
-  </div>
 </template>
 
 <script>
-import HotProducts from '@/components/fronted/HotProducts.vue';
 
 export default {
-  components: {
-    HotProducts,
-  },
   data() {
     return {
       pageTitle: '',

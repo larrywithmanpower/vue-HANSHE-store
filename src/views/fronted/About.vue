@@ -5,9 +5,9 @@
     </h2>
   </div>
   <section class="container py-3 text-primary">
-        <div class="row text-center pt-5 pb-3">
+        <div class="row text-center py-5">
           <h2 class="text-center text-primary mb-4">
-            <span class="border-bottom border-primary border-2 pb-2">寒舍使命</span>
+            <span class="border-bottom border-primary border-2 ">寒舍使命</span>
           </h2>
         </div>
         <div class="row">

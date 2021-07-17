@@ -104,7 +104,11 @@
                     </button>
                   </li>
                   <li>
-                    <button class="btn btn-primary text-white">
+                    <button
+                      class="btn btn-primary text-white"
+                      :class="{ 'bg-info': myFavorite.includes(item) }"
+                      @click="addMyFavorite(item)"
+                    >
                       <i class="bi bi-heart"></i>
                     </button>
                   </li>
@@ -130,6 +134,15 @@
 </template>
 
 <script>
+const storageMethods = {
+  setItem(MyFavorite) {
+    const favoriteString = JSON.stringify(MyFavorite);
+    localStorage.setItem('MyFavorite', favoriteString);
+  },
+  getItem() {
+    return JSON.parse(localStorage.getItem('MyFavorite'));
+  },
+};
 
 export default {
   props: ['propsProducts', 'propsCategories'],
@@ -140,12 +153,20 @@ export default {
       filterCategory: '',
       isLoading: false,
       pageTitle: '',
+      myFavorite: storageMethods.getItem() || [],
     };
   },
   inject: ['emitter'],
   created() {
     this.pageTitle = this.$route.name;
     this.emitter.emit('page-title', this.pageTitle);
+    this.isLoading = true;
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1500);
+    this.emitter.on('send-removeFavorite', () => {
+      this.getFavorite();
+    });
   },
   watch: {
     propsProducts() {
@@ -154,8 +175,31 @@ export default {
     propsCategories() {
       this.categories = this.propsCategories;
     },
+    myFavorite: {
+      handler() {
+        storageMethods.setItem(this.myFavorite);
+      },
+      deep: true,
+    },
   },
   methods: {
+    getFavorite() {
+      this.myFavorite = storageMethods.getItem() || [];
+    },
+    addMyFavorite(item) {
+      if (this.myFavorite.includes(item)) {
+        this.myFavorite.splice(this.myFavorite.indexOf(item), 1);
+        storageMethods.setItem(this.myFavorite);
+        // this.emitter.emit('send-favorite', this.myFavorite)
+        this.$swal({ icon: 'warning', title: '已移除最愛' });
+      } else {
+        this.myFavorite.push(item);
+        storageMethods.setItem(this.myFavorite);
+        // this.emitter.emit('send-favorite', item)
+        this.$swal({ icon: 'success', title: '加入成功！' });
+      }
+      this.emitter.emit('get-favorite');
+    },
     goDetail(item) {
       this.$router.push(`/products/product/${item.id}`);
     },

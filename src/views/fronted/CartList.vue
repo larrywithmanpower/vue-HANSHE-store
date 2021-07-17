@@ -109,7 +109,7 @@
     <div class="card" style="width: 20rem;">
       <div class="card-body">
         <h5 class="card-title text-danger">購物車內無任何商品</h5>
-        <router-link to="/products/category" class="card-link stretched-link">還不快去買</router-link>
+        <router-link to="/products/productList" class="card-link stretched-link">還不快去買</router-link>
       </div>
     </div>
   </section>
