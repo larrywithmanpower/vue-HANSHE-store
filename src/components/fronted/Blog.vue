@@ -7,11 +7,11 @@
       </div>
     </div>
   </Loading>
-  <div class="row">
+  <div class="row" data-aos="zoom-in-right">
     <div class="col-md-6 col-lg-4 mb-4 mb-lg-0"
     v-for="(article, index) in articles" :key="index"
     >
-      <div class="card">
+      <div class="card border-0 bg-info">
         <div class="card-image" :style="{ 'background-image': `url(${article.imageUrl})` }"></div>
         <div class="card-body">
           <div class="d-flex justify-content-between py-3">
@@ -69,6 +69,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .card {
+    transition: all .3s ease;
+    &:hover {
+      box-shadow: 1px 5px 10px gray;
+    }
+  }
   .card-image {
     height: 250px;
     background-size: cover;

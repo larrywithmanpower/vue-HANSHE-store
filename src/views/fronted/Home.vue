@@ -1,11 +1,13 @@
 <template>
   <Carousel></Carousel>
-  <section class="container">
-    <h2 class="text-center text-primary py-4">
-      <span class="border-bottom border-primary border-2 pb-2">為何選擇寒舍</span>
-    </h2>
-    <div class="">
-      <Lightbox></Lightbox>
+  <section class="bg-light">
+    <div class="container">
+      <h2 class="text-center text-primary py-4">
+        <span class="border-bottom border-primary border-2 pb-2">為何選擇寒舍</span>
+      </h2>
+      <div>
+        <Lightbox></Lightbox>
+      </div>
     </div>
   </section>
   <section class="pt-5 pb-4 bg-white">

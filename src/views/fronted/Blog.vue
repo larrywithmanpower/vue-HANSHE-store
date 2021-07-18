@@ -18,6 +18,22 @@
     <div class="row">
       <div class="col-md-8">
         <h2 class="fw-bold">{{ article.title }}</h2>
+        <ul class="d-flex list-unstyled">
+          <li class="text-muted me-3">作者：{{ article.author }}</li>
+          <li class="text-muted me-3">
+            日期：{{ new Date(article.create_at * 1000).toLocaleDateString() }}
+          </li>
+          <li class="text-muted">
+            tag：
+            <span class="badge me-2"
+            v-for="(tag, index) in article.tag"
+            :key="index"
+            :class="[{ 'bg-primary': tag === '新款' },
+            { 'bg-warning': tag === '友誼' },
+            { 'bg-secondary': tag === '鮮豔' }]"
+            >{{ tag }}</span>
+          </li>
+        </ul>
         <img :src="article.imageUrl"
         alt=""
         class="img-fluid mb-3">

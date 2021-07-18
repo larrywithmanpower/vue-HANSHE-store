@@ -28,15 +28,17 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active"
-      style="background-image: url()"
       >
         <img src="https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2VhcmluZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="d-block w-100" alt="..." />
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-none d-md-block" data-aos="zoom-in"
+        data-aos-duration="1000">
           <h2>穿出屬於自己的
             <span class="decoration-text">Style</span>
           </h2>
           <p class="fs-4">找尋屬於自己的風格，創造嶄新的外表</p>
-          <button type="button" class="btn-animation pulse">看看商品</button>
+          <button type="button" class="btn-animation pulse"
+          @click="$router.push('/products/productList')"
+          >看看商品</button>
         </div>
       </div>
       <div class="carousel-item">
@@ -51,7 +53,9 @@
           <figcaption class="blockquote-footer text-light">
             <cite title="Source Title">雷舒雁</cite>
           </figcaption>
-          <button type="button" class="btn-animation offset">為自己挑一雙好鞋</button>
+          <button type="button" class="btn-animation offset"
+          @click="$router.push('/products/productList')"
+          >為自己挑一雙好鞋</button>
         </div>
       </div>
       <div class="carousel-item">

@@ -125,7 +125,7 @@ export default {
       this.myFavorite = storageMethods.getItem() || [];
     },
     removeFavorite(id) {
-      console.log(id);
+      // console.log(id);
       // eslint-disable-next-line no-shadow
       this.myFavorite.forEach((item) => {
         if (item.id === id) {
@@ -140,6 +140,7 @@ export default {
       localStorage.clear();
       this.getFavorite();
       this.emitter.emit('send-removeFavorite');
+      this.$swal({ icon: 'success', title: '已全部清除！' });
     },
     navbarTransition() {
       const windowY = window.scrollY;

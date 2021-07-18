@@ -17,9 +17,10 @@
     }'
     :autoplay='
       {
-        "delay": 2500,
+        "delay": 4000,
         "disableOnInteraction": false,
       }'
+      :pagination="true"
     class="mySwiper"
   >
     <template v-for="item in filterNew" :key="item.id">
@@ -50,7 +51,10 @@
                   </button>
                 </li>
                 <li>
-                  <button class="btn btn-primary text-white">
+                  <button class="btn btn-primary text-white"
+                  :class="{ 'bg-info': myFavorite.includes(item) }"
+                  @click="addMyFavorite(item)"
+                  >
                     <i class="bi bi-heart"></i>
                   </button>
                 </li>
@@ -79,6 +83,16 @@ import SwiperCore, { Pagination, Autoplay } from 'swiper/core';
 
 SwiperCore.use([Autoplay, Pagination]);
 
+const storageMethods = {
+  setItem(MyFavorite) {
+    const favoriteString = JSON.stringify(MyFavorite);
+    localStorage.setItem('MyFavorite', favoriteString);
+  },
+  getItem() {
+    return JSON.parse(localStorage.getItem('MyFavorite'));
+  },
+};
+
 export default {
   components: {
     Swiper,
@@ -89,12 +103,33 @@ export default {
     return {
       products: [],
       qty: 1,
+      myFavorite: storageMethods.getItem() || [],
     };
   },
   created() {
     this.getProducts();
+    this.emitter.on('send-removeFavorite', () => {
+      this.getFavorite();
+    });
   },
   methods: {
+    getFavorite() {
+      this.myFavorite = storageMethods.getItem() || [];
+    },
+    addMyFavorite(item) {
+      if (this.myFavorite.includes(item)) {
+        this.myFavorite.splice(this.myFavorite.indexOf(item), 1);
+        storageMethods.setItem(this.myFavorite);
+        // this.emitter.emit('send-favorite', this.myFavorite)
+        this.$swal({ icon: 'warning', title: '已移除最愛' });
+      } else {
+        this.myFavorite.push(item);
+        storageMethods.setItem(this.myFavorite);
+        // this.emitter.emit('send-favorite', item)
+        this.$swal({ icon: 'success', title: '加入成功！' });
+      }
+      this.emitter.emit('get-favorite');
+    },
     getProducts() {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
       this.$http.get(url).then((res) => {

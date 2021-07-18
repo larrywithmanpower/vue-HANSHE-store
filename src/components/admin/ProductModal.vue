@@ -216,14 +216,19 @@
               </div>
               <div class="form-group mb-3">
                 <label for="content">功能說明</label>
-                <textarea
+                <!-- <textarea
                   v-model="editProduct.content"
                   id="content"
                   type="text"
                   class="form-control"
                   placeholder="請輸入說明內容"
                   rows="4"
-                ></textarea>
+                ></textarea> -->
+                <p v-html="editProduct.content"></p>
+                <ckeditor :editor="editor"
+                v-model="editProduct.content"
+                :config="editorConfig"
+                ></ckeditor>
               </div>
               <div class="row">
                 <div class="form-check col-2">
@@ -313,6 +318,7 @@
 
 <script>
 import { Modal } from 'bootstrap';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   props: ['tempProduct', 'isNew'],
@@ -321,6 +327,38 @@ export default {
       productModal: {},
       editProduct: {
         storageNum: 0,
+      },
+      editor: ClassicEditor,
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+        // 刪除工具列的功能
+        placeholder: '請輸入功能...',
+        // 當編輯器內容為空時顯示此字串
+        // 初始化載入文字
+        heading: {
+        // 設定 Heading 內的樣式，可新增多個
+          options: [
+            {
+              model: 'paragraph',
+              title: 'Paragraph',
+              class: 'ck-heading_paragraph',
+            },
+            {
+              model: 'heading1',
+              view: 'h2',
+              title: 'Heading 1',
+              class: 'ck-heading_heading1',
+            },
+            {
+              model: 'heading2',
+              view: 'h3',
+              title: 'Heading 2',
+              class: 'ck-heading_heading2',
+            },
+          ],
+        },
+        language: 'tw',
+        // 設定語言
       },
     };
   },

@@ -1,5 +1,5 @@
 <template>
-  <section class="row">
+  <section class="row"  data-aos="zoom-out-up">
     <div class="col-lg-3 col-md-4 col-6 g-0" v-for="(src, index) in imgs"
       :key="index"
       >
