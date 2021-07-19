@@ -20,14 +20,19 @@
             寒舍資訊
           </h2>
           <ul class="list-unstyled text-light footer-link-list">
-            <li class="">
+            <li>
               <router-link to="/products/category"
               class="text-decoration-none link-light" href="#">寒舍商品</router-link>
             </li>
-            <li class="">
+            <li>
               <router-link to="/about"
               class="text-decoration-none link-light"
               href="#">關於寒舍</router-link>
+            </li>
+            <li>
+              <router-link to="/blogs/blogList"
+              class="text-decoration-none link-light"
+              href="#">部落格</router-link>
             </li>
           </ul>
         </div>

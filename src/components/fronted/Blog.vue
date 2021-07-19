@@ -8,8 +8,9 @@
     </div>
   </Loading>
   <div class="row" data-aos="zoom-in-right">
+    <!-- v-for搭配.slice(0,3)只顯示三篇 -->
     <div class="col-md-6 col-lg-4 mb-4 mb-lg-0"
-    v-for="(article, index) in articles" :key="index"
+    v-for="(article, index) in articles.slice(0,3)" :key="index"
     >
       <div class="card border-0">
         <div class="card-image" :style="{ 'background-image': `url(${article.imageUrl})` }"></div>
@@ -25,9 +26,9 @@
         <div class="card-body">
           <p class="card-text ellipsis" v-html="article.description">
           </p>
-          <a href="#" class="card-link stretched-link"
+          <a href="#" class="card-link stretched-link h6 text-primary"
           @click.prevent="goToBlog(article)"
-          >看更多...</a>
+          >more...</a>
         </div>
       </div>
     </div>
@@ -61,7 +62,7 @@ export default {
       }).catch((err) => { console.log(err); });
     },
     goToBlog(article) {
-      this.$router.push(`/blog/${article.id}`);
+      this.$router.push(`/blogs/blog/${article.id}`);
       this.article = article;
     },
   },

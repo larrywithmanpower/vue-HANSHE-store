@@ -64,9 +64,21 @@ const routes = [
         component: () => import('../views/fronted/Finished.vue'),
       },
       {
-        path: 'blog/:id',
-        name: 'Blog',
-        component: () => import('../views/fronted/Blog.vue'),
+        path: 'blogs',
+        name: 'Blogs',
+        component: () => import('../views/fronted/Blogs.vue'),
+        children: [
+          {
+            path: 'blog/:id',
+            name: 'Blog',
+            component: () => import('../views/fronted/Blog.vue'),
+          },
+          {
+            path: 'blogList',
+            name: 'BlogList',
+            component: () => import('../views/fronted/BlogList.vue'),
+          },
+        ],
       },
     ],
   },

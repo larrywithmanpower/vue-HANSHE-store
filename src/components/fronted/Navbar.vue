@@ -33,24 +33,25 @@
         <div class="navbar-nav">
           <router-link to="/home" class="nav-link">首頁</router-link>
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
+          <router-link to="/blogs/blogList" class="nav-link">部落格</router-link>
           <router-link to="/products/productList" class="nav-link">寒舍商品</router-link
           >
           <router-Link to="/cart/cartList" class="nav-link">
             <i class="bi bi-cart-plus me-2"></i>
             <small>[ {{ carts.length }} ]</small>
-          </router-Link>
+          </router-Link >
           <!-- <button class="bg-transparent border-0 nav-link text-start">
             <i class="bi bi-heart me-2"></i>
             <small>[ {{ myFavorite.length }} ]</small>
           </button> -->
-          <div class="btn-group">
-            <button
+          <div class="nav-item dropdown">
+            <a href="javascript:void(0)"
             class="bg-transparent border-0 nav-link
-            text-start" type="button" id="dropdownMenuButton"
+            text-start" type="a" id="dropdownMenuButton"
             data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-heart me-2"></i>
               <small>[ {{ myFavorite.length }} ]</small>
-            </button>
+            </a>
             <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" href="#">Menu item</a></li>
               <li><a class="dropdown-item" href="#">Menu item</a></li>

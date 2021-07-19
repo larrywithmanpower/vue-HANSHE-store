@@ -60,7 +60,7 @@
                 </li>
               </ul>
             </div>
-            <div class="card-body text-center">
+            <div class="card-body text-center pt-1">
               <p class="card-text mb-0 d-none d-md-block">
                 <small class="text-muted">{{ item.category }}</small>
               </p>

@@ -170,8 +170,6 @@ export default {
       editorConfig: {
         // 刪除工具列的功能
         placeholder: '請輸入文章...',
-        // 當編輯器內容為空時顯示此字串
-        initialData: '<h2>我是預設字串</h2>',
         // 初始化載入文字
         heading: {
         // 設定 Heading 內的樣式，可新增多個

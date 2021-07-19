@@ -41,7 +41,15 @@
       class="row align-items-center mb-md-4 introduction">
         <div class="col-md-7 bg-cover introduction-area" style="background-image: url(https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80); height: 320px;"
         >
-          <h3 class="innerText--hover">了解更多</h3>
+          <h3 class="innerText--hover">
+            <span class="d-none d-md-block">
+              了解更多
+            </span>
+            <span class="d-md-none">
+              <i class="bi bi-stars"></i>
+              經典復刻
+            </span>
+          </h3>
         </div>
         <div class="col-md-5 d-none d-md-block">
           <h3 class="text-primary outerText--hover">
@@ -54,7 +62,15 @@
       class="row flex-row-reverse align-items-center mb-md-4 introduction">
         <div class="col-md-7 bg-cover introduction-area" style="background-image: url(https://images.unsplash.com/photo-1578118725665-f4097cd63964?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM1fHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); height: 320px;"
         >
-          <h3 class="innerText--hover">了解更多</h3>
+          <h3 class="innerText--hover">
+            <span class="d-none d-md-block">
+              了解更多
+            </span>
+            <span class="d-md-none">
+              <i class="bi bi-moon-stars"></i>
+              時尚潮流
+            </span>
+          </h3>
         </div>
         <div class="col-md-5 d-none d-md-block outerTextReverse--hover">
           <h3 class="text-primary text-end">
@@ -66,7 +82,15 @@
       <routerLink to="/products/productList" class="row align-items-center mb-md-4 introduction">
         <div class="col-md-7 bg-cover introduction-area" style="background-image: url(https://images.unsplash.com/photo-1581067675122-a07ed597f1ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); height: 320px;"
         >
-          <h3 class="innerText--hover">了解更多</h3>
+        <h3 class="innerText--hover">
+          <span class="d-none d-md-block">
+            了解更多
+          </span>
+          <span class="d-md-none">
+            <i class="bi bi-gender-ambiguous"></i>
+            休閒混搭
+          </span>
+        </h3>
         </div>
         <div class="col-md-5 d-none d-md-block outerText--hover">
           <h3 class="text-primary">
@@ -146,7 +170,6 @@ export default {
         display: block;
         width: 100%;
         height: 100%;
-        border-radius: 15px;
         background: rgba(#000, 0.6);
         z-index: 2;
         transition: 0.5s;

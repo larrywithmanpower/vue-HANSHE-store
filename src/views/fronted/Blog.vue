@@ -7,13 +7,6 @@
       </div>
     </div>
   </Loading>
-  <div class="banner d-flex justify-content-center align-items-center position-relative"
-  :style="{ 'background-image': `url(${article.imageUrl})` }">
-    <h1 class="display-4 text-white routeFont" data-aos="fade-up">
-    <!-- 使用mitt來解決取route不動的問題 -->
-      {{ article.title }}
-    </h1>
-  </div>
   <div class="container py-5">
     <div class="row">
       <div class="col-md-8">
@@ -30,7 +23,8 @@
             :key="index"
             :class="[{ 'bg-primary': tag === '新款' },
             { 'bg-warning': tag === '友誼' },
-            { 'bg-secondary': tag === '鮮豔' }]"
+            { 'bg-secondary': tag === '鮮豔' },
+            { 'bg-success': tag === '生活' }]"
             >{{ tag }}</span>
           </li>
         </ul>
@@ -47,7 +41,7 @@
           v-model="searchArticles"
           >
         </div>
-        <div class="list-group rounded-0">
+        <div class="list-group rounded-0  position-sticky overflow-scroll vh-100">
           <h2
             class="
               text-center
@@ -69,8 +63,8 @@
               v-html="item.description"></p>
               <p class="card-text">
                 <a href="#"
-                class="stretched-link text-danger"
-                @click.prevent="goToPage(item.id)">看更多...</a>
+                class="stretched-link text-primary h6"
+                @click.prevent="goToPage(item.id)">more...</a>
               </p>
             </div>
           </div>
@@ -98,7 +92,7 @@ export default {
     //  * safari使用$router.go(0)無效，嘗試使用window.history.go(0)
     $route() {
       this.id = this.$route.params.id;
-      window.history.go(0);
+      window.location.reload();
       this.getArticle();
     },
   },
@@ -117,8 +111,10 @@ export default {
           this.article = res.data.article;
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
         }
       }).catch((err) => { console.log(err); });
     },
@@ -128,9 +124,9 @@ export default {
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.articles = res.data.articles;
-          this.articles.forEach((item, index) => {
+          this.articles.forEach((item) => {
             if (item.id !== this.id) {
-              console.log(item, index);
+              // console.log(item, index);
               this.filterArticles.push(item);
             }
           });
@@ -142,7 +138,7 @@ export default {
       }).catch((err) => { console.log(err); });
     },
     goToPage(id) {
-      this.$router.push(`/blog/${id}`);
+      this.$router.push(`/blogs/blog/${id}`);
     },
   },
   computed: {
