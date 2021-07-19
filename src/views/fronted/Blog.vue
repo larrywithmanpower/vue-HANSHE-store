@@ -92,7 +92,14 @@ export default {
     //  * safari使用$router.go(0)無效，嘗試使用window.history.go(0)
     $route() {
       this.id = this.$route.params.id;
-      window.location.reload();
+      const browserRule = /^.((iPhone)|(iPad)|(Safari))+.$/;
+      if (browserRule.test(navigator.userAgent)) {
+        window.onpageshow = (event) => {
+          if (event.persisted) {
+            window.location.reload();
+          }
+        };
+      }
       this.getArticle();
     },
   },
