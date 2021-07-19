@@ -9,7 +9,7 @@
         >HanShe</router-link
       >
       <button
-        class="navbar-toggler border-0"
+        class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#layoutNav"
@@ -118,6 +118,7 @@ export default {
       carts: [],
       myFavorite: storageMethods.getItem() || [],
       products: [],
+      fullWidth: window.innerWidth,
     };
   },
   methods: {

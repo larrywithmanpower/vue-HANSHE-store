@@ -1,54 +1,59 @@
 <template>
-  <div class="banner d-flex justify-content-center align-items-center mb-3">
+  <section class="banner d-flex justify-content-center align-items-center">
     <h2 class="display-4 text-white routeFont" data-aos="fade-up">
       {{ pageTitle }}
     </h2>
-  </div>
-  <section class="container py-3 text-primary">
-        <div class="row text-center py-5">
-          <h2 class="text-center text-primary mb-4">
-            <span class="border-bottom border-primary border-2 ">寒舍使命</span>
-          </h2>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-3 pb-5">
-              <div class="h-100 py-5 services-icon services-icon--hover shadow">
-                <div class="h1 text-primary text-center
-                ">
-                  <i class="bi bi-truck"></i>
-                </div>
-                <h2 class="h5 mt-4 text-center">宅配到府</h2>
+  </section>
+  <section class="bg-light py-5">
+    <div class="container py-3 text-primary">
+      <div class="row text-center">
+        <h2 class="text-center text-primary mb-4">
+          <span class="border-bottom border-primary border-2 ">寒舍使命</span>
+        </h2>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon services-icon--hover shadow">
+              <div class="h1 text-primary text-center
+              ">
+                <i class="bi bi-truck"></i>
               </div>
+              <h2 class="h5 mt-4 text-center">宅配到府</h2>
             </div>
+          </div>
 
-            <div class="col-md-6 col-lg-3 pb-5">
+          <div class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon services-icon--hover shadow">
+                <div class="h1 text-priamry text-center">
+                  <i class="bi bi-arrow-left-right"></i>
+                </div>
+                <h2 class="h5 mt-4 text-center">最高品質</h2>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 pb-5">
               <div class="h-100 py-5 services-icon services-icon--hover shadow">
-                  <div class="h1 text-priamry text-center">
-                    <i class="bi bi-arrow-left-right"></i>
+                  <div class="h1 text-primary text-center"><i class="bi bi-percent"></i></div>
+                  <h2 class="h5 mt-4 text-center">最多優惠</h2>
+              </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 pb-5">
+              <div class="h-100 py-5 services-icon services-icon--hover shadow">
+                  <div class="h1 text-primary text-center">
+                    <i class="bi bi-telephone-inbound"></i>
                   </div>
-                  <h2 class="h5 mt-4 text-center">最高品質</h2>
+                  <h2 class="h5 mt-4 text-center">貴賓服務專線</h2>
               </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon services-icon--hover shadow">
-                    <div class="h1 text-primary text-center"><i class="bi bi-percent"></i></div>
-                    <h2 class="h5 mt-4 text-center">最多優惠</h2>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-3 pb-5">
-                <div class="h-100 py-5 services-icon services-icon--hover shadow">
-                    <div class="h1 text-primary text-center">
-                      <i class="bi bi-telephone-inbound"></i>
-                    </div>
-                    <h2 class="h5 mt-4 text-center">貴賓服務專線</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-  <div class="container my-5">
-    <section class="iframe-rwd mb-5">
+          </div>
+      </div>
+    </div>
+  </section>
+  <section class="container py-5">
+    <h2 class="text-center text-primary mb-4">
+      <span class="border-bottom border-primary border-2 ">寒舍定位</span>
+    </h2>
+    <div class="iframe-rwd mb-5">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1823.0199917032346!2d120.5814602110709!3d23.95902623218566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1szh-TW!2stw!4v1626067517107!5m2!1szh-TW!2stw"
         width="600"
@@ -57,8 +62,8 @@
         allowfullscreen=""
         loading="lazy"
       ></iframe>
-    </section>
-    <section class="row">
+    </div>
+    <div class="row">
       <ul class="col-md-4 col-lg-3 mb-4 mb-md-0">
         <li class="media">
           <span class="bi bi-house me-2 fs-4"></span>
@@ -141,8 +146,8 @@
           </div>
         </form>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>

@@ -61,13 +61,13 @@
               </ul>
             </div>
             <div class="card-body text-center">
-              <p class="card-text mb-0">
+              <p class="card-text mb-0 d-none d-md-block">
                 <small class="text-muted">{{ item.category }}</small>
               </p>
               <h5 class="card-title mb-0">
                 {{ item.title }}
               </h5>
-              <p class="card-text font-monospace fs-4">
+              <p class="card-text font-monospace fs-4 d-none d-md-block">
                 <small class="text-muted">$ {{ $toCurrency(item.price) }}</small>
               </p>
             </div>

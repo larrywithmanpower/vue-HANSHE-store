@@ -29,9 +29,6 @@
               class="text-decoration-none link-light"
               href="#">關於寒舍</router-link>
             </li>
-            <li class="">
-              <a class="text-decoration-none link-light" href="#">FAQs</a>
-            </li>
           </ul>
         </div>
 

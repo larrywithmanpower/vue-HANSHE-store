@@ -114,7 +114,7 @@
       </div>
       <!-- nav pill -->
       <ul
-        class="nav nav-pills nav-fill justify-content-center mb-3 px-2 col-12"
+        class="nav nav-pills nav-fill justify-content-center mb-3 px-2 col-12 mt-3"
         id="pills-tab"
         role="tablist"
       >

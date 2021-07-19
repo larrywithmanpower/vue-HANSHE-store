@@ -95,9 +95,10 @@ export default {
   },
   watch: {
     // * 監聽 $router id 值變化後，使用 $router.go(0) 重新刷新頁面
+    //  * safari使用$router.go(0)無效，嘗試使用window.history.go(0)
     $route() {
       this.id = this.$route.params.id;
-      this.$router.go(0);
+      window.history.go(0);
       this.getArticle();
     },
   },
@@ -162,6 +163,13 @@ export default {
     height: 400px;
     @media (max-width: 768px) {
       height: 300px;
+    }
+  }
+
+  .card {
+    transition: all .3s ease;
+    &:hover {
+      box-shadow: 1px 5px 10px gray;
     }
   }
 </style>

@@ -47,30 +47,6 @@
             <i class="bi bi-chevron-right list-group-icon"></i>
           </a>
         </div>
-        <!-- <div class="list-group rounded-0">
-          <h2
-            class="
-              text-center
-              border-bottom border-3 border-primary
-              pb-2
-              mb-0
-              h4
-            "
-          >
-            最新資訊
-          </h2>
-          <a
-            href="#"
-            class="
-              list-group-item list-group-item-action
-              border-0
-              d-flex
-              justify-content-between
-              list-group-item--hover
-            ">
-            文章
-          </a>
-        </div> -->
       </div>
       <!-- products -->
       <div class="col-lg-9">

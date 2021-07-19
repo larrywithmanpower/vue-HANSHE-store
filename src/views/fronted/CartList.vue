@@ -10,7 +10,7 @@
 
   <div class="table-responsive mx-auto my-3" v-if="carts.length > 0">
     <table class="table table-sm table-borderless text-center border-light align-middle">
-      <thead class="bg-primary text-white">
+      <thead class="border-bottom text-primary">
         <tr class="py-3">
           <th></th>
           <th class="d-none d-md-block"></th>

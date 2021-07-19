@@ -151,16 +151,20 @@ export default {
           if (res.data.success) {
             this.checkSuccess = true;
           } else {
-            // eslint-disable-next-line no-alert
-            alert(res.data.message);
+            this.$swal({
+              title: res.data.message,
+              icon: 'error',
+            });
             this.$router.push('/');
           }
         }).catch((err) => {
           console.log(err);
         });
       } else {
-        // eslint-disable-next-line no-alert
-        alert('未登入');
+        this.$swal({
+          title: '未登入',
+          icon: 'error',
+        });
         this.$router.push('/');
       }
     },
@@ -169,8 +173,10 @@ export default {
       this.$http.post(url).then((res) => {
         if (res.data.success) {
           document.cookie = 'myToken=; expires=;';
-          // eslint-disable-next-line no-alert
-          alert('登出成功');
+          this.$swal({
+            title: res.data.message,
+            icon: 'success',
+          });
           this.$router.push('/');
         }
       });

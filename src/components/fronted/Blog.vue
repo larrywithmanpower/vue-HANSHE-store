@@ -11,7 +11,7 @@
     <div class="col-md-6 col-lg-4 mb-4 mb-lg-0"
     v-for="(article, index) in articles" :key="index"
     >
-      <div class="card border-0 bg-info">
+      <div class="card border-0">
         <div class="card-image" :style="{ 'background-image': `url(${article.imageUrl})` }"></div>
         <div class="card-body">
           <div class="d-flex justify-content-between py-3">
