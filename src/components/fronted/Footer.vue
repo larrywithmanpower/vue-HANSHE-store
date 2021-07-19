@@ -21,7 +21,7 @@
           </h2>
           <ul class="list-unstyled text-light footer-link-list">
             <li>
-              <router-link to="/products/category"
+              <router-link to="/products/productList"
               class="text-decoration-none link-light" href="#">寒舍商品</router-link>
             </li>
             <li>
@@ -84,7 +84,7 @@
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
-                href="https://twitter.com/"
+                href="https://www.linkedin.com/"
                 ><i class="bi bi-linkedin"></i
               ></a>
             </li>
@@ -92,7 +92,7 @@
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
-                href="https://www.linkedin.com/"
+                href="https://github.com/larrywithmanpower/vue-store-HANSHE.git"
                 ><i class="bi bi-github"></i
               ></a>
             </li>

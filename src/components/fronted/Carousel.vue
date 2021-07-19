@@ -3,6 +3,7 @@
     id="carouselExampleCaptions"
     class="carousel slide"
     data-bs-ride="carousel"
+    ref="myCarousel"
   >
     <div class="carousel-indicators">
       <button
@@ -29,7 +30,7 @@
     <div class="carousel-inner">
       <div class="carousel-item active"
       >
-        <img src="https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2VhcmluZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="d-block w-100" alt="..." />
+        <img src="https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2VhcmluZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="d-block w-100" alt="carouselPic" />
         <div class="carousel-caption d-none d-md-block" data-aos="zoom-in"
         data-aos-duration="1000">
           <h2>穿出屬於自己的
@@ -42,7 +43,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1486218119243-13883505764c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODl8fHNwb3J0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="d-block w-100" alt="..." />
+        <img src="https://images.unsplash.com/photo-1486218119243-13883505764c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODl8fHNwb3J0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="d-block w-100" alt="carouselPic" />
         <div class="carousel-caption d-none d-md-block">
           <h2>保護雙腳跑遍世界
             <span class="decoration-text text-primary">HANSHE</span>
@@ -59,7 +60,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1608033451651-49af4c31ed1b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" class="d-block w-100" alt="..." />
+        <img src="https://images.unsplash.com/photo-1608033451651-49af4c31ed1b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" class="d-block w-100" alt="carouselPic" />
         <div class="carousel-caption">
           <h2>夏季大拍賣
             <span class="decoration-text">Discount</span>
@@ -91,6 +92,8 @@
 </template>
 
 <script>
+import { Carousel } from 'bootstrap';
+
 export default {
   data() {
     return {
@@ -111,7 +114,13 @@ export default {
           text: '疫情期間優惠方案',
         },
       ],
+      myCarousel: {},
     };
+  },
+  mounted() {
+    this.myCarousel = new Carousel(this.$refs.myCarousel, {
+      interval: 2500,
+    });
   },
 };
 </script>
