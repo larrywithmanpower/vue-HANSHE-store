@@ -342,7 +342,11 @@
                 <div v-for="(user, index) in users" :key="user.name">
                   <div class="mb-3">
                     <div class="d-flex align-items-center">
-                      <img :src="user.picture.thumbnail" alt="" class="rounded-circle"/>
+                      <img
+                        :src="user.picture.thumbnail"
+                        :alt="user.name.first"
+                        class="rounded-circle"
+                      />
                       <h4 class="mb-0 ms-3">{{ user.name.first }}</h4>
                     </div>
                     <div>
@@ -429,7 +433,6 @@
                         type="text"
                         class="form-control"
                         id="name"
-                        name="name"
                         placeholder="請輸入姓名"
                       />
                     </div>
@@ -440,7 +443,6 @@
                         type="email"
                         class="form-control"
                         id="email"
-                        name="email"
                         placeholder="請輸入Email"
                       />
                     </div>
@@ -451,7 +453,6 @@
                         type="text"
                         class="form-control"
                         id="number"
-                        name="number"
                         placeholder="請輸入手機"
                       />
                     </div>
@@ -460,7 +461,6 @@
                     <div class="form-group mb-3">
                       <textarea
                         class="form-control"
-                        name="message"
                         id="message"
                         rows="3"
                         placeholder="請輸入評價內容"
@@ -468,7 +468,11 @@
                     </div>
                   </div>
                   <div class="col-md-12 text-right">
-                    <button type="submit" class="btn btn-outline-primary">
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary"
+                      @click="$router.push('/products/productList')"
+                    >
                       送出評價
                     </button>
                   </div>
@@ -526,15 +530,11 @@ export default {
     },
   },
   methods: {
-    changeStar() {
-
-    },
     getUser() {
       const url = 'https://randomuser.me/api/?results=3';
       this.$http.get(url).then((res) => {
         this.users = res.data.results;
-        console.log(this.users);
-      });
+      }).catch((err) => console.log(err));
     },
     getProduct() {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;
@@ -543,15 +543,15 @@ export default {
         if (res.data.success) {
           this.emitter.emit('update-cart');
           this.product = res.data.product;
-          console.log(this.$router);
           this.isLoading = false;
         } else {
           this.$swal({
             title: res.data.message,
             icon: 'error',
           });
+          this.isLoading = false;
         }
-      });
+      }).catch((err) => console.log(err));
     },
     addCart(id) {
       this.isLoading = true;
@@ -573,8 +573,9 @@ export default {
             title: res.data.message,
             icon: 'error',
           });
+          this.isLoading = false;
         }
-      });
+      }).catch((err) => console.log(err));
     },
   },
 };

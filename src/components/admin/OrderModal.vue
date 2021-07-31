@@ -59,7 +59,8 @@
                       <span
                         :class="[
                         { 'text-success': tempOrder.is_paid },
-                        { 'text-danger': !tempOrder.is_paid }]">
+                        { 'text-danger': !tempOrder.is_paid }
+                        ]">
                           {{ tempOrder.is_paid ? '已付款' : '未付款' }}
                       </span>
                   </td>

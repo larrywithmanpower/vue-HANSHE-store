@@ -2,7 +2,7 @@
   <div class="banner d-flex justify-content-center align-items-center position-relative">
     <h2 class="display-4 text-white routeFont" data-aos="fade-up">
     <!-- 使用mitt來解決取route不動的問題 -->
-      {{$route.name}}
+      {{ $route.name }}
     </h2>
   </div>
   <section class="container my-5">
@@ -18,13 +18,16 @@
       >
         <p class="py-4"
         :class="$route.name === '訂單資訊' ?
-        ['bg-primary', 'text-white', 'rounded-2', 'fw-bold'] : ''">2. 填寫訂單資訊</p>
+        ['bg-primary', 'text-white', 'rounded-2', 'fw-bold'] : ''">
+        2. 填寫訂單資訊
+        </p>
       </div>
       <div class="col-4">
         <p class="py-4"
         :class="$route.name === '付款確認' ?
-        ['bg-primary', 'text-white', 'rounded-2', 'fw-bold'] : ''"
-        >3. 確認付款</p>
+        ['bg-primary', 'text-white', 'rounded-2', 'fw-bold'] : ''">
+        3. 確認付款
+        </p>
       </div>
     </div>
     <router-view></router-view>

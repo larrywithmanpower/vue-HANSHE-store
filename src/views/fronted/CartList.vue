@@ -173,7 +173,6 @@ export default {
         this.carts = res.data.data.carts;
         this.total = res.data.data.total;
         this.isLoading = false;
-        // console.log('getcarts', res.data);
       });
     },
     updateCart(item) {
@@ -186,7 +185,6 @@ export default {
       this.$http.put(url, { data }).then((res) => {
         if (res.data.success) {
           this.isLoading = false;
-          console.log(res.data.data.qty);
         }
       }).catch((err) => {
         console.log(err);
@@ -210,6 +208,7 @@ export default {
             title: res.data.message,
             icon: 'error',
           });
+          this.isLoading = false;
         }
       });
     },
@@ -233,7 +232,7 @@ export default {
           });
           this.isLoading = false;
         }
-      });
+      }).catch((err) => console.log(err));
     },
     addCouponCode() {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/coupon`;
@@ -247,8 +246,6 @@ export default {
             title: res.data.message,
             icon: 'success',
           });
-          // console.log('finalTotal', res.data.data.final_total);
-          // console.log('coupon', res.data);
           this.coupon.isUsed = true;
           this.coupon.finalTotal = res.data.data.final_total;
           this.getCarts();

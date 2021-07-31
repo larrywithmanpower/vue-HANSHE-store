@@ -2,8 +2,8 @@
   <div class="toast-container position-fixed end-0"
   style="z-index: 1500">
     <Toast
-    v-for="(msg, index) in messages" :key="index"
-    :msg="msg"
+      v-for="(msg, index) in messages" :key="index"
+      :msg="msg"
     ></Toast>
   </div>
 </template>

@@ -71,7 +71,7 @@
       </div>
       <div class="d-flex justify-content-between">
         <button
-          type="submit"
+          type="button"
           class="btn btn-outline-primary"
           @click="$router.go(-1)"
         >
@@ -119,18 +119,16 @@ export default {
         this.carts = res.data.data.carts;
         this.finalTotal = res.data.data.final_total;
         this.isLoading = false;
-      });
+      }).catch((err) => console.log(err));
     },
     createOrder() {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/order`;
       const { user } = this.form;
       const { message } = this.form.message;
-      // console.log(user);
       this.$http.post(url, { data: { user, message } })
         .then((res) => {
           if (res.data.success) {
-            // console.log(res);
             const id = res.data.orderId;
             this.$swal({
               title: res.data.message,
@@ -149,6 +147,7 @@ export default {
               title: res.data.message,
               icon: 'error',
             });
+            this.isLoading = false;
           }
         })
         .catch((err) => {

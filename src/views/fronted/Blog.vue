@@ -29,16 +29,16 @@
           </li>
         </ul>
         <img :src="article.imageUrl"
-        alt=""
+        :alt="article.title"
         class="img-fluid mb-3">
         <p class="text-muted" v-html="article.description"></p>
       </div>
       <div class="col-md-4 py-3 bg-light">
         <div class="input-group mb-4">
           <input type="text"
-          class="form-control"
-          name="q" placeholder="找文章 ..."
-          v-model="searchArticles"
+            class="form-control"
+            placeholder="找文章 ..."
+            v-model="searchArticles"
           >
         </div>
         <div class="list-group rounded-0  position-sticky overflow-scroll vh-100">
@@ -127,14 +127,16 @@ export default {
           this.articles = res.data.articles;
           this.articles.forEach((item) => {
             if (item.id !== this.id) {
-              // console.log(item, index);
               this.filterArticles.push(item);
             }
           });
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+          this.isLoading = false;
         }
       }).catch((err) => { console.log(err); });
     },

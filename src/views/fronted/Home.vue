@@ -39,7 +39,11 @@
       </h2>
       <routerLink to="/products/productList"
       class="row align-items-center mb-md-4 introduction">
-        <div class="col-md-7 bg-cover introduction-area" style="background-image: url(https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80); height: 320px;"
+        <div
+          class="col-md-7 bg-cover introduction-area"
+          style="
+            background-image: url(https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80);
+            height: 320px;"
         >
           <h3 class="innerText--hover">
             <span class="d-none d-md-block">
@@ -60,7 +64,11 @@
       </routerLink>
       <routerLink to="/products/productList"
       class="row flex-row-reverse align-items-center mb-md-4 introduction">
-        <div class="col-md-7 bg-cover introduction-area" style="background-image: url(https://images.unsplash.com/photo-1578118725665-f4097cd63964?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM1fHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); height: 320px;"
+        <div
+          class="col-md-7 bg-cover introduction-area"
+          style="
+            background-image: url(https://images.unsplash.com/photo-1578118725665-f4097cd63964?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM1fHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60);
+            height: 320px;"
         >
           <h3 class="innerText--hover">
             <span class="d-none d-md-block">
@@ -79,8 +87,19 @@
           </h3>
         </div>
       </routerLink>
-      <routerLink to="/products/productList" class="row align-items-center mb-md-4 introduction">
-        <div class="col-md-7 bg-cover introduction-area" style="background-image: url(https://images.unsplash.com/photo-1581067675122-a07ed597f1ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); height: 320px;"
+      <routerLink
+        to="/products/productList"
+        class="
+        row
+        align-items-center
+        mb-md-4
+        introduction"
+      >
+        <div
+          class="col-md-7 bg-cover introduction-area"
+          style="
+            background-image: url(https://images.unsplash.com/photo-1581067675122-a07ed597f1ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60);
+            height: 320px;"
         >
         <h3 class="innerText--hover">
           <span class="d-none d-md-block">
@@ -114,7 +133,7 @@
       <h2 class="text-center text-primary mb-5">
         <span class="border-bottom border-primary border-2 pb-2">最新情報</span>
       </h2>
-      <Bolg></Bolg>
+      <Blog></Blog>
     </div>
   </section>
 </template>
@@ -122,14 +141,14 @@
 <script>
 import Carousel from '@/components/fronted/Carousel.vue';
 import SwiperNewItem from '@/components/fronted/SwiperNewItem.vue';
-import Bolg from '@/components/fronted/Blog.vue';
+import Blog from '@/components/fronted/Blog.vue';
 
 export default {
   name: 'Home',
   components: {
     Carousel,
     SwiperNewItem,
-    Bolg,
+    Blog,
   },
   data() {
     return {
@@ -144,6 +163,8 @@ export default {
 
 <style lang="scss" scoped>
   .introduction {
+    padding-left: 10px;
+    padding-right: 10px;
     transition: 0.4s ease-out;
     &:hover {
         .innerText--hover {
@@ -179,7 +200,9 @@ export default {
         transition: all 0.4s ease-out;
         position: absolute;
         bottom: 0;
-        left: 40%;
+        left: 50%;
+        margin-left: -40px;
+        margin-bottom: -2px;
         opacity: 0;
         color: #fff;
         z-index: 10;

@@ -5,8 +5,12 @@
     :class="[classList.navbarTop, classList.navbarInner]"
   >
     <div class="container d-flex justify-content-between align-items-center">
-      <router-link to="/" class="navbar-brand logoFont text-primary"
-        >HanShe</router-link
+      <router-link
+        to="/"
+        class="navbar-brand logoFont text-primary"
+      >
+        HanShe
+      </router-link
       >
       <button
         class="navbar-toggler"
@@ -31,7 +35,6 @@
         id="layoutNav"
       >
         <div class="navbar-nav">
-          <router-link to="/home" class="nav-link">首頁</router-link>
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
           <router-link to="/blogs/blogList" class="nav-link">部落格</router-link>
           <router-link to="/products/productList" class="nav-link">寒舍商品</router-link
@@ -45,10 +48,18 @@
             <small>[ {{ myFavorite.length }} ]</small>
           </button> -->
           <div class="nav-item dropdown">
-            <a href="javascript:void(0)"
-            class="bg-transparent border-0 nav-link
-            text-start" type="a" id="dropdownMenuButton"
-            data-bs-toggle="dropdown" aria-expanded="false">
+            <a
+              href="javascript:void(0)"
+              class="
+              bg-transparent
+              border-0
+              nav-link
+              text-start"
+              type="a"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               <i class="bi bi-heart me-2"></i>
               <small>[ {{ myFavorite.length }} ]</small>
             </a>
@@ -59,7 +70,10 @@
             </ul> -->
             <div class="dropdown-menu dropdown-menu-end text-muted"
             style="min-width: 400px">
-              <table class="table table-sm align-middle text-center" v-if="myFavorite.length > 0">
+              <table
+                class="table table-sm align-middle text-center"
+                v-if="myFavorite.length > 0"
+              >
                 <thead>
                   <tr>
                     <th width="35%"></th>
@@ -74,9 +88,12 @@
                     </td>
                     <td>{{ item.title }}</td>
                     <td>
-                      <button class="btn btn-outline-danger"
-                      @click="removeFavorite(item.id)"
-                      ><i class="bi bi-trash"></i></button>
+                      <button
+                        class="btn btn-outline-danger"
+                        @click="removeFavorite(item.id)"
+                      >
+                        <i class="bi bi-trash"></i>
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -86,10 +103,11 @@
               </h2>
               <div class="d-flex justify-content-center">
               <button class="btn btn-danger"
-              :disabled="myFavorite.length === 0"
-              @click="removeAll()"
-              >刪除所有最愛</button>
-
+                :disabled="myFavorite.length === 0"
+                @click="removeAll()"
+              >
+                刪除所有最愛
+              </button>
               </div>
             </div>
           </div>
@@ -127,7 +145,6 @@ export default {
       this.myFavorite = storageMethods.getItem() || [];
     },
     removeFavorite(id) {
-      // console.log(id);
       // eslint-disable-next-line no-shadow
       this.myFavorite.forEach((item) => {
         if (item.id === id) {
@@ -154,7 +171,7 @@ export default {
         };
       } else {
         this.classList = {
-          navbarTop: ['bg-transparent'],
+          navbarTop: ['bg-transparent-dark'],
           navbarInner: ['navbar-dark', 'fw-bold', 'py-3', 'position-absolute', 'z-index-2', 'h5'],
         };
       }
@@ -198,6 +215,9 @@ export default {
 
   #nav-top {
     transition: all .5s ease-in-out;
+    &.bg-transparent-dark {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
     &.navbar-dark {
       .nav-link {
         color: $primary;

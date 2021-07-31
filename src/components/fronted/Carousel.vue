@@ -38,12 +38,16 @@
           </h2>
           <p class="fs-4">找尋屬於自己的風格，創造嶄新的外表</p>
           <button type="button" class="btn-animation pulse"
-          @click="$router.push('/products/productList')"
-          >看看商品</button>
+          @click="$router.push('/products/productList')">
+            看看商品
+          </button>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1486218119243-13883505764c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODl8fHNwb3J0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="d-block w-100" alt="carouselPic" />
+        <img
+        src="https://images.unsplash.com/photo-1486218119243-13883505764c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODl8fHNwb3J0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60"
+        class="d-block w-100"
+        alt="carouselPic"/>
         <div class="carousel-caption d-none d-md-block">
           <h2>保護雙腳跑遍世界
             <span class="decoration-text text-primary">HANSHE</span>
@@ -54,15 +58,20 @@
           <figcaption class="blockquote-footer text-light">
             <cite title="Source Title">雷舒雁</cite>
           </figcaption>
-          <button type="button" class="btn-animation offset"
-          @click="$router.push('/products/productList')"
-          >為自己挑一雙好鞋</button>
+          <button
+            type="button"
+            class="btn-animation offset"
+            @click="$router.push('/products/productList')"
+          >
+            為自己挑一雙好鞋
+          </button>
         </div>
       </div>
       <div class="carousel-item">
         <img src="https://images.unsplash.com/photo-1608033451651-49af4c31ed1b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" class="d-block w-100" alt="carouselPic" />
         <div class="carousel-caption">
-          <h2>夏季大拍賣
+          <h2>
+            夏季大拍賣
             <span class="decoration-text">Discount</span>
           </h2>
           <p class="fs-4 d-none d-md-block">不同的時間點，一定要有不同的優惠，在最困難的時間，寒舍給您最大的折扣</p>

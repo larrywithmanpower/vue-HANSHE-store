@@ -61,7 +61,6 @@ export default {
   watch: {
     fullWidth() {
       this.fullWidth = window.innerWidth;
-      console.log(this.fullWidth);
       if (this.fullWidth > 414 && this.fullWidth < 1024) {
         this.imgs = [
           {

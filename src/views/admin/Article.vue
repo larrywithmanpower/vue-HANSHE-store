@@ -56,24 +56,26 @@
   </div>
 
   <ArticleModal
-  id="ArticleModal"
-  ref="ArticleModal"
-  :is-new="isNew"
-  :article="tempArticle"
-  @update-article="updateArticle"
+    id="ArticleModal"
+    ref="ArticleModal"
+    :is-new="isNew"
+    :article="tempArticle"
+    @update-article="updateArticle"
   ></ArticleModal>
 
   <DelModal
-  id="DelModal"
-  ref="DelModal"
-  :item="tempArticle"
-  @delete="deleteArticle"></DelModal>
+    id="DelModal"
+    ref="DelModal"
+    :item="tempArticle"
+    @delete="deleteArticle">
+  </DelModal>
 
   <PreviewModal
-  ref="PreviewModal"
-  id="PreviewModal"
-  :props-article="tempArticle"
-  ></PreviewModal>
+    ref="PreviewModal"
+    id="PreviewModal"
+    :props-article="tempArticle"
+  >
+  </PreviewModal>
 </template>
 
 <script>
@@ -108,12 +110,12 @@ export default {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/articles?page=${page}`;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
-          console.log(res);
           this.articles = res.data.articles;
           this.isLoading = false;
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.messages.join(','));
+          this.isLoading = false;
         }
       }).catch((err) => {
         console.log(err);
@@ -133,7 +135,6 @@ export default {
           break;
         case 'edit':
           this.isNew = false;
-          console.log(article);
           this.tempArticle = {
             imagesUrl: [],
             ...article,
@@ -155,7 +156,7 @@ export default {
     },
     updateArticle(tempArticle) {
       // ! 新增
-      if (this.isNew === true) {
+      if (this.isNew) {
         const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article`;
         this.$http.post(url, { data: tempArticle }).then((res) => {
           if (res.data.success) {
@@ -214,7 +215,7 @@ export default {
             title: res.data.message,
           });
         }
-      });
+      }).catch((err) => console.log(err));
     },
   },
 };

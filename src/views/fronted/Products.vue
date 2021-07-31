@@ -2,7 +2,7 @@
   <div class="banner d-flex justify-content-center align-items-center position-relative">
     <h2 class="display-4 text-white routeFont" data-aos="fade-up">
     <!-- 使用mitt來解決取route不動的問題 -->
-      {{pageTitle}}
+      {{ pageTitle }}
     </h2>
   </div>
   <router-view :props-products='products'
@@ -36,15 +36,16 @@ export default {
           this.products = res.data.products;
           this.getCategories();
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
         }
-      }).catch((err) => { console.log(err); });
+      }).catch((err) => console.log(err));
     },
     getCategories() {
       const categories = new Set();
       this.products.forEach((item) => categories.add(item.category));
-      // console.log(categories);
       this.categories = [...categories];
     },
   },

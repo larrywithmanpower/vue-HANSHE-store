@@ -1,8 +1,9 @@
 <template>
   <footer class="bg-dark position-relative" id="layoutFooter">
-    <a href="#" class="to-top text-secondary"
-    :class="isTop ? 'goTopAfter' : ''"
-    @click.prevent="goTop()"
+    <a href="#"
+      class="to-top text-secondary"
+      :class="isTop ? 'goTopAfter' : ''"
+      @click.prevent="goTop()"
     ></a>
     <div class="container">
       <div class="row">
@@ -163,7 +164,14 @@ export default {
   },
   methods: {
     openModal() {
-      this.$refs.LoginModal.showModal();
+      const token = document.cookie.replace(/(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+      this.token = token;
+
+      if (token) {
+        this.$router.push('/admin/adminProducts');
+      } else {
+        this.$refs.LoginModal.showModal();
+      }
     },
     goTop() {
       document.documentElement.scrollTop = 0;

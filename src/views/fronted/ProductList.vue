@@ -199,8 +199,9 @@ export default {
             title: res.data.message,
             icon: 'error',
           });
+          this.isLoading = false;
         }
-      });
+      }).catch((err) => console.log(err));
     },
   },
   computed: {

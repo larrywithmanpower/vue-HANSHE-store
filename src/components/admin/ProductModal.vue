@@ -118,7 +118,7 @@
                   />
                 </div>
                 <div class="form-group col-md-6 mb-3">
-                  <label for="price">單位</label>
+                  <label for="unit">單位</label>
                   <input
                     v-model="editProduct.unit"
                     id="unit"
@@ -166,7 +166,7 @@
                   />
                 </div>
                 <div class="form-check col-6">
-                  <p class="mb-1">星等</p>
+                  <label class="mb-1" for="rate3">星等</label><br>
                   <div class="form-check form-check-inline">
                     <input class="form-check-input"
                     type="radio" id="rate1" value="1.0"
@@ -272,22 +272,32 @@
                 </div>
                 <div class="form-check col-6">
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                    type="radio" name="inlineRadioOptions" id="male" value="male"
-                    v-model="editProduct.sex">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="male"
+                      value="male"
+                      v-model="editProduct.sex"
+                    >
                     <label class="form-check-label" for="male">男</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                    type="radio" name="inlineRadioOptions" id="neutral" value="neutral"
-                    v-model="editProduct.sex">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="neutral" value="neutral"
+                      v-model="editProduct.sex"
+                    >
                     <label class="form-check-label"
                     for="neutral">中性</label>
                   </div>
                   <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                    type="radio" name="inlineRadioOptions" id="female" value="female"
-                    v-model="editProduct.sex">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      id="female" value="female"
+                      v-model="editProduct.sex"
+                    >
                     <label class="form-check-label" for="female">女</label>
                   </div>
                 </div>

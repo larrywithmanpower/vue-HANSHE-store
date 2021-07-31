@@ -1,6 +1,12 @@
 <template>
-  <div id="delModal" ref="delModal" class="modal fade" tabindex="-1"
-    aria-labelledby="delModalLabel" aria-hidden="true">
+  <div
+    id="delModal"
+    ref="delModal"
+    class="modal fade"
+    tabindex="-1"
+    aria-labelledby="delModalLabel"
+    aria-hidden="true"
+  >
         <div class="modal-dialog">
             <div class="modal-content border-0">
                 <div class="modal-header bg-danger text-white">
@@ -20,13 +26,17 @@
                     (刪除後將無法恢復)。
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        取消
+                    <button type="button"
+                      class="btn btn-outline-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      取消
                     </button>
                     <button type="button"
-                    class="btn btn-danger"
-                    @click="$emit('delete', item)">
-                        確認刪除
+                      class="btn btn-danger"
+                      @click="$emit('delete', item)"
+                    >
+                      確認刪除
                     </button>
                 </div>
             </div>

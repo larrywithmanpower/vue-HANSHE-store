@@ -8,50 +8,50 @@
     <div class="container py-3 text-primary">
       <div class="row text-center">
         <h2 class="text-center text-primary mb-4">
-          <span class="border-bottom border-primary border-2 ">寒舍使命</span>
+          <span class="border-bottom border-primary border-2">寒舍使命</span>
         </h2>
       </div>
-      <div class="row">
-          <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon services-icon--hover shadow">
+      <ul class="row list-unstyled">
+          <li class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon shadow">
               <div class="h1 text-primary text-center
               ">
                 <i class="bi bi-truck"></i>
               </div>
               <h2 class="h5 mt-4 text-center">宅配到府</h2>
             </div>
-          </div>
+          </li>
 
-          <div class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon services-icon--hover shadow">
-                <div class="h1 text-priamry text-center">
-                  <i class="bi bi-arrow-left-right"></i>
-                </div>
-                <h2 class="h5 mt-4 text-center">最高品質</h2>
+          <li class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon shadow">
+              <div class="h1 text-priamry text-center">
+                <i class="bi bi-arrow-left-right"></i>
+              </div>
+              <h2 class="h5 mt-4 text-center">最高品質</h2>
             </div>
-          </div>
+          </li>
 
-          <div class="col-md-6 col-lg-3 pb-5">
-              <div class="h-100 py-5 services-icon services-icon--hover shadow">
-                  <div class="h1 text-primary text-center"><i class="bi bi-percent"></i></div>
-                  <h2 class="h5 mt-4 text-center">最多優惠</h2>
-              </div>
-          </div>
+          <li class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon shadow">
+              <div class="h1 text-primary text-center"><i class="bi bi-percent"></i></div>
+              <h2 class="h5 mt-4 text-center">最多優惠</h2>
+            </div>
+          </li>
 
-          <div class="col-md-6 col-lg-3 pb-5">
-              <div class="h-100 py-5 services-icon services-icon--hover shadow">
-                  <div class="h1 text-primary text-center">
-                    <i class="bi bi-telephone-inbound"></i>
-                  </div>
-                  <h2 class="h5 mt-4 text-center">貴賓服務專線</h2>
+          <li class="col-md-6 col-lg-3 pb-5">
+            <div class="h-100 py-5 services-icon shadow">
+              <div class="h1 text-primary text-center">
+                <i class="bi bi-telephone-inbound"></i>
               </div>
-          </div>
-      </div>
+              <h2 class="h5 mt-4 text-center">貴賓服務專線</h2>
+            </div>
+          </li>
+      </ul>
     </div>
   </section>
   <section class="container py-5">
     <h2 class="text-center text-primary mb-4">
-      <span class="border-bottom border-primary border-2 ">寒舍定位</span>
+      <span class="border-bottom border-primary border-2">寒舍定位</span>
     </h2>
     <div class="iframe-rwd mb-5">
       <iframe
@@ -68,13 +68,13 @@
         <li class="media">
           <span class="bi bi-house me-2 fs-4"></span>
           <div class="media-body">
-            <p class="text-primary mb-0">彰化縣叉叉市圈圈路二段77號</p>
+            <p class="text-primary mb-0">彰化縣青年市萬年路二段77號</p>
           </div>
         </li>
         <li class="media">
           <span class="bi bi-phone me-2 fs-4"></span>
           <div class="media-body">
-            <a href="telto:080000778" class="link-primary"> 080000778 </a>
+            <a href="tel:+080000778" class="link-primary"> +080000778 </a>
           </div>
         </li>
         <li class="media">
@@ -98,7 +98,6 @@
               <div class="form-group">
                 <input
                   class="form-control"
-                  name="name"
                   id="name"
                   type="text"
                   placeholder="輸入您的姓名"
@@ -107,7 +106,6 @@
               <div class="form-group">
                 <input
                   class="form-control"
-                  name="email"
                   id="email"
                   type="email"
                   placeholder="輸入您的email"
@@ -116,7 +114,6 @@
               <div class="form-group">
                 <input
                   class="form-control"
-                  name="subject"
                   id="subject"
                   type="text"
                   placeholder="輸入您的問題"
@@ -127,10 +124,8 @@
               <div class="form-group">
                 <textarea
                   class="form-control different-control w-100"
-                  name="message"
                   id="message"
                   cols="30"
-                  rows="5"
                   placeholder="詳細說明"
                 ></textarea>
               </div>
@@ -138,8 +133,9 @@
           </div>
           <div class="form-group text-center text-md-end mt-3">
             <button
-              type="submit"
+              type="button"
               class="btn btn-outline-primary"
+              @click="$router.push('/home')"
             >
               聯絡我們
             </button>
@@ -176,15 +172,7 @@ export default {
   }
 
   .services-icon {
-    transition: all.3s ease;
     border-radius: 10px;
-    &--hover:hover {
-      background-color: $primary;
-      color: #fff;
-      .bi {
-        color: #fff;
-      }
-    }
   }
 
   .iframe-rwd {
@@ -223,7 +211,7 @@ export default {
       margin-bottom: 10px;
     }
     .different-control {
-    height: 100% !important;
+    height: 140px !important;
     }
   }
 

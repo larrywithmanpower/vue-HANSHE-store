@@ -115,11 +115,11 @@ export default {
           this.products = res.data.products;
           this.pagination = res.data.pagination;
           this.currentPage = res.data.pagination.current_page;
-          // console.log(this.products);
           this.isLoading = false;
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.message);
+          this.isLoading = false;
         }
       }).catch((err) => { console.log(err); });
     },
@@ -152,7 +152,7 @@ export default {
       }
     },
     updateProduct(tempProduct) {
-      if (this.isNew === true) {
+      if (this.isNew) {
         // ! 新增
         const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`;
         this.$http.post(url, { data: tempProduct }).then((res) => {
@@ -212,7 +212,7 @@ export default {
             title: res.data.message,
           });
         }
-      });
+      }).catch((err) => console.log(err));
     },
   },
 };

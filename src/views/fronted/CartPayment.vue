@@ -102,18 +102,16 @@ export default {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/orders?${page}`;
       this.$http.get(url).then((res) => {
         this.orders = res.data.orders;
-        console.log(this.orders);
         this.isLoading = false;
-      });
+      }).catch((err) => console.log(err));
     },
     getOrder() {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/order/${this.id}`;
       this.$http.get(url).then((res) => {
         this.order = res.data.order;
-        console.log(this.order);
         this.isLoading = false;
-      });
+      }).catch((err) => console.log(err));
     },
     payOrder() {
       this.isLoading = true;

@@ -12,9 +12,9 @@
       <div class="row justify-content-center mb-4">
         <div class="col-md-9">
           <input type="text"
-          class="form-control"
-          name="q" placeholder="找文章 ..."
-          v-model="searchArticles"
+            class="form-control"
+            placeholder="找文章 ..."
+            v-model="searchArticles"
           >
         </div>
       </div>
@@ -120,8 +120,11 @@ export default {
             this.articles = res.data.articles;
             this.isLoading = false;
           } else {
-            // eslint-disable-next-line no-alert
-            alert(res.data.message);
+            this.$swal({
+              title: res.data.message,
+              icon: 'error',
+            });
+            this.isLoading = false;
           }
         })
         .catch((err) => {

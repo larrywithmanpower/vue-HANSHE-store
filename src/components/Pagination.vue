@@ -7,22 +7,29 @@
                 @click.prevent="$emit('get-page', page.current_page - 1)">Previous</a>
           </li>
           <li class="page-item"
-              v-for="item in page.total_pages" :key="item"
-              :class="{ 'active': item === page.current_page }"
-              >
-              <a class="page-link link-primary"
+            v-for="item in page.total_pages"
+            :key="item"
+            :class="{ 'active': item === page.current_page }"
+          >
+            <a
+              class="page-link link-primary"
               href="#"
-              @click.prevent="$emit('get-page', item)">{{ item }}</a>
+              @click.prevent="$emit('get-page', item)"
+            >
+              {{ item }}
+            </a>
           </li>
-          <li class="page-item"
-              :class="{ 'disabled': !page.has_next }">
-              <a
+          <li
+            class="page-item"
+            :class="{ 'disabled': !page.has_next }"
+          >
+            <a
               class="page-link link-primary"
               href="#"
               @click.prevent="$emit('get-page', page.current_page + 1)"
-              >
+            >
               Next
-              </a>
+            </a>
           </li>
       </ul>
     </nav>

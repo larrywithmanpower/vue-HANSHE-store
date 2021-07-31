@@ -24,8 +24,12 @@
           <td>
             <!-- 以v-for方式取得物件屬型與value -->
             <ul class="list-unstyled">
-              <li v-for="(product, i) in item.products" :key="i">
-                {{ product.product.title }} 數量：{{ product.qty }}
+              <li
+                v-for="(product, i) in item.products"
+                :key="i"
+              >
+                {{ product.product.title }}
+                數量：{{ product.qty }}
                 {{ product.product.unit }}
               </li>
             </ul>
@@ -43,7 +47,11 @@
               :checked="item.is_paid">
               <label class="form-check-label" :for="item.id">
                 <span
-                :class="[{ 'text-success': item.is_paid } , { 'text-danger': !item.is_paid }]">
+                  :class="[
+                    { 'text-success': item.is_paid },
+                    { 'text-danger': !item.is_paid }
+                  ]"
+                >
                   {{ item.is_paid ? '已付款' : '未付款' }}
                 </span>
               </label>
@@ -52,12 +60,18 @@
           <td>
             <div class="btn-group">
               <button type="button"
-              class="btn btn-sm btn-outline-primary"
-              @click="openModal('edit', item)"
-              >檢視</button>
-              <button type="button" class="btn btn-sm btn-outline-danger"
-              @click="openModal('delete', item)"
-              >刪除</button>
+                class="btn btn-sm btn-outline-primary"
+                @click="openModal('edit', item)"
+              >
+                檢視
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                @click="openModal('delete', item)"
+              >
+                刪除
+              </button>
             </div>
           </td>
         </tr>
@@ -66,23 +80,23 @@
     <!-- pagination -->
     <div class="d-flex justify-content-center">
       <Pagination
-      :page="pagination"
-      @get-page="getOrders"
+        :page="pagination"
+        @get-page="getOrders"
       ></Pagination>
     </div>
   </div>
 
   <OrderModal
-  ref="orderModal"
-  id="orderModal"
-  :order="tempOrder"
+    ref="orderModal"
+    id="orderModal"
+    :order="tempOrder"
   ></OrderModal>
 
   <DelModal
-  id="delModal"
-  ref="delModal"
-  :item="tempOrder"
-  @delete="deleteOrder"
+    id="delModal"
+    ref="delModal"
+    :item="tempOrder"
+    @delete="deleteOrder"
   ></DelModal>
 </template>
 
@@ -121,11 +135,11 @@ export default {
           this.orders = res.data.orders;
           this.pagination = res.data.pagination;
           this.currentPage = res.data.pagination.current_page;
-          // console.log(this.orders);
           this.isLoading = false;
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.message);
+          this.isLoading = false;
         }
       }).catch((err) => {
         console.log(err);
@@ -190,7 +204,7 @@ export default {
             title: res.data.message,
           });
         }
-      });
+      }).catch((err) => console.log(err));
     },
   },
 };

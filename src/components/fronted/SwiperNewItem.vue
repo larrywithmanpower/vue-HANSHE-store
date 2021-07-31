@@ -1,5 +1,5 @@
 <template>
-  <swiper
+  <Swiper
     :spaceBetween="40"
     :breakpoints='{
       "640": {
@@ -24,7 +24,7 @@
     class="mySwiper"
   >
     <template v-for="item in filterNew" :key="item.id">
-      <swiper-slide>
+      <Swiper-slide>
           <div class="card border-0 card-product h-100">
             <div class="card-product__img">
               <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
@@ -38,8 +38,9 @@
                 "
               >
                 <li class="me-3">
-                  <button class="btn btn-primary text-white"
-                  @click="goDetail(item)"
+                  <button
+                    class="btn btn-primary text-white"
+                    @click="goDetail(item)"
                   >
                     <i class="bi bi-search"></i>
                   </button>
@@ -52,8 +53,8 @@
                 </li>
                 <li>
                   <button class="btn btn-primary text-white"
-                  :class="{ 'bg-info': myFavorite.includes(item) }"
-                  @click="addMyFavorite(item)"
+                    :class="{ 'bg-info': myFavorite.includes(item) }"
+                    @click="addMyFavorite(item)"
                   >
                     <i class="bi bi-heart"></i>
                   </button>
@@ -72,9 +73,9 @@
               </p>
             </div>
           </div>
-      </swiper-slide>
+      </Swiper-slide>
     </template>
-  </swiper>
+  </Swiper>
 </template>
 
 <script>
@@ -161,6 +162,7 @@ export default {
             title: res.data.message,
             icon: 'error',
           });
+          this.isLoading = false;
         }
       });
     },
