@@ -63,6 +63,15 @@
                         ]">
                           {{ tempOrder.is_paid ? '已付款' : '未付款' }}
                       </span>
+                      <span
+                        class="ms-3"
+                        v-if="tempOrder.is_paid"
+                      >
+                        付款日期： {{ tempOrder.paid_date
+                          ? new Date(tempOrder.paid_date * 1000).toLocaleDateString()
+                          : '補繳款，須查詢記帳紙本'
+                        }}
+                      </span>
                   </td>
                   </tr>
                   <tr>

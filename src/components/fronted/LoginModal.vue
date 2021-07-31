@@ -12,26 +12,56 @@
           <button type="button"
           class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form @submit.prevent="login">
+        <Form
+          novalidate="novalidate"
+          v-slot="{ errors }"
+          ref="form"
+          @submit="login"
+        >
           <div class="modal-body">
             <div class="form-floating mb-3">
-              <input type="email"
-              class="form-control" id="floatingInput" placeholder="name@example.com"
-              v-model="user.username">
+              <Field
+                type="email"
+                class="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+                v-model="user.username"
+                name="email"
+                rules="email|required"
+                :class="{ 'is-invalid': errors['email'] }"
+              ></Field>
+              <Error-message
+                name="email"
+                class="invalid-feedback"
+              ></Error-message>
               <label for="floatingInput">
                 <i class="bi bi-person-circle"></i>
                 管理人員帳號
               </label>
             </div>
             <div class="form-floating position-relative">
-              <input :type="isChecked ? 'text' : 'password'"
-              class="form-control" id="floatingPassword" placeholder="Password"
-              v-model="user.password">
-              <i class="bi bi-eye position-absolute top-50 end-0 translate-middle"
-              @click="showPassword" v-if="isChecked"></i>
-              <i class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle"
-              ref="showPassword"
-              @click="showPassword" v-if="!isChecked"></i>
+              <Field
+                :type="isChecked ? 'text' : 'password'"
+                class="form-control"
+                id="floatingPassword"
+                placeholder="Password"
+                v-model="user.password"
+                name="密碼"
+                rules="required"
+                :class="{ 'is-invalid': errors['密碼'] }"
+              ></Field>
+              <Error-message name="密碼" class="invalid-feedback"></Error-message>
+                <i
+                  class="bi bi-eye position-absolute top-50 end-0 translate-middle"
+                  @click="showPassword"
+                  v-if="isChecked">
+                </i>
+                <i
+                  class="bi bi-eye-slash position-absolute top-50 end-0 translate-middle"
+                  ref="showPassword"
+                  @click="showPassword"
+                  v-if="!isChecked">
+                </i>
               <label for="floatingPassword">
                 <i class="bi bi-shield-lock"></i>
                 管理人員密碼
@@ -42,7 +72,7 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
             <button type="submit" class="btn btn-outline-primary">確認登入</button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   </div>

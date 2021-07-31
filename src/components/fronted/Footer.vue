@@ -167,7 +167,7 @@ export default {
       const token = document.cookie.replace(/(?:(?:^|.*;\s*)myToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
       this.token = token;
 
-      if (token) {
+      if (token || this.token !== token) {
         this.$router.push('/admin/adminProducts');
       } else {
         this.$refs.LoginModal.showModal();

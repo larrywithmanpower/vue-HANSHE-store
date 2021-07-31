@@ -1,6 +1,10 @@
 <template>
   <section class="d-flex justify-content-center">
-    <Form class="col-6" v-slot="{ errors }" @submit="createOrder" ref="form">
+    <Form
+      class="col-6"
+      v-slot="{ errors }"
+      @submit="createOrder"
+      ref="form">
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <Field

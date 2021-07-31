@@ -21,305 +21,329 @@
           ></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <!-- ? 圖片新增 -->
-            <div class="col-sm-4">
-              <div class="mb-1">
-                <div class="form-group">
-                  <label for="imageUrl" class="fw-bold">主要圖片</label>
+          <form
+            class="needs-validation"
+            @submit="$emit('update-product', editProduct)"
+            novalidate>
+            <div class="row">
+              <!-- ? 圖片新增 -->
+              <div class="col-sm-4">
+                <div class="mb-1">
+                  <div class="form-group">
+                    <label for="imageUrl" class="fw-bold">主要圖片</label>
+                    <input
+                      v-model="editProduct.imageUrl"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入圖片連結"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      至少放入一張圖片
+                    </div>
+                  </div>
+                  <img class="img-fluid" :src="editProduct.imageUrl" />
+                </div>
+                <div class="form-group mb-3 position-relative">
+                  <label for="photoFile" class="fw-bold">上傳圖片檔案</label>
                   <input
-                    v-model="editProduct.imageUrl"
-                    type="text"
+                    type="file"
+                    id="photoFile"
                     class="form-control"
-                    placeholder="請輸入圖片連結"
+                    placeholder="請輸入圖片路徑"
+                    @change="uploadImage"
                   />
                 </div>
-                <img class="img-fluid" :src="editProduct.imageUrl" />
-              </div>
-              <div class="form-group mb-3">
-                <label for="photoFile" class="fw-bold">上傳圖片檔案</label>
-                <input
-                  type="file"
-                  id="photoFile"
-                  class="form-control"
-                  placeholder="請輸入圖片路徑"
-                  @change="uploadImage"
-                />
-              </div>
-              <hr />
-              <!-- ? 多圖 -->
-              <div class="mb-1 fw-bold">其他圖片</div>
-              <div v-if="Array.isArray(editProduct.imagesUrl)">
-                <div
-                  class="mb-1"
-                  v-for="(image, index) in editProduct.imagesUrl"
-                  :key="index"
-                >
-                  <label for="imageUrl">圖片網址</label>
-                  <input
-                    v-model="editProduct.imagesUrl[index]"
-                    type="text"
-                    class="form-control"
-                    placeholder="請輸入圖片連結"
-                  />
-                  <img :src="editProduct.imagesUrl[index]" class="img-fluid" />
-                </div>
-                <div
-                  v-if="
-                    !editProduct.imagesUrl.length ||
-                    editProduct.imagesUrl[editProduct.imagesUrl.length - 1]
-                  "
-                >
-                  <button
-                    class="btn btn-outline-primary btn-sm d-block w-100"
-                    @click="editProduct.imagesUrl.push('')"
+                <hr />
+                <!-- ? 多圖 -->
+                <div class="mb-1 fw-bold">其他圖片</div>
+                <div v-if="Array.isArray(editProduct.imagesUrl)">
+                  <div
+                    class="mb-1"
+                    v-for="(image, index) in editProduct.imagesUrl"
+                    :key="index"
                   >
-                    新增圖片
+                    <label for="imageUrl">圖片網址</label>
+                    <input
+                      v-model="editProduct.imagesUrl[index]"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入圖片連結"
+                    />
+                    <img :src="editProduct.imagesUrl[index]" class="img-fluid" />
+                  </div>
+                  <div
+                    v-if="
+                      !editProduct.imagesUrl.length ||
+                      editProduct.imagesUrl[editProduct.imagesUrl.length - 1]
+                    "
+                  >
+                    <button
+                      class="btn btn-outline-primary btn-sm d-block w-100"
+                      @click="editProduct.imagesUrl.push('')"
+                    >
+                      新增圖片
+                    </button>
+                  </div>
+                  <div v-else>
+                    <button
+                      class="btn btn-outline-danger btn-sm d-block w-100"
+                      @click="editProduct.imagesUrl.pop()"
+                    >
+                      刪除空白圖片網址
+                    </button>
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <button
+                    class="btn btn-sm btn-danger d-block w-100"
+                    @click="removeImages()"
+                  >
+                    刪除圖片
                   </button>
                 </div>
-                <div v-else>
-                  <button
-                    class="btn btn-outline-danger btn-sm d-block w-100"
-                    @click="editProduct.imagesUrl.pop()"
-                  >
-                    刪除空白圖片網址
-                  </button>
-                </div>
               </div>
-              <div class="mt-2">
-                <button
-                  class="btn btn-sm btn-danger d-block w-100"
-                  @click="removeImages()"
-                >
-                  刪除圖片
-                </button>
-              </div>
-            </div>
-            <div class="col-sm-8">
-              <div class="form-group mb-3">
-                <label for="title">標題</label>
-                <input
-                  v-model="editProduct.title"
-                  id="title"
-                  type="text"
-                  class="form-control"
-                  placeholder="請輸入標題"
-                />
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6 mb-3">
-                  <label for="category">分類</label>
+              <div class="col-sm-8">
+                <div class="form-group mb-3">
+                  <label for="title">標題</label>
                   <input
-                    v-model="editProduct.category"
-                    id="category"
+                    v-model="editProduct.title"
+                    id="title"
                     type="text"
                     class="form-control"
-                    placeholder="請輸入分類"
+                    placeholder="請輸入標題"
+                    required
                   />
+                  <div class="invalid-feedback">
+                    標題 必填
+                  </div>
                 </div>
-                <div class="form-group col-md-6 mb-3">
-                  <label for="unit">單位</label>
-                  <input
-                    v-model="editProduct.unit"
-                    id="unit"
+                <div class="row">
+                  <div class="form-group col-md-6 mb-3">
+                    <label for="category">分類</label>
+                    <input
+                      v-model="editProduct.category"
+                      id="category"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入分類"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      分類 必填
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6 mb-3">
+                    <label for="unit">單位</label>
+                    <input
+                      v-model="editProduct.unit"
+                      id="unit"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入單位"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      單位 必填
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6 mb-3">
+                    <label for="origin_price">原價</label>
+                    <input
+                      v-model.number="editProduct.origin_price"
+                      id="origin_price"
+                      type="number"
+                      min="0"
+                      class="form-control"
+                      placeholder="請輸入原價"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      原價 必填
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="price">售價</label>
+                    <input
+                      v-model.number="editProduct.price"
+                      id="price"
+                      type="number"
+                      min="0"
+                      class="form-control"
+                      placeholder="請輸入售價"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      售價 必填
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="form-group col-6 mb-3">
+                    <label for="storageNum">庫存</label>
+                    <input
+                      v-model.number="editProduct.storageNum"
+                      id="storageNum"
+                      type="number"
+                      min="0"
+                      class="form-control"
+                      placeholder="請輸入庫存"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      庫存 必填
+                    </div>
+                  </div>
+                  <div class="form-check col-6">
+                    <label class="mb-1" for="rate3">星等</label><br>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"
+                      type="radio" id="rate1" value="1.0"
+                      v-model="editProduct.rate">
+                      <label class="form-check-label" for="rate1">1.0</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"
+                      type="radio" id="rate2" value="2.0"
+                      v-model="editProduct.rate">
+                      <label class="form-check-label"
+                      for="rate2">2.0</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"
+                      type="radio" id="rate3" value="3.0"
+                      v-model="editProduct.rate">
+                      <label class="form-check-label"
+                      for="rate3">3.0</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"
+                      type="radio" id="rate4" value="4.0"
+                      v-model="editProduct.rate">
+                      <label class="form-check-label"
+                      for="rate4">4.0</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input"
+                      type="radio" id="rate5" value="5.0"
+                      v-model="editProduct.rate">
+                      <label class="form-check-label"
+                      for="rate5">5.0</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="description">產品描述</label>
+                  <textarea
+                    v-model="editProduct.description"
+                    id="description"
                     type="text"
                     class="form-control"
-                    placeholder="請輸入單位"
-                  />
+                    placeholder="請輸入產品描述"
+                    rows="4"
+                  ></textarea>
                 </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-6 mb-3">
-                  <label for="origin_price">原價</label>
-                  <input
-                    v-model.number="editProduct.origin_price"
-                    id="origin_price"
-                    type="number"
-                    min="0"
-                    class="form-control"
-                    placeholder="請輸入原價"
-                  />
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="price">售價</label>
-                  <input
-                    v-model.number="editProduct.price"
-                    id="price"
-                    type="number"
-                    min="0"
-                    class="form-control"
-                    placeholder="請輸入售價"
-                  />
-                </div>
-              </div>
-              <hr />
-              <div class="row">
-                <div class="form-group col-6 mb-3">
-                  <label for="storageNum">庫存</label>
-                  <input
-                    v-model.number="editProduct.storageNum"
-                    id="storageNum"
-                    type="number"
-                    min="0"
-                    class="form-control"
-                    placeholder="請輸入庫存"
-                  />
-                </div>
-                <div class="form-check col-6">
-                  <label class="mb-1" for="rate3">星等</label><br>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                    type="radio" id="rate1" value="1.0"
-                    v-model="editProduct.rate">
-                    <label class="form-check-label" for="rate1">1.0</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                    type="radio" id="rate2" value="2.0"
-                    v-model="editProduct.rate">
-                    <label class="form-check-label"
-                    for="rate2">2.0</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                    type="radio" id="rate3" value="3.0"
-                    v-model="editProduct.rate">
-                    <label class="form-check-label"
-                    for="rate3">3.0</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                    type="radio" id="rate4" value="4.0"
-                    v-model="editProduct.rate">
-                    <label class="form-check-label"
-                    for="rate4">4.0</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input"
-                    type="radio" id="rate5" value="5.0"
-                    v-model="editProduct.rate">
-                    <label class="form-check-label"
-                    for="rate5">5.0</label>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group mb-3">
-                <label for="description">產品描述</label>
-                <textarea
-                  v-model="editProduct.description"
-                  id="description"
-                  type="text"
-                  class="form-control"
-                  placeholder="請輸入產品描述"
-                  rows="4"
-                ></textarea>
-              </div>
-              <div class="form-group mb-3">
-                <label for="content">功能說明</label>
-                <!-- <textarea
+                <div class="form-group mb-3">
+                  <label for="content">功能說明</label>
+                  <p v-html="editProduct.content"></p>
+                  <ckeditor :editor="editor"
                   v-model="editProduct.content"
-                  id="content"
-                  type="text"
-                  class="form-control"
-                  placeholder="請輸入說明內容"
-                  rows="4"
-                ></textarea> -->
-                <p v-html="editProduct.content"></p>
-                <ckeditor :editor="editor"
-                v-model="editProduct.content"
-                :config="editorConfig"
-                ></ckeditor>
-              </div>
-              <div class="row">
-                <div class="form-check col-2">
-                  <input
-                    v-model="editProduct.is_enabled"
-                    id="is_enabled"
-                    class="form-check-input"
-                    type="checkbox"
-                    :true-value="1"
-                    :false-value="0"
-                  />
-                  <label class="form-check-label" for="is_enabled"
-                    >啟用</label
-                  >
+                  :config="editorConfig"
+                  ></ckeditor>
                 </div>
-                <div class="form-check col-2">
-                  <input
-                    v-model="editProduct.is_hot"
-                    id="is_hot"
-                    class="form-check-input"
-                    type="checkbox"
-                    :true-value="1"
-                    :false-value="0"
-                  />
-                  <label class="form-check-label" for="is_hot"
-                    >熱銷</label
-                  >
-                </div>
-                <div class="form-check col-2">
-                  <input
-                    v-model="editProduct.is_new"
-                    id="is_new"
-                    class="form-check-input"
-                    type="checkbox"
-                    :true-value="1"
-                    :false-value="0"
-                  />
-                  <label class="form-check-label" for="is_new"
-                    >新品</label
-                  >
-                </div>
-                <div class="form-check col-6">
-                  <div class="form-check form-check-inline">
+                <div class="row align-items-center ms-1">
+                  <div class="form-check col-2">
                     <input
+                      v-model="editProduct.is_enabled"
+                      id="is_enabled"
                       class="form-check-input"
-                      type="radio"
-                      id="male"
-                      value="male"
-                      v-model="editProduct.sex"
+                      type="checkbox"
+                      :true-value="1"
+                      :false-value="0"
+                    />
+                    <label class="form-check-label" for="is_enabled"
+                      >啟用</label
                     >
-                    <label class="form-check-label" for="male">男</label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check col-2">
                     <input
+                      v-model="editProduct.is_hot"
+                      id="is_hot"
                       class="form-check-input"
-                      type="radio"
-                      id="neutral" value="neutral"
-                      v-model="editProduct.sex"
+                      type="checkbox"
+                      :true-value="1"
+                      :false-value="0"
+                    />
+                    <label class="form-check-label" for="is_hot"
+                      >熱銷</label
                     >
-                    <label class="form-check-label"
-                    for="neutral">中性</label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check col-2">
                     <input
+                      v-model="editProduct.is_new"
+                      id="is_new"
                       class="form-check-input"
-                      type="radio"
-                      id="female" value="female"
-                      v-model="editProduct.sex"
+                      type="checkbox"
+                      :true-value="1"
+                      :false-value="0"
+                    />
+                    <label class="form-check-label" for="is_new"
+                      >新品</label
                     >
-                    <label class="form-check-label" for="female">女</label>
+                  </div>
+                  <div class="form-check col-6">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="male"
+                        value="male"
+                        v-model="editProduct.sex"
+                      >
+                      <label class="form-check-label" for="male">男</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="neutral" value="neutral"
+                        v-model="editProduct.sex"
+                      >
+                      <label class="form-check-label"
+                      for="neutral">中性</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="female" value="female"
+                        v-model="editProduct.sex"
+                      >
+                      <label class="form-check-label" for="female">女</label>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            取消
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="$emit('update-product', editProduct)"
-          >
-            確認
-          </button>
+            <div class="modal-footer pb-0">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                取消
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+              >
+                確認
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -337,6 +361,7 @@ export default {
       productModal: {},
       editProduct: {
         storageNum: 0,
+        rate: '3.0',
       },
       editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',
@@ -374,6 +399,20 @@ export default {
   },
   mounted() {
     this.productModal = new Modal(this.$refs.productModal);
+    // validation
+    // eslint-disable-next-line func-names
+    (function () {
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.prototype.slice.call(forms).forEach((form) => {
+        form.addEventListener('submit', (e) => {
+          if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }());
   },
   watch: {
     tempProduct() {

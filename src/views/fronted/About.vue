@@ -87,37 +87,54 @@
         </li>
       </ul>
       <div class="col-md-8 col-lg-9">
-        <form
+        <Form
           class="form-contact contact_form"
           method="post"
           id="contactForm"
           novalidate="novalidate"
+          v-slot="{ errors }"
+          ref="form"
+          @submit="sendQuestion"
         >
           <div class="row">
             <div class="col-lg-5">
               <div class="form-group">
-                <input
+                <Field
                   class="form-control"
                   id="name"
                   type="text"
                   placeholder="輸入您的姓名"
-                />
+                  v-model="form.user.name"
+                  name="姓名"
+                  rules="required"
+                  :class="{ 'is-invalid': errors['姓名'] }"
+                ></Field>
+                <Error-message name="姓名" class="invalid-feedback"></Error-message>
               </div>
               <div class="form-group">
-                <input
+                <Field
                   class="form-control"
                   id="email"
                   type="email"
                   placeholder="輸入您的email"
-                />
+                  v-model="form.user.email"
+                  name="email"
+                  rules="email|required"
+                  :class="{ 'is-invalid': errors['email'] }"
+                ></Field>
+                <Error-message name="email" class="invalid-feedback"></Error-message>
               </div>
               <div class="form-group">
-                <input
+                <Field
                   class="form-control"
                   id="subject"
                   type="text"
-                  placeholder="輸入您的問題"
-                />
+                  placeholder="輸入您的問題概述"
+                  name="問題概述"
+                  rules="required"
+                  :class="{ 'is-invalid': errors['問題概述'] }"
+                ></Field>
+                <Error-message name="問題概述" class="invalid-feedback"></Error-message>
               </div>
             </div>
             <div class="col-lg-7">
@@ -133,14 +150,13 @@
           </div>
           <div class="form-group text-center text-md-end mt-3">
             <button
-              type="button"
+              type="submit"
               class="btn btn-outline-primary"
-              @click="$router.push('/home')"
             >
               聯絡我們
             </button>
           </div>
-        </form>
+        </Form>
       </div>
     </div>
   </section>
@@ -151,7 +167,27 @@ export default {
   data() {
     return {
       pageTitle: '',
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
+        },
+        message: '',
+      },
     };
+  },
+  methods: {
+    sendQuestion() {
+      this.$router.push('/home');
+      this.$swal({
+        title: '您的問題已成功送出',
+        icon: 'success',
+        width: '280px',
+        position: 'center',
+      });
+    },
   },
   created() {
     this.pageTitle = this.$route.name;
