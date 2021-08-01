@@ -54,53 +54,58 @@
           <div class="col" v-for="item in filterCategories" :key="item.id" data-aos="zoom-in"
           data-aos-once="true">
             <div class="card card-product h-100">
-              <div class="card-product__img">
-                <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
-                <ul
-                  class="
-                    card-product__imgOverlay
-                    list-unstyled
-                    d-flex
-                    justify-content-center
-                    mb-0
-                  "
+              <div
+                class="card-product__img"
+              >
+                <div class="overflow-hidden">
+                  <img
+                    :src="item.imageUrl"
+                    class="card-img-top"
+                    :alt="item.title"
+                  />
+                </div>
+                <a
+                  href="#"
+                  class="fs-5"
+                  :class="{
+                    'text-primary': myFavorite.includes(item),
+                    'text-white': !myFavorite.includes(item)
+                  }"
+                  @click.prevent="addMyFavorite(item)"
                 >
-                  <li class="me-3">
-                    <button class="btn btn-primary text-white"
-                    @click="goDetail(item)"
-                    >
-                      <i class="bi bi-search"></i>
-                    </button>
-                  </li>
-                  <li class="me-3">
-                    <button class="btn btn-primary text-white"
-                    @click="addCart(item.id)"
-                    :disabled="item.storageNum === 0">
-                      <i class="bi bi-cart"></i>
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      class="btn btn-primary text-white"
-                      :class="{ 'bg-info': myFavorite.includes(item) }"
-                      @click="addMyFavorite(item)"
-                    >
-                      <i class="bi bi-heart"></i>
-                    </button>
-                  </li>
-                </ul>
+                  <i class="bi bi-heart"></i>
+                </a>
               </div>
-              <div class="card-body text-center">
+              <div
+                class="card-body text-center position-relative"
+              >
                 <p class="card-text mb-0">
-                  <small class="text-muted">{{ item.category }}</small>
+                  <small class="text-muted">
+                    {{ item.category }}
+                  </small>
                 </p>
                 <h5 class="card-title mb-0">
                   {{ item.title }}
                 </h5>
-                <p class="card-text font-monospace fs-4">
-                  <small class="text-muted">$ {{ item.price }}</small>
+                <p class="card-text font-monospace fs-4 mb-0">
+                  <small class="text-muted">
+                    $ {{ item.price }}
+                  </small>
                 </p>
+                <a
+                  href="#"
+                  class="stretched-link"
+                  @click.prevent="goDetail(item)"
+                ></a>
               </div>
+              <button
+                class="btn btn-primary text-white rounded-0 py-2"
+                @click="addCart(item.id)"
+                :disabled="item.storageNum === 0"
+                >
+                <i class="bi bi-cart"></i>
+                加入購物車
+              </button>
             </div>
           </div>
         </div>
@@ -243,25 +248,23 @@ export default {
       .card-title {
         color: $primary;
       }
+      .overflow-hidden img {
+        transform: scale(1.2);
+      }
     }
     &__img {
       position: relative;
-    }
-    &__imgOverlay {
-      background: rgba(255, 254, 254, 0.5);
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      padding: 30px 5px;
-      transform: translateY(30px);
-      opacity: 0;
-      z-index: -1;
-      transition: all .48s ease;
-    }
-    &:hover .card-product__imgOverlay{
-      opacity: 1;
-      z-index: 1;
-      transform: translateY(0);
+      a {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        z-index: 10;
+      }
+      img {
+        transition: all 0.5s ease;
+
+      }
     }
   }
 </style>

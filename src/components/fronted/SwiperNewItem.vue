@@ -1,14 +1,13 @@
 <template>
   <Swiper
-    :spaceBetween="40"
     :breakpoints='{
       "640": {
-        "slidesPerView": 2,
-        "spaceBetween": 20
+        "slidesPerView": 1,
+        "spaceBetween": 10
       },
       "768": {
-        "slidesPerView": 3,
-        "spaceBetween": 40
+        "slidesPerView": 2,
+        "spaceBetween": 30
       },
       "1024": {
         "slidesPerView": 4,
@@ -21,58 +20,85 @@
         "disableOnInteraction": false,
       }'
       :pagination="true"
-    class="mySwiper"
+    class="mySwiper pb-0 pb-lg-5"
   >
     <template v-for="item in filterNew" :key="item.id">
       <Swiper-slide>
-          <div class="card border-0 card-product h-100">
-            <div class="card-product__img">
-              <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
-              <ul
-                class="
-                  card-product__imgOverlay
-                  list-unstyled
-                  d-flex
-                  justify-content-center
-                  mb-0
-                "
+          <div class="card card-product h-lg-100 border-0">
+              <div
+                class="card-product__img"
               >
-                <li class="me-3">
-                  <button
-                    class="btn btn-primary text-white"
-                    @click="goDetail(item)"
-                  >
-                    <i class="bi bi-search"></i>
-                  </button>
-                </li>
-                <li class="me-3">
-                  <button class="btn btn-primary text-white"
-                  @click="addCart(item.id)">
-                    <i class="bi bi-cart"></i>
-                  </button>
-                </li>
-                <li>
-                  <button class="btn btn-primary text-white"
-                    :class="{ 'bg-info': myFavorite.includes(item) }"
-                    @click="addMyFavorite(item)"
-                  >
-                    <i class="bi bi-heart"></i>
-                  </button>
-                </li>
-              </ul>
+                <div class="overflow-hidden">
+                  <img
+                    class="card-img-top d-none d-lg-block"
+                    :src="item.imageUrl"
+                    :alt="item.title"
+                  />
+                </div>
+                <a
+                  href="#"
+                  class="fs-5"
+                  :class="{
+                    'text-primary': myFavorite.includes(item),
+                    'text-white': !myFavorite.includes(item)
+                  }"
+                  @click.prevent="addMyFavorite(item)"
+                >
+                  <i class="bi bi-heart"></i>
+                </a>
+              </div>
+              <div
+                class="card-body text-center align-middle position-relative d-none d-lg-block"
+              >
+                <p class="card-text mb-0">
+                  <small class="text-muted">
+                    {{ item.category }}
+                  </small>
+                </p>
+                <h5 class="card-title mb-0">
+                  {{ item.title }}
+                </h5>
+                <a
+                  href="#"
+                  class="stretched-link"
+                  @click.prevent="goDetail(item)"
+                >
+                  詳細介紹
+                </a>
+              </div>
+              <!-- 平板以下 -->
+              <img
+                class="card-img d-lg-none"
+                :src="item.imageUrl"
+                :alt="item.title"
+              />
+              <div
+                class="d-lg-none card-img-overlay d-flex align-items-end p-0"
+              >
+                <h5
+                  class="
+                    card-title w-100 text-white
+                    bg-special p-3 mb-0
+                    d-flex align-items-end justify-content-between">
+                  <strong>{{ item.title }}</strong>
+                  <small>NT$ {{ item.price }}</small>
+                </h5>
+                <a
+                  href="#"
+                  class="stretched-link"
+                  @click.prevent="goDetail(item)"
+                >
+                </a>
+              </div>
+              <!-- <button
+                class="btn btn-primary text-white rounded-0 py-2"
+                @click="addCart(item.id)"
+                :disabled="item.storageNum === 0"
+                >
+                <i class="bi bi-cart"></i>
+                加入購物車
+              </button> -->
             </div>
-            <div class="card-body text-center pt-1">
-              <p class="card-text mb-0 d-none d-md-block">
-                <small class="text-muted">{{ item.category }}</small>
-              </p>
-              <h5 class="card-title mb-0">
-                {{ item.title }}
-              </h5>
-              <p class="card-text font-monospace fs-4 d-none d-md-block">
-                <small class="text-muted">$ {{ $toCurrency(item.price) }}</small>
-              </p>
-            </div>
-          </div>
       </Swiper-slide>
     </template>
   </Swiper>
@@ -180,20 +206,20 @@ export default {
 
 <style lang="scss">
   #app { height: 100% }
-html,
-body {
-  position: relative;
-  height: 100%;
-}
+  html,
+  body {
+    position: relative;
+    height: 100%;
+  }
 
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
+  body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+  }
 
 .swiper-container {
   width: 100%;
@@ -212,5 +238,4 @@ body {
   display: block;
   width: 100%;
 }
-
 </style>
