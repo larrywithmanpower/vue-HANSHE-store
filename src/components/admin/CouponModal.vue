@@ -96,6 +96,7 @@ import { Modal } from 'bootstrap';
 
 export default {
   props: ['isNew', 'coupon'],
+  emits: [],
   data() {
     return {
       couponModal: {},

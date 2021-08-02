@@ -24,81 +24,73 @@
   >
     <template v-for="item in filterNew" :key="item.id">
       <Swiper-slide>
-          <div class="card card-product h-lg-100 border-0">
-              <div
-                class="card-product__img"
-              >
-                <div class="overflow-hidden">
-                  <img
-                    class="card-img-top d-none d-lg-block"
-                    :src="item.imageUrl"
-                    :alt="item.title"
-                  />
-                </div>
-                <a
-                  href="#"
-                  class="fs-5"
-                  :class="{
-                    'text-primary': myFavorite.includes(item),
-                    'text-white': !myFavorite.includes(item)
-                  }"
-                  @click.prevent="addMyFavorite(item)"
-                >
-                  <i class="bi bi-heart"></i>
-                </a>
-              </div>
-              <div
-                class="card-body text-center align-middle position-relative d-none d-lg-block"
-              >
-                <p class="card-text mb-0">
-                  <small class="text-muted">
-                    {{ item.category }}
-                  </small>
-                </p>
-                <h5 class="card-title mb-0">
-                  {{ item.title }}
-                </h5>
-                <a
-                  href="#"
-                  class="stretched-link"
-                  @click.prevent="goDetail(item)"
-                >
-                  詳細介紹
-                </a>
-              </div>
-              <!-- 平板以下 -->
+        <div class="card card-product h-lg-100 border-0">
+          <div
+            class="card-product__img"
+          >
+            <div class="overflow-hidden">
               <img
-                class="card-img d-lg-none"
+                class="card-img-top d-none d-lg-block"
                 :src="item.imageUrl"
                 :alt="item.title"
               />
-              <div
-                class="d-lg-none card-img-overlay d-flex align-items-end p-0"
-              >
-                <h5
-                  class="
-                    card-title w-100 text-white
-                    bg-special p-3 mb-0
-                    d-flex align-items-end justify-content-between">
-                  <strong>{{ item.title }}</strong>
-                  <small>NT$ {{ item.price }}</small>
-                </h5>
-                <a
-                  href="#"
-                  class="stretched-link"
-                  @click.prevent="goDetail(item)"
-                >
-                </a>
-              </div>
-              <!-- <button
-                class="btn btn-primary text-white rounded-0 py-2"
-                @click="addCart(item.id)"
-                :disabled="item.storageNum === 0"
-                >
-                <i class="bi bi-cart"></i>
-                加入購物車
-              </button> -->
             </div>
+            <a
+              href="#"
+              class="fs-5"
+              :class="{
+                'text-primary': myFavorite.includes(item),
+                'text-white': !myFavorite.includes(item)
+              }"
+              @click.prevent="addMyFavorite(item)"
+            >
+              <i class="bi bi-heart"></i>
+            </a>
+          </div>
+          <div
+            class="card-body text-center align-middle position-relative d-none d-lg-block"
+          >
+            <p class="card-text mb-0">
+              <small class="text-muted">
+                {{ item.category }}
+              </small>
+            </p>
+            <h5 class="card-title mb-0">
+              {{ item.title }}
+            </h5>
+            <a
+              href="#"
+              class="stretched-link"
+              @click.prevent="goDetail(item)"
+            >
+              詳細介紹
+            </a>
+          </div>
+          <!-- 平板以下 -->
+          <img
+            class="card-img d-lg-none"
+            :src="item.imageUrl"
+            :alt="item.title"
+          />
+          <div
+            class="d-lg-none card-img-overlay d-flex align-items-end p-0"
+          >
+            <h5
+              class="
+                card-title w-100 text-white
+                bg-special p-3 mb-0
+                d-flex align-items-end justify-content-between">
+              <strong>{{ item.title }}</strong>
+              <small>NT$ {{ item.price }}</small>
+            </h5>
+            <a
+              href="#"
+              class="stretched-link"
+              @click.prevent="goDetail(item)"
+            >
+            </a>
+          </div>
+        </div>
       </Swiper-slide>
     </template>
   </Swiper>
@@ -135,6 +127,7 @@ export default {
   },
   created() {
     this.getProducts();
+    this.getFavorite();
     this.emitter.on('send-removeFavorite', () => {
       this.getFavorite();
     });
@@ -162,6 +155,7 @@ export default {
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.products = res.data.products;
+          console.log(this.products);
         } else {
           // eslint-disable-next-line no-alert
           alert(res.data.message);

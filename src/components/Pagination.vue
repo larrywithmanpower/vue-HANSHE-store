@@ -44,5 +44,6 @@
 <script>
 export default {
   props: ['page'],
+  emits: [],
 };
 </script>

@@ -43,10 +43,6 @@
             <i class="bi bi-cart-plus me-2"></i>
             <small>[ {{ carts.length }} ]</small>
           </router-Link >
-          <!-- <button class="bg-transparent border-0 nav-link text-start">
-            <i class="bi bi-heart me-2"></i>
-            <small>[ {{ myFavorite.length }} ]</small>
-          </button> -->
           <div class="nav-item dropdown">
             <a
               href="javascript:void(0)"
@@ -63,13 +59,9 @@
               <i class="bi bi-heart me-2"></i>
               <small>[ {{ myFavorite.length }} ]</small>
             </a>
-            <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">Menu item</a></li>
-              <li><a class="dropdown-item" href="#">Menu item</a></li>
-              <li><a class="dropdown-item" href="#">Menu item</a></li>
-            </ul> -->
-            <div class="dropdown-menu dropdown-menu-end text-muted"
-            style="min-width: 400px">
+            <div
+              class="dropdown-menu dropdown-menu-end text-muted dropdown--rwd"
+            >
               <table
                 class="table table-sm align-middle text-center"
                 v-if="myFavorite.length > 0"
@@ -203,6 +195,10 @@ export default {
   },
   unmounted() { // 離開頁面後移除監聽事件
     window.removeEventListener('scroll', this.navbarTransition);
+    this.emitter.off('update-cart', this.getCarts);
+    this.emitter.off('get-favorite', () => {
+      this.getFavorite();
+    });
   },
 };
 </script>
@@ -220,11 +216,11 @@ export default {
     }
     &.navbar-dark {
       .nav-link {
-        color: $primary;
+        color:#fff;
       }
       & .nav-link:hover,
       & .nav-link.active {
-        color: #fff;
+        color: $primary;
       }
     }
     &.navbar-light {
@@ -239,4 +235,11 @@ export default {
     color: #fff;
   }
 
+  .dropdown--rwd {
+    min-width: 350px;
+    @media (max-width: 414px) {
+      min-width: 200px;
+      z-index: 10;
+    }
+  }
 </style>

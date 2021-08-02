@@ -9,13 +9,13 @@
   </Loading>
 
   <div class="table-responsive mx-auto my-3" v-if="carts.length > 0">
-    <table class="table table-sm table-borderless text-center border-light align-middle">
+    <table class="table table-sm table-borderless border-light align-middle">
       <thead class="border-bottom text-primary">
         <tr class="py-3">
-          <th></th>
-          <th class="d-none d-md-block"></th>
+          <th width="5%"></th>
+          <th class="d-none d-md-block" width="30%"></th>
           <th>品名</th>
-          <th width="20%">數量</th>
+          <th width="13%">數量</th>
           <th width="20%">單價</th>
         </tr>
       </thead>
@@ -31,11 +31,11 @@
             </button>
           </td>
           <td class="d-none d-md-block">
-            <img
+              <img
               class="img-fluid"
               :src="item.product.imageUrl"
               :alt="item.id"
-              style="width: 180px; heigth: 180px"
+              style="width: 200px; heigth: 200px"
             />
           </td>
           <td>
@@ -60,7 +60,8 @@
                 NT$ {{ $toCurrency(item.total) }}
               </del><br>
               <small
-                class="text-success">折扣價：NT$ {{ $toCurrency(Math.round(item.final_total)) }}</small>
+                class="text-success">折扣價：NT$ {{ $toCurrency(Math.round(item.final_total)) }}
+              </small>
             </span>
             <span v-else>NT$ {{ $toCurrency(item.total) }}</span>
           </td>
@@ -77,7 +78,7 @@
                     繼續選購
                   </button>
                   <button
-                    class="btn btn-danger"
+                    class="btn btn-outline-danger"
                     role="group"
                     v-show="carts.length !== 0"
                     @click="delAllCarts()"
@@ -94,7 +95,9 @@
                   v-model.trim="coupon_code"
                   >
                   <button class="btn btn-outline-primary" type="button"
-                  @click="addCouponCode">
+                  @click="addCouponCode"
+                  :disabled="coupon_code === ''"
+                  >
                     加入優惠碼
                   </button>
                 </div>
@@ -103,9 +106,37 @@
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td class="text-end pt-3" colspan="2">
+            <h5>
+              總計
+            </h5>
+            <h5 class="text-success mb-0"
+            v-if="coupon.isUsed">
+              優惠折扣
+            </h5>
+          </td>
+          <td class="text-end pt-3 fs-5" colspan="2">
+            <p v-if="!coupon.isUsed">NT$ {{ $toCurrency(total) }}</p>
+            <span class="text-success"
+              v-if="coupon.isUsed">
+              <p  class="text-dark mb-0">
+                <del>NT$ {{ $toCurrency(total) }}</del>
+              </p>
+              NT$ {{ $toCurrency(Math.round(coupon.finalTotal)) }}
+            </span>
+          </td>
+          <td class="text-end">
+            <a href="#" class="btn btn-outline-primary"
+            @click.prevent="$router.push('/cart/cartOrder')"
+            >填寫訂單資訊</a>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
-  <section class="d-flex justify-content-center my-5" v-else>
+  <!-- <section class="d-flex justify-content-center my-5" v-else>
     <div class="card" style="width: 20rem;">
       <div class="card-body">
         <h5 class="card-title text-danger">購物車內無任何商品</h5>
@@ -142,7 +173,7 @@
         >填寫訂單資訊</a>
       </div>
     </div>
-  </section>
+  </section> -->
 </template>
 
 <script>

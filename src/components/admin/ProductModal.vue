@@ -356,12 +356,15 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   props: ['tempProduct', 'isNew'],
+  emits: [],
   data() {
     return {
       productModal: {},
       editProduct: {
         storageNum: 0,
         rate: '3.0',
+        is_new: 0,
+        is_hot: 0,
       },
       editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',

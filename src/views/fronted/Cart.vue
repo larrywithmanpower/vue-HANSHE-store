@@ -36,7 +36,7 @@
 
 <style lang="scss" scoped>
   .banner {
-    background-image: url(https://images.unsplash.com/photo-1530601925101-42efae542166?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80);
+    background-image: url('../../../public/images/cartBanner.jpg');
     background-size: cover;
     background-position: center bottom;
     height: 400px;

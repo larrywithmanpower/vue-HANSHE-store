@@ -26,8 +26,8 @@
             <div class="row g-0">
               <div class="col-md-4">
                 <div class=" bg-cover"
-                :style="{ 'background-image': `url(${article.imageUrl})` }"
-                style="height: 220px;"
+                  :style="{ 'background-image': `url(${article.imageUrl})` }"
+                  style="height: 220px;"
                 ></div>
               </div>
               <div class="col-md-8">
@@ -60,9 +60,9 @@
           >
             <div class="row g-0">
               <div class="col-md-4">
-                <div class=" bg-cover"
-                :style="{ 'background-image': `url(${article.imageUrl})` }"
-                style="height: 220px;"
+                <div class="bg-cover"
+                  :style="{ 'background-image': `url(${article.imageUrl})` }"
+                  style="height: 220px;"
                 ></div>
               </div>
               <div class="col-md-8">
@@ -70,8 +70,11 @@
                   <h5 class="card-title">{{ article.title }}</h5>
                   <p class="card-text ellipsis" v-html="article.description">
                   </p>
-                  <p class="card-text d-flex justify-content-between">
-                    <small class="text-muted">{{ article.author }}</small>
+                  <p
+                    class="card-text d-flex justify-content-between">
+                    <small class="text-muted">
+                      {{ article.author }}
+                    </small>
                     <small class="text-muted">
                       {{ new Date(article.create_at * 1000 ).toLocaleDateString()}}
                     </small>

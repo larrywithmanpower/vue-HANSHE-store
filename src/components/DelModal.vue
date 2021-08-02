@@ -49,6 +49,7 @@ import { Modal } from 'bootstrap';
 
 export default {
   props: ['item'],
+  emits: [],
   mounted() {
     this.delModal = new Modal(this.$refs.delModal);
   },

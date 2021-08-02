@@ -1,56 +1,63 @@
 <template>
-  <div class="row">
-    <div class="col-lg-3" v-for="item in filterHot" :key="item.id">
-      <div class="card card-product h-100">
-        <div class="card-product__img">
-          <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
-          <ul
-            class="
-              card-product__imgOverlay
-              list-unstyled
-              d-flex
-              justify-content-center
-              mb-0
-            "
-          >
-            <li class="me-3">
-              <button class="btn btn-primary text-white" @click="goDetail(item)">
-                <i class="bi bi-search"></i>
-              </button>
-            </li>
-            <li class="me-3">
-              <button class="btn btn-primary text-white"
-              @click="addCart(item.id)">
-                <i class="bi bi-cart"></i>
-              </button>
-            </li>
-            <li>
-              <button class="btn btn-primary text-white">
-                <i class="bi bi-heart"></i>
-              </button>
-            </li>
-          </ul>
+  <Swiper
+    :spaceBetween="10"
+    :breakpoints='{
+      "640": {
+        "slidesPerView": 1,
+        "spaceBetween": 10
+      },
+      "768": {
+        "slidesPerView": 2,
+        "spaceBetween": 10
+      },
+      "1024": {
+        "slidesPerView": 3,
+        "spaceBetween": 15
+      }
+    }'
+    :autoplay='
+      {
+        "delay": 4000,
+        "disableOnInteraction": false,
+      }'
+    class="mySwiper pb-5"
+  >
+    <template class="mb-3" v-for="item in filterHot" :key="item.id">
+      <Swiper-slide>
+        <div class="card card-product h-100">
+          <div class="card-product__img">
+            <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
+          </div>
+          <div class="card-body text-center">
+            <p class="card-text mb-0">
+              <small class="text-muted">{{ item.category }}</small>
+            </p>
+            <h5 class="card-title mb-0">
+              {{ item.title }}
+            </h5>
+            <a class="text-primary stretched-link"
+              @click="goDetail(item)">
+              去看看...
+            </a>
+          </div>
         </div>
-        <div class="card-body text-center">
-          <p class="card-text mb-0">
-            <small class="text-muted">{{ item.category }}</small>
-          </p>
-          <h5 class="card-title mb-0">
-            {{ item.title }}
-          </h5>
-          <p class="card-text font-monospace fs-4">
-            <small class="text-muted">$ {{ item.price }}</small>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+      </Swiper-slide>
+    </template>
+  </Swiper>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import SwiperCore, { Pagination, Autoplay } from 'swiper/core';
+
+SwiperCore.use([Autoplay, Pagination]);
+
 export default {
-  props: ['propsProducts'],
   inject: ['emitter'],
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   data() {
     return {
       products: [],
@@ -58,42 +65,30 @@ export default {
       qty: 1,
     };
   },
-  watch: {
-    prpsProducts() {
-      this.products = this.propsProducts;
-    },
+  created() {
+    this.getProducts();
   },
   computed: {
     filterHot() {
-      return this.propsProducts.filter((item) => item.is_hot);
+      return this.products.filter((item) => item.is_hot);
     },
   },
   methods: {
-    goDetail(item) {
-      this.$router.push({ path: `/products/product/${item.id}` });
-    },
-    addCart(id) {
-      this.isLoading = true;
-      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
-      const data = {
-        product_id: id,
-        qty: this.qty,
-      };
-      this.$http.post(url, { data }).then((res) => {
+    getProducts() {
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
+      this.$http.get(url).then((res) => {
         if (res.data.success) {
-          this.$swal({
-            title: res.data.message,
-            icon: 'success',
-          });
-          this.emitter.emit('update-cart');
-          this.isLoading = false;
+          this.products = res.data.products;
         } else {
           this.$swal({
             title: res.data.message,
             icon: 'error',
           });
         }
-      });
+      }).catch((err) => console.log(err));
+    },
+    goDetail(item) {
+      this.$router.push({ path: `/products/product/${item.id}` });
     },
   },
 };

@@ -161,6 +161,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   props: ['article', 'isNew'],
+  emits: [],
   data() {
     return {
       articleModal: {},

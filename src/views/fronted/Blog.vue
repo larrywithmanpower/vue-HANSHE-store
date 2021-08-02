@@ -34,14 +34,14 @@
         <p class="text-muted" v-html="article.description"></p>
       </div>
       <div class="col-md-4 py-3 bg-light">
-        <div class="input-group mb-4">
+        <div class="input-group mb-4 w-100">
           <input type="text"
             class="form-control"
             placeholder="找文章 ..."
             v-model="searchArticles"
           >
         </div>
-        <div class="list-group rounded-0  position-sticky overflow-scroll vh-100">
+        <div class="list-group rounded-0">
           <h2
             class="
               text-center

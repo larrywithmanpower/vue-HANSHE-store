@@ -31,8 +31,7 @@
           <a
             href="#"
             class="
-              list-group-item list-group-item-action
-              border-0
+              list-group-item
               d-flex
               justify-content-between
               list-group-item--hover
@@ -138,7 +137,7 @@ export default {
     };
   },
   inject: ['emitter'],
-  created() {
+  mounted() {
     this.pageTitle = this.$route.name;
     this.emitter.emit('page-title', this.pageTitle);
     this.isLoading = true;
@@ -148,6 +147,7 @@ export default {
     this.emitter.on('send-removeFavorite', () => {
       this.getFavorite();
     });
+    this.getFavorite();
   },
   watch: {
     propsProducts() {
@@ -165,7 +165,7 @@ export default {
   },
   methods: {
     getFavorite() {
-      this.myFavorite = storageMethods.getItem() || [];
+      this.myFavorite = storageMethods.getItem();
     },
     addMyFavorite(item) {
       if (this.myFavorite.includes(item)) {
@@ -226,7 +226,9 @@ export default {
     &-item--hover {
       border-bottom: 2px solid transparent;
       transition: all 0.3s ease;
-
+      &.active {
+        z-index: 1;
+      }
       &:hover {
         color: white;
         background-color: $primary;
