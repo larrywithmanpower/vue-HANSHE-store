@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="col py-3">
-        <ToastMessage></ToastMessage>
+        <ToastMessage/>
         <router-view></router-view>
       </div>
     </div>

@@ -74,7 +74,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="(item) in myFavorite" :key="item.id">
+                  <tr v-for="(item) in myFavoriteProducts" :key="item.id">
                     <td>
                       <img :src="item.imageUrl" alt="" class="img-thumbnail">
                     </td>
@@ -82,7 +82,7 @@
                     <td>
                       <button
                         class="btn btn-outline-danger"
-                        @click="removeFavorite(item.id)"
+                        @click="removeFavorite(item)"
                       >
                         <i class="bi bi-trash"></i>
                       </button>
@@ -110,16 +110,7 @@
 </template>
 
 <script>
-// 轉型
-const storageMethods = {
-  setItem(MyFavorite) {
-    const favoriteString = JSON.stringify(MyFavorite);
-    localStorage.setItem('MyFavorite', favoriteString);
-  },
-  getItem() {
-    return JSON.parse(localStorage.getItem('MyFavorite'));
-  },
-};
+import { setItem, getItem } from '../../methods/localStorage';
 
 export default {
   inject: ['emitter'],
@@ -127,21 +118,23 @@ export default {
     return {
       classList: '',
       carts: [],
-      myFavorite: storageMethods.getItem() || [],
+      myFavorite: getItem() || [],
       products: [],
+      myFavoriteProducts: [],
       fullWidth: window.innerWidth,
     };
   },
   methods: {
     getFavorite() {
-      this.myFavorite = storageMethods.getItem() || [];
+      this.myFavorite = getItem() || [];
     },
-    removeFavorite(id) {
-      // eslint-disable-next-line no-shadow
-      this.myFavorite.forEach((item) => {
-        if (item.id === id) {
+    removeFavorite(favorite) {
+      this.myFavoriteProducts.forEach((item) => {
+        console.log(item.id === favorite.id);
+        if (item.id === favorite.id) {
           this.myFavorite.splice(item.id, 1);
-          storageMethods.setItem(this.myFavorite);
+          this.myFavoriteProducts.splice(item.id, 1);
+          setItem(this.myFavorite);
           this.emitter.emit('send-removeFavorite');
           this.$swal({ icon: 'success', title: '刪除成功！' });
         }
@@ -150,6 +143,7 @@ export default {
     removeAll() {
       localStorage.clear();
       this.getFavorite();
+      this.getFavoriteProducts();
       this.emitter.emit('send-removeFavorite');
       this.$swal({ icon: 'success', title: '已全部清除！' });
     },
@@ -176,10 +170,14 @@ export default {
       });
     },
     getProducts() {
-      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http.get(url).then((res) => {
         this.products = res.data.products;
+        this.getFavoriteProducts();
       });
+    },
+    getFavoriteProducts() {
+      this.myFavoriteProducts = this.products.filter((item) => this.myFavorite.includes(item.id));
     },
   },
   mounted() {
@@ -191,6 +189,7 @@ export default {
     this.getFavorite();
     this.emitter.on('get-favorite', () => {
       this.getFavorite();
+      this.getFavoriteProducts();
     });
   },
   unmounted() { // 離開頁面後移除監聽事件
@@ -198,6 +197,7 @@ export default {
     this.emitter.off('update-cart', this.getCarts);
     this.emitter.off('get-favorite', () => {
       this.getFavorite();
+      this.getFavoriteProducts();
     });
   },
 };

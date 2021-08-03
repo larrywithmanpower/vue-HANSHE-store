@@ -133,7 +133,7 @@
     </div>
   </footer>
 
-  <LoginModal ref="LoginModal" id="LoginModal"></LoginModal>
+  <LoginModal ref="LoginModal" id="LoginModal"/>
 </template>
 
 <script>
@@ -150,17 +150,10 @@ export default {
     };
   },
   mounted() {
-    window.addEventListener('scroll', () => {
-      const top = document.documentElement.scrollTop
-        || document.body.scrollTop
-        || window.pageYOffset;
-      this.scrollNum = top;
-      if (top >= 100) {
-        this.isTop = true;
-      } else {
-        this.isTop = false;
-      }
-    });
+    window.addEventListener('scroll', this.scrollTop());
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.scrollTop());
   },
   methods: {
     openModal() {
@@ -175,6 +168,17 @@ export default {
     },
     goTop() {
       document.documentElement.scrollTop = 0;
+    },
+    scrollTop() {
+      const top = document.documentElement.scrollTop
+        || document.body.scrollTop
+        || window.pageYOffset;
+      this.scrollNum = top;
+      if (top >= 100) {
+        this.isTop = true;
+      } else {
+        this.isTop = false;
+      }
     },
   },
 };

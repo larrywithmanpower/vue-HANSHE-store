@@ -21,7 +21,7 @@
         <a href="#" class="btn btn-outline-primary">繼續購物</a>
         <div class="mt-5">
           <h3 class="text-danger">熱銷商品</h3>
-          <HotProducts></HotProducts>
+          <HotProducts/>
         </div>
       </div>
     </div>

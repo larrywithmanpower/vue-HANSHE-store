@@ -1,18 +1,10 @@
 <template>
-  <!-- <section class="bg-dark
-  text-start">
-    <Marguee></Marguee>
-  </section> -->
-  <!-- navbar -->
   <div class="position-relative">
-      <Navbar :carts="carts"></Navbar>
-
+      <Navbar />
   </div>
   <div id="main"></div>
   <router-view></router-view>
-  <!-- footer -->
-  <Footer></Footer>
-  <!-- loginModal -->
+    <Footer/>
 </template>
 
 <script>

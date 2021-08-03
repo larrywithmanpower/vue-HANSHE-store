@@ -20,11 +20,11 @@
         "delay": 4000,
         "disableOnInteraction": false,
       }'
-    class="mySwiper pb-5"
+    class="mySwiper pb-6 pb-md-1 pt-1"
   >
     <template class="mb-3" v-for="item in filterHot" :key="item.id">
       <Swiper-slide>
-        <div class="card card-product h-100">
+        <div class="card card-product">
           <div class="card-product__img">
             <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
           </div>

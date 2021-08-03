@@ -174,7 +174,7 @@
       <h2 class="text-center text-primary mb-0">
         <span class="border-bottom border-primary border-2 pb-2">新品推薦</span>
       </h2>
-      <SwiperNewItem></SwiperNewItem>
+      <SwiperNewItem/>
     </div>
   </section>
   <section class="bg-white">
@@ -182,7 +182,7 @@
       <h2 class="text-center text-primary mb-5">
         <span class="border-bottom border-primary border-2 pb-2">最新情報</span>
       </h2>
-      <Blog></Blog>
+      <Blog/>
     </div>
   </section>
 </template>

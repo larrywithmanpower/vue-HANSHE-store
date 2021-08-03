@@ -5,9 +5,7 @@
       {{ pageTitle }}
     </h2>
   </div>
-  <router-view :props-products='products'
-  :props-categories='categories'
-  ></router-view>
+  <router-view/>
 </template>
 
 <script>
@@ -26,28 +24,11 @@ export default {
     this.emitter.on('page-title', (pageTitle) => {
       this.pageTitle = pageTitle;
     });
-    this.getProducts();
   },
-  methods: {
-    getProducts() {
-      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products`;
-      this.$http.get(url).then((res) => {
-        if (res.data.success) {
-          this.products = res.data.products;
-          this.getCategories();
-        } else {
-          this.$swal({
-            title: res.data.message,
-            icon: 'error',
-          });
-        }
-      }).catch((err) => console.log(err));
-    },
-    getCategories() {
-      const categories = new Set();
-      this.products.forEach((item) => categories.add(item.category));
-      this.categories = [...categories];
-    },
+  unmounted() {
+    this.emitter.off('page-title', (pageTitle) => {
+      this.pageTitle = pageTitle;
+    });
   },
 };
 </script>

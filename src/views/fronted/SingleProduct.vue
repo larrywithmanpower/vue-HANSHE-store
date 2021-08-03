@@ -488,7 +488,6 @@
 
 <script>
 export default {
-  props: ['propsProducts', 'propsCategories'],
   data() {
     return {
       id: '',

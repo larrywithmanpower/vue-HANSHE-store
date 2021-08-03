@@ -62,20 +62,26 @@
     </div>
     <div class="d-flex justify-content-center">
       <Pagination
-      :page="pagination"
-      @get-page="getProducts"
+        :page="pagination"
+        @get-page="getProducts"
       ></Pagination>
     </div>
   </div>
 
-  <ProductModal ref="ProductModal"
-  id="ProductModal"
-  :is-new="isNew"
-  @update-product="updateProduct"
-  :tempProduct="tempProduct"></ProductModal>
+  <ProductModal
+    ref="ProductModal"
+    id="ProductModal"
+    :is-new="isNew"
+    @update-product="updateProduct"
+    :tempProduct="tempProduct"
+  ></ProductModal>
 
-  <DelModal ref="DelModal" id="DelModal" :item="tempProduct"
-  @delete="deleteProduct"></DelModal>
+  <DelModal
+    ref="DelModal"
+    id="DelModal"
+    :item="tempProduct"
+    @delete="deleteProduct"
+  ></DelModal>
 </template>
 
 <script>

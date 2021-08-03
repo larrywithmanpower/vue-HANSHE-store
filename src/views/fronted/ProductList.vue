@@ -49,7 +49,7 @@
       </div>
       <!-- products -->
       <div class="col-lg-9">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-6">
           <div class="col" v-for="item in filterCategories" :key="item.id" data-aos="zoom-in"
           data-aos-once="true">
             <div class="card card-product h-100">
@@ -66,14 +66,31 @@
                 <a
                   href="#"
                   class="fs-5"
-                  :class="{
-                    'text-primary': myFavorite.includes(item),
-                    'text-white': !myFavorite.includes(item)
-                  }"
                   @click.prevent="addMyFavorite(item)"
                 >
-                  <i class="bi bi-heart"></i>
+                  <i class="bi bi-heart text-primary"
+                  v-if="!myFavorite.includes(item.id)"></i>
+                  <i class="bi bi-heart-fill text-primary"
+                  v-else></i>
                 </a>
+                <span
+                  class="badge bg-success position-absolute top-0 p-2 rounded-0"
+                  v-if="item.is_new"
+                >
+                    新品
+                </span>
+                <span
+                  class="badge bg-danger position-absolute top-0 p-2 rounded-0"
+                  v-else-if="item.is_hot"
+                >
+                  熱銷品
+                </span>
+                <span
+                  class="badge bg-warning position-absolute top-0 p-2 rounded-0"
+                  v-if="item.is_hot && item.is_new"
+                >
+                  熱銷新品
+                </span>
               </div>
               <div
                 class="card-body text-center position-relative"
@@ -108,24 +125,25 @@
             </div>
           </div>
         </div>
+        <div class="d-flex justify-content-center">
+          <Pagination
+            :page="pagination"
+            @get-page="getProducts"
+          ></Pagination>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-const storageMethods = {
-  setItem(MyFavorite) {
-    const favoriteString = JSON.stringify(MyFavorite);
-    localStorage.setItem('MyFavorite', favoriteString);
-  },
-  getItem() {
-    return JSON.parse(localStorage.getItem('MyFavorite'));
-  },
-};
+import Pagination from '@/components/Pagination.vue';
+import { setItem, getItem } from '../../methods/localStorage';
 
 export default {
-  props: ['propsProducts', 'propsCategories'],
+  components: {
+    Pagination,
+  },
   data() {
     return {
       products: [],
@@ -133,7 +151,9 @@ export default {
       filterCategory: '',
       isLoading: false,
       pageTitle: '',
-      myFavorite: storageMethods.getItem() || [],
+      myFavorite: getItem() || [],
+      pagination: {},
+      currentPage: '',
     };
   },
   inject: ['emitter'],
@@ -143,11 +163,17 @@ export default {
     this.isLoading = true;
     setTimeout(() => {
       this.isLoading = false;
-    }, 1500);
+    }, 2500);
     this.emitter.on('send-removeFavorite', () => {
       this.getFavorite();
     });
+    this.getProducts();
     this.getFavorite();
+  },
+  unmounted() {
+    this.emitter.off('send-removeFavorite', () => {
+      this.getFavorite();
+    });
   },
   watch: {
     propsProducts() {
@@ -158,24 +184,48 @@ export default {
     },
     myFavorite: {
       handler() {
-        storageMethods.setItem(this.myFavorite);
+        setItem(this.myFavorite);
       },
       deep: true,
     },
   },
   methods: {
+    getProducts(page) {
+      this.isLoading = true;
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
+      this.$http.get(url).then((res) => {
+        if (res.data.success) {
+          this.products = res.data.products;
+          this.pagination = res.data.pagination;
+          this.currentPage = res.data.pagination.current_page;
+          this.getCategories();
+          this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+          this.isLoading = false;
+        }
+      }).catch((err) => console.log(err));
+    },
+    getCategories() {
+      const categories = new Set();
+      this.products.forEach((item) => categories.add(item.category));
+      this.categories = [...categories];
+    },
     getFavorite() {
-      this.myFavorite = storageMethods.getItem();
+      this.myFavorite = getItem() || [];
     },
     addMyFavorite(item) {
-      if (this.myFavorite.includes(item)) {
-        this.myFavorite.splice(this.myFavorite.indexOf(item), 1);
-        storageMethods.setItem(this.myFavorite);
+      if (this.myFavorite.includes(item.id)) {
+        this.myFavorite.splice(this.myFavorite.indexOf(item.id), 1);
+        setItem(this.myFavorite);
         // this.emitter.emit('send-favorite', this.myFavorite)
         this.$swal({ icon: 'warning', title: '已移除最愛' });
       } else {
-        this.myFavorite.push(item);
-        storageMethods.setItem(this.myFavorite);
+        this.myFavorite.push(item.id);
+        setItem(this.myFavorite);
         // this.emitter.emit('send-favorite', item)
         this.$swal({ icon: 'success', title: '加入成功！' });
       }
@@ -265,7 +315,6 @@ export default {
       }
       img {
         transition: all 0.5s ease;
-
       }
     }
   }
