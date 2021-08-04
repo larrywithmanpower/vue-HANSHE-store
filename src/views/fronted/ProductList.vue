@@ -49,7 +49,7 @@
       </div>
       <!-- products -->
       <div class="col-lg-9">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-6">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           <div class="col" v-for="item in filterCategories" :key="item.id" data-aos="zoom-in"
           data-aos-once="true">
             <div class="card card-product h-100">
@@ -125,25 +125,15 @@
             </div>
           </div>
         </div>
-        <div class="d-flex justify-content-center">
-          <Pagination
-            :page="pagination"
-            @get-page="getProducts"
-          ></Pagination>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Pagination from '@/components/Pagination.vue';
 import { setItem, getItem } from '../../methods/localStorage';
 
 export default {
-  components: {
-    Pagination,
-  },
   data() {
     return {
       products: [],
@@ -152,8 +142,6 @@ export default {
       isLoading: false,
       pageTitle: '',
       myFavorite: getItem() || [],
-      pagination: {},
-      currentPage: '',
     };
   },
   inject: ['emitter'],
@@ -190,14 +178,12 @@ export default {
     },
   },
   methods: {
-    getProducts(page) {
+    getProducts() {
       this.isLoading = true;
-      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products?page=${page}`;
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.products = res.data.products;
-          this.pagination = res.data.pagination;
-          this.currentPage = res.data.pagination.current_page;
           this.getCategories();
           this.isLoading = false;
         } else {
