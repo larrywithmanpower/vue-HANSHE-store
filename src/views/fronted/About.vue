@@ -12,40 +12,39 @@
         </h2>
       </div>
       <ul class="row list-unstyled">
-          <li class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon shadow">
-              <div class="h1 text-primary text-center
-              ">
-                <i class="bi bi-truck"></i>
-              </div>
-              <h2 class="h5 mt-4 text-center">宅配到府</h2>
+        <li class="col-md-6 col-lg-3 pb-5">
+          <div class="h-100 py-5 services-icon shadow">
+            <div class="h1 text-primary text-center
+            ">
+              <i class="bi bi-truck"></i>
             </div>
-          </li>
+            <h2 class="h5 mt-4 text-center">宅配到府</h2>
+          </div>
+        </li>
 
-          <li class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon shadow">
-              <div class="h1 text-priamry text-center">
-                <i class="bi bi-arrow-left-right"></i>
-              </div>
-              <h2 class="h5 mt-4 text-center">最高品質</h2>
+        <li class="col-md-6 col-lg-3 pb-5">
+          <div class="h-100 py-5 services-icon shadow">
+            <div class="h1 text-priamry text-center">
+              <i class="bi bi-arrow-left-right"></i>
             </div>
-          </li>
+            <h2 class="h5 mt-4 text-center">最高品質</h2>
+          </div>
+        </li>
+        <li class="col-md-6 col-lg-3 pb-5">
+          <div class="h-100 py-5 services-icon shadow">
+            <div class="h1 text-primary text-center"><i class="bi bi-percent"></i></div>
+            <h2 class="h5 mt-4 text-center">最多優惠</h2>
+          </div>
+        </li>
 
-          <li class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon shadow">
-              <div class="h1 text-primary text-center"><i class="bi bi-percent"></i></div>
-              <h2 class="h5 mt-4 text-center">最多優惠</h2>
+        <li class="col-md-6 col-lg-3 pb-5">
+          <div class="h-100 py-5 services-icon shadow">
+            <div class="h1 text-primary text-center">
+              <i class="bi bi-telephone-inbound"></i>
             </div>
-          </li>
-
-          <li class="col-md-6 col-lg-3 pb-5">
-            <div class="h-100 py-5 services-icon shadow">
-              <div class="h1 text-primary text-center">
-                <i class="bi bi-telephone-inbound"></i>
-              </div>
-              <h2 class="h5 mt-4 text-center">貴賓服務專線</h2>
-            </div>
-          </li>
+            <h2 class="h5 mt-4 text-center">貴賓服務專線</h2>
+          </div>
+        </li>
       </ul>
     </div>
   </section>
@@ -108,8 +107,8 @@
                   name="姓名"
                   rules="required"
                   :class="{ 'is-invalid': errors['姓名'] }"
-                ></Field>
-                <Error-message name="姓名" class="invalid-feedback"></Error-message>
+                />
+                <Error-message name="姓名" class="invalid-feedback"/>
               </div>
               <div class="form-group">
                 <Field
@@ -121,8 +120,8 @@
                   name="email"
                   rules="email|required"
                   :class="{ 'is-invalid': errors['email'] }"
-                ></Field>
-                <Error-message name="email" class="invalid-feedback"></Error-message>
+                />
+                <Error-message name="email" class="invalid-feedback"/>
               </div>
               <div class="form-group">
                 <Field
@@ -133,8 +132,8 @@
                   name="問題概述"
                   rules="required"
                   :class="{ 'is-invalid': errors['問題概述'] }"
-                ></Field>
-                <Error-message name="問題概述" class="invalid-feedback"></Error-message>
+                />
+                <Error-message name="問題概述" class="invalid-feedback"/>
               </div>
             </div>
             <div class="col-lg-7">

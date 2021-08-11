@@ -85,12 +85,13 @@ const routes = [
   // admin
   {
     path: '/admin',
-    name: '後台',
+    name: 'admin',
     component: () => import('../views/Dashboard.vue'),
+    redirect: { name: 'Products' },
     children: [
       {
-        path: 'adminProducts',
-        name: 'AdminProducts',
+        path: 'products',
+        name: 'Products',
         component: () => import('../views/admin/Products.vue'),
       },
       {

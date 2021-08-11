@@ -4,7 +4,8 @@
       class="col-6"
       v-slot="{ errors }"
       @submit="createOrder"
-      ref="form">
+      ref="form"
+    >
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <Field
@@ -16,8 +17,8 @@
           name="email"
           rules="email|required"
           :class="{ 'is-invalid': errors['email'] }"
-        ></Field>
-        <Error-message name="email" class="invalid-feedback"></Error-message>
+        />
+        <Error-message name="email" class="invalid-feedback"/>
       </div>
       <div class="mb-3">
         <label for="username" class="form-label">收件人姓名</label>
@@ -30,8 +31,8 @@
           name="姓名"
           rules="required"
           :class="{ 'is-invalid': errors['姓名'] }"
-        ></Field>
-        <Error-message name="姓名" class="invalid-feedback"></Error-message>
+        />
+        <Error-message name="姓名" class="invalid-feedback"/>
       </div>
       <div class="mb-3">
         <label for="tel" class="form-label">收件人電話</label>
@@ -44,9 +45,8 @@
           name="電話"
           :rules="isPhone"
           :class="{ 'is-invalid': errors['電話'] }"
-        >
-        </Field>
-        <Error-message name="電話" class="invalid-feedback"></Error-message>
+        />
+        <Error-message name="電話" class="invalid-feedback"/>
       </div>
       <div class="mb-3">
         <label for="address" class="form-label">收件人地址</label>
@@ -59,8 +59,8 @@
           name="地址"
           rules="required"
           :class="{ 'is-invalid': errors['地址'] }"
-        ></Field>
-        <Error-message name="地址" class="invalid-feedback"></Error-message>
+        />
+        <Error-message name="地址" class="invalid-feedback"/>
       </div>
       <div class="mb-3">
         <label for="leaveMsg" class="form-label">留言</label>

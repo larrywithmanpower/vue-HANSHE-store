@@ -10,24 +10,33 @@
   <div class="row" data-aos="zoom-in-right">
     <!-- v-for搭配.slice(0,3)只顯示三篇 -->
     <div
-      class="col-md-6 col-lg-4 mb-4 mb-lg-0"
+      class="col-md-6 col-lg-4 mb-2 mb-lg-0"
       v-for="(article, index) in articles.slice(0,3)"
       :key="index"
     >
       <div class="card border-0">
-        <div class="card-image" :style="{ 'background-image': `url(${article.imageUrl})` }"></div>
-        <div class="card-body">
-          <div class="d-flex justify-content-between py-3">
-            <small class="text-muted">By {{ article.author }}</small>
+        <div
+          class="card-image"
+          :style="{ 'background-image': `url(${article.imageUrl})` }"
+        />
+        <div class="card-body py-1">
+          <div class="d-flex justify-content-between py-1">
+            <small class="text-muted">
+              By {{ article.author }}
+            </small>
             <small class="text-muted">
               Date {{  new Date(article.create_at * 1000).toLocaleDateString() }}
             </small>
           </div>
-          <h4 class="card-title">{{ article.title }}</h4>
+          <h4 class="card-title">
+            {{ article.title }}
+          </h4>
         </div>
-        <div class="card-body">
-          <p class="card-text ellipsis" v-html="article.description">
-          </p>
+        <div class="card-body pt-0">
+          <p
+            class="card-text ellipsis"
+            v-html="article.description"
+          />
           <a
             href="#"
             class="card-link stretched-link h6 text-primary"
@@ -62,8 +71,10 @@ export default {
           this.articles = res.data.articles;
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
           this.isLoading = false;
         }
       }).catch((err) => { console.log(err); });

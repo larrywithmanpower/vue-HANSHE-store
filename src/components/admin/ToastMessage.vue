@@ -4,7 +4,7 @@
     <Toast
       v-for="(msg, index) in messages" :key="index"
       :msg="msg"
-    ></Toast>
+    />
   </div>
 </template>
 

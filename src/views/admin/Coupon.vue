@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loading :active="isLoading"></Loading>
+    <Loading :active="isLoading"/>
     <button
       type="button"
       class="btn btn-primary my-3"
@@ -70,15 +70,15 @@
     :is-new="isNew"
     :coupon="tempCoupon"
     @update-coupon="updateCoupon"
-  ></CouponModal>
+  />
 
   <!-- del product modal -->
   <DelModal
     id="DelModal"
     ref="DelModal"
     :item="tempCoupon"
-    @delete="deleteCoupon">
-  </DelModal>
+    @delete="deleteCoupon"
+  />
 </template>
 
 <script>
@@ -111,8 +111,11 @@ export default {
           this.coupons = res.data.coupons;
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.messages.join(','));
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '優惠劵取得失敗',
+            content: res.data.message.join('、'),
+          });
           this.isLoading = false;
         }
       }).catch((err) => {
@@ -145,49 +148,31 @@ export default {
       }
     },
     updateCoupon(tempCoupon) {
-      // ! 新增
-      if (this.isNew) {
-        const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/coupon`;
-        this.$http.post(url, { data: tempCoupon }).then((res) => {
-          if (res.data.success) {
-            this.getCoupons();
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: res.data.message,
-            });
-            this.$refs.CouponModal.hideModal();
-          } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '新增失敗',
-              content: res.data.message.join('、'),
-            });
-          }
-        }).catch((err) => {
-          console.log(err);
-        });
-      } else {
-        // ! 編輯
-        const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/coupon/${tempCoupon.id}`;
-        this.$http.put(url, { data: tempCoupon }).then((res) => {
-          if (res.data.success) {
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: `${res.data.message}`,
-            });
-            this.getCoupons();
-            this.$refs.CouponModal.hideModal();
-          } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: `${tempCoupon.title}更新失敗`,
-              content: res.data.message.join('、'),
-            });
-          }
-        }).catch((err) => {
-          console.log(err);
-        });
+      this.tempCoupon = tempCoupon;
+      let url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/coupon`;
+      let httpMethod = 'post';
+
+      if (!this.isNew) {
+        url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`;
+        httpMethod = 'put';
       }
+
+      this.$http[httpMethod](url, { data: tempCoupon }).then((res) => {
+        if (res.data.success) {
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: res.data.message,
+          });
+          this.getCoupons(this.currentPage);
+          this.$refs.CouponModal.hideModal();
+        } else {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '更新失敗',
+            content: res.data.message.join(','),
+          });
+        }
+      });
     },
     deleteCoupon(tempCoupon) {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/coupon/${tempCoupon.id}`;

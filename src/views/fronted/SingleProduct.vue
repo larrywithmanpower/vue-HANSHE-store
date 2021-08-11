@@ -13,7 +13,7 @@
         <img class="img-fluid" :src="product.imageUrl" alt="product.title" />
       </div>
       <div class="col-md-6 px-5">
-        <h3>{{ product.title }}</h3>
+        <h1 class="fw-bold">{{ product.title }}</h1>
         <ul class="d-flex list-unstyled align-items-center">
           <li class="text-warning me-3">
             <span class="me-1">{{ product.rate }}</span>
@@ -57,8 +57,10 @@
             <span class="badge bg-danger">熱賣品</span>
           </li>
           <li>
-            <span class="badge bg-success" v-if="product.storageNum > 0"
-              >有庫存</span
+            <span
+              class="badge bg-success"
+              v-if="product.storageNum > 0"
+            >有庫存</span
             >
             <span class="badge bg-secondary" v-else>無庫存</span>
           </li>
@@ -75,7 +77,7 @@
             class="btn btn-primary"
             type="button"
             @click="qty--"
-            :disabled="product.storageNum === 0"
+            :disabled="product.storageNum === 0 || qty === 0"
           >
             <i class="bi bi-dash"></i>
           </button>
@@ -98,7 +100,7 @@
             class="btn btn-outline-primary d-none d-md-block"
             type="button"
             @click="addCart(product.id)"
-            :disabled="product.storageNum === 0"
+            :disabled="product.storageNum === 0 || qty === 0"
           >
             加入購物車
           </button>
@@ -450,7 +452,7 @@
                   <div class="col-md-12">
                     <div class="form-group mb-3">
                       <input
-                        type="text"
+                        type="tel"
                         class="form-control"
                         id="number"
                         placeholder="請輸入手機"

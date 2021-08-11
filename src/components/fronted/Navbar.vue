@@ -37,8 +37,7 @@
         <div class="navbar-nav">
           <router-link to="/about" class="nav-link">關於寒舍</router-link>
           <router-link to="/blogs/blogList" class="nav-link">部落格</router-link>
-          <router-link to="/products/productList" class="nav-link">寒舍商品</router-link
-          >
+          <router-link to="/products/productList" class="nav-link">寒舍商品</router-link>
           <router-Link to="/cart/cartList" class="nav-link">
             <i class="bi bi-cart-plus me-2"></i>
             <small>[ {{ carts.length }} ]</small>
@@ -47,11 +46,10 @@
             <a
               href="javascript:void(0)"
               class="
-              bg-transparent
-              border-0
-              nav-link
-              text-start"
-              type="a"
+                bg-transparent
+                border-0
+                nav-link
+                text-start"
               id="dropdownMenuButton"
               data-bs-toggle="dropdown"
               aria-expanded="false"
@@ -81,6 +79,7 @@
                     <td>{{ item.title }}</td>
                     <td>
                       <button
+                        type="button"
                         class="btn btn-outline-danger"
                         @click="removeFavorite(item)"
                       >
@@ -94,7 +93,9 @@
                 您還未找到喜歡的產品喔!!
               </h2>
               <div class="d-flex justify-content-center">
-              <button class="btn btn-danger"
+              <button
+                type="button"
+                class="btn btn-danger"
                 :disabled="myFavorite.length === 0"
                 @click="removeAll()"
               >
@@ -110,7 +111,7 @@
 </template>
 
 <script>
-import { setItem, getItem } from '../../methods/localStorage';
+import { setItem, getItem } from '@/methods/localStorage';
 
 export default {
   inject: ['emitter'],

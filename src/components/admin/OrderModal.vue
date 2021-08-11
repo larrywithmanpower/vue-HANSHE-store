@@ -1,24 +1,28 @@
 <template>
-  <div class="modal"
-  tabindex="-1"
-  id="orderModal"
-  ref="orderModal"
+  <div
+    class="modal"
+    tabindex="-1"
+    id="orderModal"
+    ref="orderModal"
   >
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title bg-datk text-white">訂單細節</h5>
+          <h5 class="modal-title bg-datk text-white">
+            訂單細節
+          </h5>
           <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal" aria-label="Close"></button>
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close">
+          </button>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-md-4">
               <h3>用戶資料</h3>
               <table class="table">
-                <!-- 加上v-if tempOrder.user就可以用?? -->
                 <tbody v-if="tempOrder.user">
                   <tr>
                     <th>姓名</th>
@@ -60,14 +64,16 @@
                         :class="[
                         { 'text-success': tempOrder.is_paid },
                         { 'text-danger': !tempOrder.is_paid }
-                        ]">
+                        ]"
+                      >
                           {{ tempOrder.is_paid ? '已付款' : '未付款' }}
                       </span>
                       <span
                         class="ms-3"
                         v-if="tempOrder.is_paid"
                       >
-                        付款日期： {{ tempOrder.paid_date
+                        付款日期： {{
+                          tempOrder.paid_date
                           ? new Date(tempOrder.paid_date * 1000).toLocaleDateString()
                           : '補繳款，須查詢記帳紙本'
                         }}
@@ -83,7 +89,10 @@
               <h3>選購商品</h3>
               <table class="table">
                 <tbody>
-                  <tr v-for="item in tempOrder.products"    :key="item.id">
+                  <tr
+                    v-for="item in tempOrder.products"
+                    :key="item.id"
+                  >
                     <th>
                       {{ item.product.title }}
                     </th>
@@ -97,7 +106,13 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            關閉
+          </button>
         </div>
       </div>
     </div>

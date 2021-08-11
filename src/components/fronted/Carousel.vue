@@ -28,18 +28,25 @@
       ></button>
     </div>
     <div class="carousel-inner">
-      <div class="carousel-item active"
-      >
-        <img src="../../../public/images/carouselImg-1.jpg"
-        class="d-block w-100" alt="carouselImg-1" />
-        <div class="carousel-caption d-none d-md-block" data-aos="zoom-in"
-        data-aos-duration="1000">
+      <div class="carousel-item active">
+        <img
+          src="../../../public/images/carouselImg-1.jpg"
+          class="d-block w-100" alt="carouselImg-1"
+        />
+        <div
+          class="carousel-caption d-none d-md-block"
+          data-aos="zoom-in"
+          data-aos-duration="1000"
+        >
           <h2>穿出屬於自己的
             <span class="decoration-text">Style</span>
           </h2>
           <p class="fs-4">找尋屬於自己的風格，創造嶄新的外表</p>
-          <button type="button" class="btn-animation pulse"
-          @click="$router.push('/products/productList')">
+          <button
+            type="button"
+            class="btn-animation pulse"
+            @click="$router.push('/products/productList')"
+          >
             看看商品
           </button>
           <div class="position-relative">
@@ -51,9 +58,10 @@
       </div>
       <div class="carousel-item">
         <img
-        src="../../../public/images/carouselImg-2.jpg"
-        class="d-block w-100"
-        alt="carouselPic"/>
+          src="../../../public/images/carouselImg-2.jpg"
+          class="d-block w-100"
+          alt="carouselPic"
+        />
         <div class="carousel-caption d-none d-md-block">
           <h2>保護雙腳跑遍世界
             <span class="decoration-text text-primary">HANSHE</span>
@@ -79,8 +87,11 @@
         </div>
       </div>
       <div class="carousel-item">
-        <img src="../../../public/images/carouselImg-3.jpg"
-        class="d-block w-100" alt="carouselPic" />
+        <img
+          src="../../../public/images/carouselImg-3.jpg"
+          class="d-block w-100"
+          alt="carouselPic"
+        />
         <div class="carousel-caption">
           <h2>
             夏季大拍賣

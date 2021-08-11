@@ -24,13 +24,15 @@
           <form
             class="needs-validation"
             @submit="$emit('update-product', editProduct)"
-            novalidate>
+            novalidate
+          >
             <div class="row">
-              <!-- ? 圖片新增 -->
               <div class="col-sm-4">
                 <div class="mb-1">
                   <div class="form-group">
-                    <label for="imageUrl" class="fw-bold">主要圖片</label>
+                    <label for="imageUrl" class="fw-bold">
+                      主要圖片
+                    </label>
                     <input
                       v-model="editProduct.imageUrl"
                       type="text"
@@ -45,7 +47,9 @@
                   <img class="img-fluid" :src="editProduct.imageUrl" />
                 </div>
                 <div class="form-group mb-3 position-relative">
-                  <label for="photoFile" class="fw-bold">上傳圖片檔案</label>
+                  <label for="photoFile" class="fw-bold">
+                    上傳圖片檔案
+                  </label>
                   <input
                     type="file"
                     id="photoFile"
@@ -55,7 +59,7 @@
                   />
                 </div>
                 <hr />
-                <!-- ? 多圖 -->
+                <!-- 多圖 -->
                 <div class="mb-1 fw-bold">其他圖片</div>
                 <div v-if="Array.isArray(editProduct.imagesUrl)">
                   <div
@@ -70,7 +74,10 @@
                       class="form-control"
                       placeholder="請輸入圖片連結"
                     />
-                    <img :src="editProduct.imagesUrl[index]" class="img-fluid" />
+                    <img
+                      :src="editProduct.imagesUrl[index]"
+                      class="img-fluid"
+                    />
                   </div>
                   <div
                     v-if="
@@ -79,6 +86,7 @@
                     "
                   >
                     <button
+                      type="button"
                       class="btn btn-outline-primary btn-sm d-block w-100"
                       @click="editProduct.imagesUrl.push('')"
                     >
@@ -87,6 +95,7 @@
                   </div>
                   <div v-else>
                     <button
+                      type="button"
                       class="btn btn-outline-danger btn-sm d-block w-100"
                       @click="editProduct.imagesUrl.pop()"
                     >
@@ -96,6 +105,7 @@
                 </div>
                 <div class="mt-2">
                   <button
+                    type="button"
                     class="btn btn-sm btn-danger d-block w-100"
                     @click="removeImages()"
                   >
@@ -200,38 +210,54 @@
                   <div class="form-check col-6">
                     <label class="mb-1" for="rate3">星等</label><br>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input"
-                      type="radio" id="rate1" value="1.0"
-                      v-model="editProduct.rate">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="rate1"
+                        value="1.0"
+                        v-model="editProduct.rate"
+                      >
                       <label class="form-check-label" for="rate1">1.0</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input"
-                      type="radio" id="rate2" value="2.0"
-                      v-model="editProduct.rate">
-                      <label class="form-check-label"
-                      for="rate2">2.0</label>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="rate2"
+                        value="2.0"
+                        v-model="editProduct.rate"
+                      >
+                      <label class="form-check-label" for="rate2">2.0</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input"
-                      type="radio" id="rate3" value="3.0"
-                      v-model="editProduct.rate">
-                      <label class="form-check-label"
-                      for="rate3">3.0</label>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="rate3"
+                        value="3.0"
+                        v-model="editProduct.rate"
+                      >
+                      <label class="form-check-label" for="rate3">3.0</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input"
-                      type="radio" id="rate4" value="4.0"
-                      v-model="editProduct.rate">
-                      <label class="form-check-label"
-                      for="rate4">4.0</label>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="rate4"
+                        value="4.0"
+                        v-model="editProduct.rate"
+                      >
+                      <label class="form-check-label" for="rate4">4.0</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input"
-                      type="radio" id="rate5" value="5.0"
-                      v-model="editProduct.rate">
-                      <label class="form-check-label"
-                      for="rate5">5.0</label>
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        id="rate5"
+                        value="5.0"
+                        v-model="editProduct.rate"
+                      >
+                      <label class="form-check-label" for="rate5">5.0</label>
                     </div>
                   </div>
                 </div>
@@ -244,15 +270,16 @@
                     class="form-control"
                     placeholder="請輸入產品描述"
                     rows="4"
-                  ></textarea>
+                  />
                 </div>
                 <div class="form-group mb-3">
                   <label for="content">功能說明</label>
                   <p v-html="editProduct.content"></p>
-                  <ckeditor :editor="editor"
-                  v-model="editProduct.content"
-                  :config="editorConfig"
-                  ></ckeditor>
+                  <ckeditor
+                    :editor="editor"
+                    v-model="editProduct.content"
+                    :config="editorConfig"
+                  />
                 </div>
                 <div class="row align-items-center ms-1">
                   <div class="form-check col-2">
@@ -264,9 +291,7 @@
                       :true-value="1"
                       :false-value="0"
                     />
-                    <label class="form-check-label" for="is_enabled"
-                      >啟用</label
-                    >
+                    <label class="form-check-label" for="is_enabled">啟用</label>
                   </div>
                   <div class="form-check col-2">
                     <input
@@ -277,9 +302,7 @@
                       :true-value="1"
                       :false-value="0"
                     />
-                    <label class="form-check-label" for="is_hot"
-                      >熱銷</label
-                    >
+                    <label class="form-check-label" for="is_hot">熱銷</label>
                   </div>
                   <div class="form-check col-2">
                     <input
@@ -290,9 +313,7 @@
                       :true-value="1"
                       :false-value="0"
                     />
-                    <label class="form-check-label" for="is_new"
-                      >新品</label
-                    >
+                    <label class="form-check-label" for="is_new">新品</label>
                   </div>
                   <div class="form-check col-6">
                     <div class="form-check form-check-inline">
@@ -312,8 +333,7 @@
                         id="neutral" value="neutral"
                         v-model="editProduct.sex"
                       >
-                      <label class="form-check-label"
-                      for="neutral">中性</label>
+                      <label class="form-check-label" for="neutral">中性</label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input
@@ -356,7 +376,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   props: ['tempProduct', 'isNew'],
-  emits: [],
+  emits: ['update-product'],
   data() {
     return {
       productModal: {},

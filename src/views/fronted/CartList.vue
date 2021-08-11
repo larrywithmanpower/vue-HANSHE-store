@@ -72,12 +72,14 @@
               <div class="col-md-6 mb-3 mb-md-0">
                 <div class="btn-group w-100">
                   <button
+                  type="button"
                   class="btn btn-outline-primary"
                   @click="$router.push('/products/category')"
                   >
                     繼續選購
                   </button>
                   <button
+                    type="button"
                     class="btn btn-outline-danger"
                     role="group"
                     v-show="carts.length !== 0"
@@ -94,9 +96,10 @@
                   placeholder="輸入優惠碼"
                   v-model.trim="coupon_code"
                   >
-                  <button class="btn btn-outline-primary" type="button"
-                  @click="addCouponCode"
-                  :disabled="coupon_code === ''"
+                  <button class="btn btn-outline-primary"
+                    type="button"
+                    @click="addCouponCode"
+                    :disabled="coupon_code === ''"
                   >
                     加入優惠碼
                   </button>
@@ -136,44 +139,21 @@
       </tfoot>
     </table>
   </div>
-  <!-- <section class="d-flex justify-content-center my-5" v-else>
-    <div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <h5 class="card-title text-danger">購物車內無任何商品</h5>
-        <router-link to="/products/productList" class="card-link stretched-link">還不快去買</router-link>
+  <section class="d-flex justify-content-center my-5" v-else>
+    <div class="card border-0 px-4 pt-4">
+      <div class="card-body text-center">
+        <h3 class="card-title text-danger mb-1">購物車內無任何商品</h3>
+        <router-link
+          to="/products/productList"
+          class="card-link stretched-link"
+        >
+          <img
+            src="../../../public/images/buyIcon.png"
+            alt="butIcon">
+        </router-link>
       </div>
     </div>
   </section>
-  <section class="d-flex justify-content-end">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body lh-lg">
-        <h5 class="card-title mb-4">小計</h5>
-        <h6 class="card-subtitle mb-4 text-muted d-flex justify-content-between">
-          商品總價
-          <span>NT$ {{ $toCurrency(total) }}</span>
-        </h6>
-        <h6 class="card-subtitle mb-4 text-success d-flex justify-content-between"
-        v-if="coupon.isUsed">
-          優惠折扣
-          <span>NT$ {{ $toCurrency(Math.round(coupon.finalTotal)) }}</span>
-        </h6>
-        <hr>
-        <p class="text-muted d-flex justify-content-between"
-        v-if="coupon.isUsed">
-          總計
-          <span>NT$ {{ $toCurrency(Math.round(coupon.finalTotal)) }}</span>
-        </p>
-        <p class="text-muted d-flex justify-content-between"
-        v-else>
-          總計
-          <span>NT$ {{ $toCurrency(total) }}</span>
-        </p>
-        <a href="#" class="btn btn-primary text-white w-100"
-        @click.prevent="$router.push('/cart/cartOrder')"
-        >填寫訂單資訊</a>
-      </div>
-    </div>
-  </section> -->
 </template>
 
 <script>
@@ -215,6 +195,13 @@ export default {
       this.isLoading = true;
       this.$http.put(url, { data }).then((res) => {
         if (res.data.success) {
+          this.getCarts();
+          this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
           this.isLoading = false;
         }
       }).catch((err) => {

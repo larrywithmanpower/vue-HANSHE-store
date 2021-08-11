@@ -1,7 +1,12 @@
 <template>
-  <div class="modal fade"
-  ref="loginModal"
-  id="loginMoal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    ref="loginModal"
+    id="loginMoal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header bg-primary text-white">
@@ -29,11 +34,11 @@
                 name="email"
                 rules="email|required"
                 :class="{ 'is-invalid': errors['email'] }"
-              ></Field>
+              />
               <Error-message
                 name="email"
                 class="invalid-feedback"
-              ></Error-message>
+              />
               <label for="floatingInput">
                 <i class="bi bi-person-circle"></i>
                 管理人員帳號
@@ -49,8 +54,8 @@
                 name="密碼"
                 rules="required"
                 :class="{ 'is-invalid': errors['密碼'] }"
-              ></Field>
-              <Error-message name="密碼" class="invalid-feedback"></Error-message>
+              />
+              <Error-message name="密碼" class="invalid-feedback"/>
                 <i
                   class="bi bi-eye position-absolute top-50 end-0 translate-middle"
                   @click="showPassword"
@@ -121,7 +126,7 @@ export default {
           const { token, expired } = res.data;
           // ! 存取token至cookie
           document.cookie = `myToken=${token}; expires=${new Date(expired)}`;
-          this.$router.push('/admin/adminProducts');
+          this.$router.push('/admin/products');
           this.loginModal.hide();
         } else {
           this.$swal({

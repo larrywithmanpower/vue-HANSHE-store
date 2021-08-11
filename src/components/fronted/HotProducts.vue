@@ -23,7 +23,7 @@
     class="mySwiper pb-6 pb-md-1 pt-1"
   >
     <template class="mb-3" v-for="item in filterHot" :key="item.id">
-      <Swiper-slide>
+      <SwiperSlide>
         <div class="card card-product">
           <div class="card-product__img">
             <img :src="item.imageUrl" class="card-img-top" :alt="item.title" />
@@ -35,13 +35,16 @@
             <h5 class="card-title mb-0">
               {{ item.title }}
             </h5>
-            <a class="text-primary stretched-link"
-              @click="goDetail(item)">
+            <a
+              class="text-primary stretched-link"
+              @click.prevent="goDetail(item)"
+              href="#"
+            >
               去看看...
             </a>
           </div>
         </div>
-      </Swiper-slide>
+      </SwiperSlide>
     </template>
   </Swiper>
 </template>

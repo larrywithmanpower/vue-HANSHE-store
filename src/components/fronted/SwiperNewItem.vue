@@ -19,11 +19,11 @@
         "delay": 4000,
         "disableOnInteraction": false,
       }'
-      :pagination="true"
+    :pagination="true"
     class="mySwiper pb-0 pb-lg-5"
   >
     <template v-for="item in filterNew" :key="item.id">
-      <Swiper-slide>
+      <SwiperSlide>
         <div class="card card-product h-lg-100 border-0">
           <div
             class="card-product__img"
@@ -40,10 +40,14 @@
               class="fs-5"
               @click.prevent="addMyFavorite(item)"
             >
-              <i class="bi bi-heart text-primary"
-              v-if="!myFavorite.includes(item.id)"></i>
-              <i class="bi bi-heart-fill text-primary"
-              v-else></i>
+              <i
+                class="bi bi-heart text-primary"
+                v-if="!myFavorite.includes(item.id)">
+              </i>
+              <i
+                class="bi bi-heart-fill text-primary"
+                v-else>
+              </i>
             </a>
           </div>
           <div
@@ -78,7 +82,8 @@
               class="
                 card-title w-100 text-white
                 bg-special p-3 mb-0
-                d-flex align-items-end justify-content-between">
+                d-flex align-items-end justify-content-between"
+              >
               <strong>{{ item.title }}</strong>
               <small>NT$ {{ item.price }}</small>
             </h5>
@@ -90,7 +95,7 @@
             </a>
           </div>
         </div>
-      </Swiper-slide>
+      </SwiperSlide>
     </template>
   </Swiper>
 </template>
@@ -98,7 +103,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import SwiperCore, { Pagination, Autoplay } from 'swiper/core';
-import { setItem, getItem } from '../../methods/localStorage';
+import { setItem, getItem } from '@/methods/localStorage';
 
 SwiperCore.use([Autoplay, Pagination]);
 

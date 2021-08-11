@@ -1,10 +1,14 @@
 <template>
-  <Loading :active="isLoading"></Loading>
+  <Loading :active="isLoading"/>
   <div class="container">
     <h2 class="mb-3 fw-bold">商品列表</h2>
-    <button class="btn btn-outline-primary mb-3"
-    @click="openModal('new')"
-    >新增產品</button>
+    <button
+      type="button"
+      class="btn btn-outline-primary mb-3"
+      @click="openModal('new')"
+    >
+      新增產品
+    </button>
     <div class="table-responsive">
       <table class="table table-sm align-middle table-hover">
         <thead>
@@ -21,19 +25,18 @@
           <tr v-for="(item, index) in products" :key="item.id">
             <th scope="row">{{ index + 1 }}</th>
             <td class="d-flex align-items-center">
-              <img :src="item.imageUrl" :alt="`第${index + 1}圖`"
-              class="img-fluid me-3"
-              width="150"
+              <img
+                :src="item.imageUrl"
+                :alt="`第${index + 1}圖`"
+                class="img-fluid me-3"
+                width="150"
               >
-                <span>
+              <span>
                 <small class="text-warning">{{ item.rate }}</small><br>
                 {{ item.title }}<br>
-                <small class="text-muted"
-                v-if="item.sex === 'male'">男</small>
-                <small class="text-muted"
-                v-else-if="item.sex === 'female'">女</small>
-                <small class="text-muted"
-                v-else-if="item.sex === 'neutral'">中性</small>
+                <small class="text-muted" v-if="item.sex === 'male'">男</small>
+                <small class="text-muted" v-else-if="item.sex === 'female'">女</small>
+                <small class="text-muted" v-else-if="item.sex === 'neutral'">中性</small>
                 <br>
                 <small v-if="item.is_hot" class="badge bg-danger">熱銷</small>
               </span>
@@ -46,14 +49,20 @@
             </td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-outline-primary"
-                type="button"
-                @click="openModal('edit', item)"
-                >編輯</button>
-                <button class="btn btn-outline-danger"
-                type="button"
-                @click="openModal('delete', item)"
-                >刪除</button>
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  @click="openModal('edit', item)"
+                >
+                  編輯
+                </button>
+                <button
+                  class="btn btn-outline-danger"
+                  type="button"
+                  @click="openModal('delete', item)"
+                >
+                  刪除
+                </button>
               </div>
             </td>
           </tr>
@@ -64,7 +73,7 @@
       <Pagination
         :page="pagination"
         @get-page="getProducts"
-      ></Pagination>
+      />
     </div>
   </div>
 
@@ -81,7 +90,7 @@
     id="DelModal"
     :item="tempProduct"
     @delete="deleteProduct"
-  ></DelModal>
+  />
 </template>
 
 <script>
@@ -123,8 +132,11 @@ export default {
           this.currentPage = res.data.pagination.current_page;
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '商品取得失敗',
+            content: res.data.message,
+          });
           this.isLoading = false;
         }
       }).catch((err) => { console.log(err); });
@@ -158,49 +170,31 @@ export default {
       }
     },
     updateProduct(tempProduct) {
-      if (this.isNew) {
-        // ! 新增
-        const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`;
-        this.$http.post(url, { data: tempProduct }).then((res) => {
-          if (res.data.success) {
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: res.data.message,
-            });
-            this.getProducts(this.currentPage);
-            this.$refs.ProductModal.hideModal();
-          } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '更新失敗',
-              content: res.data.message.join('、'),
-            });
-          }
-        }).catch((err) => {
-          console.log(err);
-        });
-      } else {
-        // ! 編輯
-        const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${tempProduct.id}`;
-        this.$http.put(url, { data: tempProduct }).then((res) => {
-          this.$refs.ProductModal.hideModal();
-          if (res.data.success) {
-            this.getProducts(this.currentPage);
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: res.data.message,
-            });
-          } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '更新失敗',
-              content: res.data.message.join('、'),
-            });
-          }
-        }).catch((err) => {
-          console.log(err);
-        });
+      this.tempProduct = tempProduct;
+      let url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product`;
+      let httpMethod = 'post';
+
+      if (!this.isNew) {
+        url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${this.tempProduct.id}`;
+        httpMethod = 'put';
       }
+
+      this.$http[httpMethod](url, { data: tempProduct }).then((res) => {
+        if (res.data.success) {
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: res.data.message,
+          });
+          this.getProducts(this.currentPage);
+          this.$refs.ProductModal.hideModal();
+        } else {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '更新失敗',
+            content: res.data.message.join(','),
+          });
+        }
+      });
     },
     deleteProduct(tempProduct) {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/product/${tempProduct.id}`;

@@ -1,5 +1,5 @@
 <template>
-  <Loading :active="isLoading"></Loading>
+  <Loading :active="isLoading"/>
   <div class="table-responsive">
     <table class="table">
       <thead>
@@ -59,7 +59,8 @@
           </td>
           <td>
             <div class="btn-group">
-              <button type="button"
+              <button
+                type="button"
                 class="btn btn-sm btn-outline-primary"
                 @click="openModal('edit', item)"
               >
@@ -82,7 +83,7 @@
       <Pagination
         :page="pagination"
         @get-page="getOrders"
-      ></Pagination>
+      />
     </div>
   </div>
 
@@ -90,14 +91,14 @@
     ref="orderModal"
     id="orderModal"
     :order="tempOrder"
-  ></OrderModal>
+  />
 
   <DelModal
     id="delModal"
     ref="delModal"
     :item="tempOrder"
     @delete="deleteOrder"
-  ></DelModal>
+  />
 </template>
 
 <script>
@@ -134,12 +135,14 @@ export default {
         if (res.data.success) {
           this.orders = res.data.orders;
           this.pagination = res.data.pagination;
-          console.log(res.data.orders);
           this.currentPage = res.data.pagination.current_page;
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.message);
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '訂單取得失敗',
+            content: res.data.message,
+          });
           this.isLoading = false;
         }
       }).catch((err) => {

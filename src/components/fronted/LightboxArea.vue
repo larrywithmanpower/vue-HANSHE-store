@@ -1,6 +1,8 @@
 <template>
   <section class="row"  data-aos="zoom-out-up">
-    <div class="col-lg-3 col-md-4 col-6 g-0" v-for="(src, index) in imgs"
+    <div
+      class="col-lg-3 col-md-4 col-6 g-0"
+      v-for="(src, index) in imgs"
       :key="index"
       >
       <div class="card"
@@ -13,15 +15,14 @@
       </div>
     </div>
   </section>
-  <vue-easy-lightbox
+  <VueEasyLightbox
     escDisabled
     moveDisabled
     :visible="visible"
     :imgs="imgs"
     :index="index"
     @hide="handleHide"
-  >
-  </vue-easy-lightbox>
+  />
 </template>
 
 <script>

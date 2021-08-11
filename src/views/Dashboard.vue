@@ -15,8 +15,8 @@
             sticky-top
           "
         >
-          <a
-            href="/"
+          <router-link
+            to="/"
             class="
               d-flex
               align-items-center
@@ -27,7 +27,7 @@
             "
           >
             <span class="fs-5 d-none d-sm-inline logoFont">HANSHE Menu</span>
-          </a>
+          </router-link>
           <ul
             class="
               nav nav-pills
@@ -45,25 +45,31 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/admin/adminProducts" class="nav-link
-              d-flex align-items-center">
+              <router-link
+                to="/admin/products"
+                class="nav-link d-flex align-items-center"
+                exact
+              >
                 <i class="fs-4 bi-box-seam"></i>
                 <span class="ms-1 d-none d-sm-inline">商品管理</span>
               </router-link>
             </li>
-            <li>
-              <router-link to="/admin/order" class="nav-link d-flex align-items-center">
+            <li class="nav-item">
+              <router-link
+                to="/admin/order"
+                class="nav-link d-flex align-items-center"
+              >
                 <i class="fs-4 bi-table"></i>
                 <span class="ms-1 d-none d-sm-inline">訂單管理</span>
               </router-link>
             </li>
-            <li>
+            <li class="nav-item">
               <router-link to="/admin/coupon" class="nav-link d-flex align-items-center">
                 <i class="fs-4 bi-bookmark"></i>
                 <span class="ms-1 d-none d-sm-inline">優惠劵管理</span>
               </router-link>
             </li>
-            <li>
+            <li class="nav-item">
               <router-link to="/admin/article" class="nav-link d-flex align-items-center">
                 <i class="fs-4 bi-newspaper"></i>
                 <span class="ms-1 d-none d-sm-inline">文章管理</span>
@@ -145,7 +151,7 @@ export default {
       this.token = token;
 
       if (token) {
-        this.$http.defaults.headers.common.Authorization = `${token}`;
+        this.$http.defaults.headers.common.Authorization = token;
         const url = `${process.env.VUE_APP_URL}/api/user/check`;
         this.$http.post(url).then((res) => {
           if (res.data.success) {

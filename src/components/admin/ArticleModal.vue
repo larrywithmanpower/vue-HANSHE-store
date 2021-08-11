@@ -1,13 +1,24 @@
 <template>
-  <div class="modal fade" id="articleModal"
-  ref="articleModal"
-  tabindex="-1" aria-labelledby="articleModalLabel" aria-hidden="true">
+  <div
+    class="modal fade"
+    id="articleModal"
+    ref="articleModal"
+    tabindex="-1"
+    aria-labelledby="articleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header bg-dark text-white">
-          <h5 class="modal-title" id="articleModalLabel">{{ isNew ? '新增文章' : '編輯文章' }}</h5>
-          <button type="button"
-          class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="articleModalLabel">
+            {{ isNew ? '新增文章' : '編輯文章' }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -15,141 +26,196 @@
             <div class="col-sm-4">
                 <div class="mb-1">
                   <div class="form-group">
-                      <label for="imageUrl" class="fw-bold">主要圖片</label>
+                      <label for="imageUrl" class="fw-bold">
+                        主要圖片
+                      </label>
                       <input
-                      v-model="tempArticle.imageUrl" type="text"
-                      class="form-control"
-                      placeholder="請輸入圖片連結">
+                        v-model="tempArticle.imageUrl"
+                        type="text"
+                        class="form-control"
+                        placeholder="請輸入圖片連結"
+                      >
                   </div>
-                  <img class="img-fluid" :src="tempArticle.imageUrl">
+                  <img
+                    class="img-fluid"
+                    :src="tempArticle.imageUrl"
+                  >
                 </div>
                 <div class="form-group mb-3">
-                    <label for="photoFile" class="fw-bold">上傳圖片檔案</label>
-                    <input type="file"
-                    id="photoFile"
-                    class="form-control" placeholder="請輸入圖片路徑"
-                    @change="uploadImage">
+                    <label for="photoFile" class="fw-bold">
+                      上傳圖片檔案
+                    </label>
+                    <input
+                      type="file"
+                      id="photoFile"
+                      class="form-control"
+                      placeholder="請輸入圖片路徑"
+                      @change="uploadImage"
+                    >
                 </div>
                 <hr>
                 <!-- ? 多圖 -->
-                <div class="mb-1 fw-bold">其他圖片</div>
+                <div class="mb-1 fw-bold">
+                  其他圖片
+                </div>
                 <div v-if="Array.isArray(tempArticle.imagesUrl)">
-                    <div class="mb-1" v-for="(image, index) in tempArticle.imagesUrl" :key="index">
+                    <div
+                      class="mb-1"
+                      v-for="(image, index) in tempArticle.imagesUrl"
+                      :key="index"
+                    >
                         <label for="imageUrl">圖片網址</label>
                         <input
-                        v-model="tempArticle.imagesUrl[index]"
-                        type="text"
-                        class="form-control"
-                        placeholder="請輸入圖片連結">
-                        <img :src="tempArticle.imagesUrl[index]" class="img-fluid">
+                          v-model="tempArticle.imagesUrl[index]"
+                          type="text"
+                          class="form-control"
+                          placeholder="請輸入圖片連結"
+                        >
+                        <img
+                          :src="tempArticle.imagesUrl[index]"
+                          class="img-fluid"
+                        >
                     </div>
                     <div
-                    v-if="!tempArticle.imagesUrl.length ||
-                    tempArticle.imagesUrl[tempArticle.imagesUrl.length - 1]">
-                        <button
+                      v-if="!tempArticle.imagesUrl.length ||
+                      tempArticle.imagesUrl[tempArticle.imagesUrl.length - 1]"
+                    >
+                      <button
+                        type="button"
                         class="btn btn-outline-primary btn-sm d-block w-100"
-                        @click="tempArticle.imagesUrl.push('')">
-                            新增圖片
-                        </button>
+                        @click="tempArticle.imagesUrl.push('')"
+                      >
+                        新增圖片
+                      </button>
                     </div>
                     <div v-else>
-                        <button
+                      <button
+                        type="button"
                         class="btn btn-outline-danger btn-sm d-block w-100"
-                        @click="tempArticle.imagesUrl.pop()">
-                            刪除空白圖片網址
-                        </button>
+                        @click="tempArticle.imagesUrl.pop()"
+                      >
+                          刪除空白圖片網址
+                      </button>
                     </div>
                 </div>
                 <div class="mt-2">
-                    <button
+                  <button
+                    type="button"
                     class="btn btn-sm btn-danger d-block w-100"
-                    @click="removeImages()">刪除圖片</button>
+                    @click="removeImages()"
+                  >
+                      刪除圖片
+                  </button>
                 </div>
             </div>
             <div class="col-sm-8">
               <div class="form-group">
-                  <label for="title">標題</label>
-                  <input v-model="tempArticle.title" id="title"
+                <label for="title">標題</label>
+                <input
+                  v-model="tempArticle.title"
+                  id="title"
                   type="text"
                   class="form-control"
-                  placeholder="請輸入標題">
+                  placeholder="請輸入標題"
+                >
               </div>
-                <div class="form-group mb-3">
-                  <label for="category">作者</label>
+              <div class="form-group mb-3">
+                <label for="category">作者</label>
+                <input
+                  v-model="tempArticle.author"
+                  id="category"
+                  type="text"
+                  class="form-control"
+                  placeholder="請輸入您的大名"
+                />
+              </div>
+              <div class="form-group">
+                <div
+                  class="mb-1"
+                  v-for="(item, index) in tempArticle.tag"
+                  :key="index"
+                >
+                  <label for="tag">
+                    標籤{{ index + 1 }}
+                  </label>
                   <input
-                    v-model="tempArticle.author"
-                    id="category"
+                    v-model="tempArticle.tag[index]"
                     type="text"
                     class="form-control"
-                    placeholder="請輸入您的大名"
-                  />
+                    placeholder="請輸入標籤名稱"
+                  >
                 </div>
-                <!-- 標籤比較難處理，不過與圖片新增大同小異，且不是一定要提供的 -->
-                <div class="form-group">
-                    <div class="mb-1" v-for="(item, index) in tempArticle.tag" :key="index">
-                        <label for="tag">標籤{{ index + 1 }}</label>
-                        <input
-                        v-model="tempArticle.tag[index]"
-                        type="text"
-                        class="form-control"
-                        placeholder="請輸入標籤名稱">
-                    </div>
-                    <div class="btn-group w-100">
-                      <button
-                        class="btn btn-outline-primary btn-sm d-block w-100"
-                        @click="tempArticle.tag.push('')">
-                          加入標籤
-                      </button>
-                      <button
-                        class="btn btn-outline-danger btn-sm d-block w-100"
-                        @click="tempArticle.tag.pop()">
-                            刪除標籤
-                      </button>
-
-                    </div>
+                <div class="btn-group w-100">
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-sm d-block w-100"
+                    @click="tempArticle.tag.push('')"
+                  >
+                    加入標籤
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-sm d-block w-100"
+                    @click="tempArticle.tag.pop()">
+                        刪除標籤
+                  </button>
                 </div>
-                <hr>
-                <div class="form-group mb-3">
-                    <label for="content">文章類別</label>
-                    <textarea
-                    v-model="tempArticle.content"
-                    id="content" type="text"
-                    class="form-control"
-                    placeholder="請輸入文章類別"
-                    rows="1"
-                    >
-                    </textarea>
+              </div>
+              <hr>
+              <div class="form-group mb-3">
+                <label for="content">文章類別</label>
+                <textarea
+                  v-model="tempArticle.content"
+                  id="content"
+                  type="text"
+                  class="form-control"
+                  placeholder="請輸入文章類別"
+                  rows="1"
+                >
+                </textarea>
+              </div>
+              <div class="form-group mb-3">
+                <label for="description">文章內容</label><br>
+                <p v-html="tempArticle.description"></p>
+                <ckeditor
+                  :editor="editor"
+                  v-model="tempArticle.description"
+                  :config="editorConfig"
+                ></ckeditor>
+              </div>
+              <div class="form-group">
+                <div class="form-check">
+                  <input
+                    v-model="tempArticle.isPublic"
+                    id="isPublic"
+                    class="form-check-input"
+                    type="checkbox"
+                    :true-value="true"
+                    :false-value="false">
+                  <label class="form-check-label" for="isPublic">
+                    是否發布
+                  </label>
                 </div>
-                <div class="form-group mb-3">
-                    <label for="description">文章內容</label><br>
-                    <!-- <textarea v-model="tempArticle.description" id="description" type="text"
-                    class="form-control" placeholder="請撰寫內文"
-                    rows="10"
-                    ></textarea> -->
-                    <p v-html="tempArticle.description"></p>
-                    <ckeditor :editor="editor"
-                    v-model="tempArticle.description"
-                    :config="editorConfig"
-                    ></ckeditor>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input v-model="tempArticle.isPublic"
-                        id="isPublic" class="form-check-input"
-                        type="checkbox" :true-value="true" :false-value="false">
-                        <label class="form-check-label" for="isPublic">是否發布</label>
-                    </div>
-                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-            <button type="button"
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            取消
+          </button>
+          <button
+            type="button"
             class="btn btn-primary"
             @click="$emit('update-article', tempArticle)"
-            >確認</button>
-          </div>
+          >
+            確認
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -161,7 +227,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   props: ['article', 'isNew'],
-  emits: [],
+  emits: ['update-article'],
   data() {
     return {
       articleModal: {},

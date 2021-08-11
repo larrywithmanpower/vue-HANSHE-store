@@ -12,30 +12,37 @@
       <div class="col-md-8">
         <h2 class="fw-bold">{{ article.title }}</h2>
         <ul class="d-flex list-unstyled">
-          <li class="text-muted me-3">作者：{{ article.author }}</li>
+          <li class="text-muted me-3">
+            作者：{{ article.author }}
+          </li>
           <li class="text-muted me-3">
             日期：{{ new Date(article.create_at * 1000).toLocaleDateString() }}
           </li>
           <li class="text-muted">
             tag：
             <span class="badge me-2"
-            v-for="(tag, index) in article.tag"
-            :key="index"
-            :class="[{ 'bg-primary': tag === '新款' },
-            { 'bg-warning': tag === '友誼' },
-            { 'bg-secondary': tag === '鮮豔' },
-            { 'bg-success': tag === '生活' }]"
-            >{{ tag }}</span>
+              v-for="(tag, index) in article.tag"
+              :key="index"
+              :class="[{ 'bg-primary': tag === '新款' },
+                { 'bg-warning': tag === '友誼' },
+                { 'bg-secondary': tag === '鮮豔' },
+                { 'bg-success': tag === '生活' }]"
+            >
+              {{ tag }}
+            </span>
           </li>
         </ul>
-        <img :src="article.imageUrl"
-        :alt="article.title"
-        class="img-fluid mb-3">
+        <img
+          :src="article.imageUrl"
+          :alt="article.title"
+          class="img-fluid mb-3"
+        >
         <p class="text-muted" v-html="article.description"></p>
       </div>
       <div class="col-md-4 py-3 bg-light">
         <div class="input-group mb-4 w-100">
-          <input type="text"
+          <input
+            type="search"
             class="form-control"
             placeholder="找文章 ..."
             v-model="searchArticles"
@@ -53,18 +60,27 @@
           >
             最新資訊
           </h2>
-          <div class="card mb-3"
-          v-for="(item, index) in searchArticle"
-          :key="index">
-            <img :src="item.imageUrl" class="card-img-top" :alt="item.id">
+          <div
+            class="card mb-3"
+            v-for="(item, index) in searchArticle"
+            :key="index"
+          >
+            <img
+              :src="item.imageUrl"
+              class="card-img-top"
+              :alt="item.id"
+            >
             <div class="card-body">
               <h5 class="card-title">{{ item.title }}</h5>
-              <p class="card-text ellipsis"
-              v-html="item.description"></p>
+              <p class="card-text ellipsis" v-html="item.description"></p>
               <p class="card-text">
-                <a href="#"
-                class="stretched-link text-primary h6"
-                @click.prevent="goToPage(item.id)">more...</a>
+                <a
+                  href="#"
+                  class="stretched-link text-primary h6"
+                  @click.prevent="goToPage(item.id)"
+                >
+                  more...
+                </a>
               </p>
             </div>
           </div>

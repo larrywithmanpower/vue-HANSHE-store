@@ -1,10 +1,10 @@
 <template>
     <div>
-    <Loading :active="isLoading"></Loading>
+    <Loading :active="isLoading"/>
     <button
-    type="button"
-    class="btn btn-primary my-3"
-    @click="openModal('new')"
+      type="button"
+      class="btn btn-primary my-3"
+      @click="openModal('new')"
     >
     新增文章
     </button>
@@ -24,29 +24,46 @@
           <tr v-for="article in articles" :key="article.id">
             <td>{{ article.title }}</td>
             <td >
-              <a href="#"
-              ata-bs-toggle="PreviewModal"
-              data-bs-target="#PreviewModal"
-              @click.prevent="openModal('preview', article)">預覽內容</a>
+              <a
+                href="#"
+                ata-bs-toggle="PreviewModal"
+                data-bs-target="#PreviewModal"
+                @click.prevent="openModal('preview', article)">
+                預覽內容
+              </a>
             </td>
             <td>{{ article.author }}</td>
             <td>{{ new Date(article.create_at * 1000).toLocaleDateString() }}</td>
             <td>
-              <span :class="{ 'text-success': article.isPublic }"
-              v-if="article.isPublic">發布</span>
-              <span :class="{ 'text-danger': !article.isPublic }"
-              v-if="!article.isPublic">未發布</span>
+              <span
+                :class="{ 'text-success': article.isPublic }"
+                v-if="article.isPublic"
+              >
+                發布
+              </span>
+              <span
+                :class="{ 'text-danger': !article.isPublic }"
+                v-if="!article.isPublic"
+              >
+                未發布
+              </span>
             </td>
             <td>
               <div class="btn-group">
-                <button type="button"
-                class="btn btn-sm btn-outline-primary"
-                @click="openModal('edit', article)"
-                >編輯</button>
-                <button type="button"
-                class="btn btn-sm btn-outline-danger"
-                @click="openModal('delete', article)"
-                >刪除</button>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-primary"
+                  @click="openModal('edit', article)"
+                >
+                  編輯
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-danger"
+                  @click="openModal('delete', article)"
+                >
+                  刪除
+                </button>
               </div>
             </td>
           </tr>
@@ -61,21 +78,20 @@
     :is-new="isNew"
     :article="tempArticle"
     @update-article="updateArticle"
-  ></ArticleModal>
+  />
 
   <DelModal
     id="DelModal"
     ref="DelModal"
     :item="tempArticle"
-    @delete="deleteArticle">
-  </DelModal>
+    @delete="deleteArticle"
+  />
 
   <PreviewModal
     ref="PreviewModal"
     id="PreviewModal"
     :props-article="tempArticle"
-  >
-  </PreviewModal>
+  />
 </template>
 
 <script>
@@ -113,8 +129,11 @@ export default {
           this.articles = res.data.articles;
           this.isLoading = false;
         } else {
-          // eslint-disable-next-line no-alert
-          alert(res.data.messages.join(','));
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '文章取得失敗',
+            content: res.data.message.join('、'),
+          });
           this.isLoading = false;
         }
       }).catch((err) => {
@@ -155,49 +174,31 @@ export default {
       }
     },
     updateArticle(tempArticle) {
-      // ! 新增
-      if (this.isNew) {
-        const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article`;
-        this.$http.post(url, { data: tempArticle }).then((res) => {
-          if (res.data.success) {
-            this.getArticles();
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: res.data.message,
-            });
-            this.$refs.ArticleModal.hideModal();
-          } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '新增失敗',
-              content: res.data.message.join('、'),
-            });
-          }
-        }).catch((err) => {
-          console.log(err);
-        });
-      } else {
-        // ! 編輯
-        const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article/${tempArticle.id}`;
-        this.$http.put(url, { data: tempArticle }).then((res) => {
-          if (res.data.success) {
-            this.emitter.emit('push-message', {
-              style: 'success',
-              title: `${res.data.message}`,
-            });
-            this.getArticles();
-            this.$refs.ArticleModal.hideModal();
-          } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: `${tempArticle.title}更新失敗`,
-              content: res.data.message.join('、'),
-            });
-          }
-        }).catch((err) => {
-          console.log(err);
-        });
+      this.tempArticle = tempArticle;
+      let url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article`;
+      let httpMethod = 'post';
+
+      if (!this.isNew) {
+        url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`;
+        httpMethod = 'put';
       }
+
+      this.$http[httpMethod](url, { data: tempArticle }).then((res) => {
+        if (res.data.success) {
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: res.data.message,
+          });
+          this.getArticles(this.currentPage);
+          this.$refs.ArticleModal.hideModal();
+        } else {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '更新失敗',
+            content: res.data.message.join(','),
+          });
+        }
+      });
     },
     deleteArticle(tempArticle) {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/admin/article/${tempArticle.id}`;

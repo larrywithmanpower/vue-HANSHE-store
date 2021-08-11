@@ -115,6 +115,7 @@
                 ></a>
               </div>
               <button
+                type="button"
                 class="btn btn-primary text-white rounded-0 py-2"
                 @click="addCart(item.id)"
                 :disabled="item.storageNum === 0"
@@ -131,7 +132,7 @@
 </template>
 
 <script>
-import { setItem, getItem } from '../../methods/localStorage';
+import { setItem, getItem } from '@/methods/localStorage';
 
 export default {
   data() {

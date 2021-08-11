@@ -52,8 +52,10 @@
                 <tr>
                   <th width="100">付款狀態</th>
                   <td
-                  :class="!order.is_paid ? 'text-danger' : 'text-success'"
-                  >{{ !order.is_paid ? '未付款' : '付款完成' }}</td>
+                    :class="!order.is_paid ? 'text-danger' : 'text-success'"
+                  >
+                    {{ !order.is_paid ? '未付款' : '付款完成' }}
+                  </td>
                 </tr>
               </tbody>
               <tfoot class=" border-top">
@@ -99,7 +101,7 @@ export default {
   methods: {
     getOrders(page = 1) {
       this.isLoading = true;
-      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/orders?${page}`;
+      const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/orders?page=${page}`;
       this.$http.get(url).then((res) => {
         this.orders = res.data.orders;
         this.isLoading = false;

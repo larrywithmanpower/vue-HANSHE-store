@@ -18,8 +18,8 @@
         <p>
           付款完成後，商品預計3~5天內寄出，還請耐心等待!!
         </p>
-        <a href="#" class="btn btn-outline-primary">繼續購物</a>
-        <div class="mt-5">
+        <router-link to="/products/productList" class="btn btn-outline-primary">繼續購物</router-link>
+        <div class="mt-5 pb-5">
           <h3 class="text-danger">熱銷商品</h3>
           <HotProducts/>
         </div>

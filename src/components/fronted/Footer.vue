@@ -22,18 +22,28 @@
           </h2>
           <ul class="list-unstyled text-light footer-link-list">
             <li>
-              <router-link to="/products/productList"
-              class="text-decoration-none link-light" href="#">寒舍商品</router-link>
+              <router-link
+                to="/products/productList"
+                class="text-decoration-none link-light"
+              >
+                寒舍商品
+              </router-link>
             </li>
             <li>
-              <router-link to="/about"
-              class="text-decoration-none link-light"
-              href="#">關於寒舍</router-link>
+              <router-link
+                to="/about"
+                class="text-decoration-none link-light"
+              >
+                關於寒舍
+              </router-link>
             </li>
             <li>
-              <router-link to="/blogs/blogList"
-              class="text-decoration-none link-light"
-              href="#">部落格</router-link>
+              <router-link
+                to="/blogs/blogList"
+                class="text-decoration-none link-light"
+              >
+                部落格
+              </router-link>
             </li>
           </ul>
         </div>
@@ -70,32 +80,36 @@
                 class="text-light text-decoration-none"
                 target="_blank"
                 href="http://facebook.com/"
-                ><i class="bi bi-facebook"></i
-              ></a>
+              >
+                <i class="bi bi-facebook"></i>
+              </a>
             </li>
             <li class="list-inline-item text-center rounded-circle">
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
                 href="https://www.instagram.com/"
-                ><i class="bi bi-instagram"></i
-              ></a>
+              >
+                <i class="bi bi-instagram"></i>
+              </a>
             </li>
             <li class="list-inline-item text-center rounded-circle">
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
                 href="https://www.linkedin.com/"
-                ><i class="bi bi-linkedin"></i
-              ></a>
+              >
+                <i class="bi bi-linkedin"></i>
+              </a>
             </li>
             <li class="list-inline-item text-center rounded-circle">
               <a
                 class="text-light text-decoration-none"
                 target="_blank"
                 href="https://github.com/larrywithmanpower/vue-store-HANSHE.git"
-                ><i class="bi bi-github"></i
-              ></a>
+                >
+                <i class="bi bi-github"></i>
+              </a>
             </li>
           </ul>
         </div>
@@ -103,7 +117,7 @@
           <div class="input-group mb-3">
             <input
               type="text"
-              class="form-control"
+              class="form-control w-50"
               placeholder="輸入Email訂閱最新資訊吧!!"
               aria-label="Recipient's username"
               aria-describedby="button-addon2"
@@ -161,7 +175,7 @@ export default {
       this.token = token;
 
       if (token || this.token !== token) {
-        this.$router.push('/admin/adminProducts');
+        this.$router.push('/admin');
       } else {
         this.$refs.LoginModal.showModal();
       }
