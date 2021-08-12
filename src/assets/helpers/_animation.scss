@@ -3,7 +3,7 @@ $colors: (
   fill: #a972cb,
   pulse: #f5dad2,
   close: #ff7f82,
-  raise: #ffa260,
+  raise: #8ccaf0,
   up: #e4cb58,
   slide: #8fc866,
   offset: #C03F19
@@ -38,6 +38,13 @@ $colors: (
       inset 6em 3.5em 0 0 var(--hover);
   }
 }
+
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
 
 
 .btn-animation {

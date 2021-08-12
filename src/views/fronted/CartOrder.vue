@@ -1,7 +1,7 @@
 <template>
   <section class="d-flex justify-content-center">
     <Form
-      class="col-6"
+      class="col-lg-6 col-md-9 col-10"
       v-slot="{ errors }"
       @submit="createOrder"
       ref="form"
@@ -123,7 +123,14 @@ export default {
         this.carts = res.data.data.carts;
         this.finalTotal = res.data.data.final_total;
         this.isLoading = false;
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     createOrder() {
       this.isLoading = true;
@@ -153,9 +160,13 @@ export default {
             });
             this.isLoading = false;
           }
-        })
-        .catch((err) => {
-          console.log(err);
+        }).catch((err) => {
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: err,
+          });
         });
     },
     isPhone(value) {

@@ -98,7 +98,15 @@
             <span class="decoration-text">Discount</span>
           </h2>
           <p class="fs-4 d-none d-md-block">不同的時間點，一定要有不同的優惠，在最困難的時間，寒舍給您最大的折扣</p>
-          <p class="fs-4">優惠碼：<ins>de3445feefa</ins></p>
+          <button
+            type="button"
+            class="btn-animation raise"
+            v-clipboard:copy="couponCode"
+            v-clipboard:success="onSuccess"
+            v-clipboard:error="onError"
+          >
+            取得優惠碼
+          </button>
           <div class="position-relative">
             <div class="chevron"></div>
             <div class="chevron"></div>
@@ -132,15 +140,33 @@
 import { Carousel } from 'bootstrap';
 
 export default {
+  inject: ['emitter'],
   data() {
     return {
       myCarousel: {},
+      couponCode: 'fallSale',
     };
   },
   mounted() {
     this.myCarousel = new Carousel(this.$refs.myCarousel, {
       interval: 4000,
     });
+  },
+  methods: {
+    onSuccess() {
+      this.emitter.emit('getCouponCode', this.couponCode);
+      this.$swal({
+        width: '27rem',
+        title: '優惠折扣取得成功，記得要貼到優惠欄位',
+        icon: 'success',
+      });
+    },
+    onError() {
+      this.$swal({
+        title: '優惠折扣取得失敗',
+        icon: 'error',
+      });
+    },
   },
 };
 </script>

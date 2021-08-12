@@ -13,10 +13,10 @@
       <thead class="border-bottom text-primary">
         <tr class="py-3">
           <th width="5%"></th>
-          <th class="d-none d-md-block" width="30%"></th>
-          <th>品名</th>
-          <th width="13%">數量</th>
-          <th width="20%">單價</th>
+          <th class="d-none d-md-block" width="25%"></th>
+          <th width="25%">品名</th>
+          <th width="10%">數量</th>
+          <th width="35%">單價</th>
         </tr>
       </thead>
       <tbody class="border-bottom">
@@ -120,7 +120,7 @@
               優惠折扣
             </h5>
           </td>
-          <td class="text-end pt-3 fs-5" colspan="2">
+          <td class="text-end pt-3 fs-5 px-3" colspan="2">
             <p v-if="!coupon.isUsed">NT$ {{ $toCurrency(total) }}</p>
             <span class="text-success"
               v-if="coupon.isUsed">
@@ -130,8 +130,15 @@
               NT$ {{ $toCurrency(Math.round(coupon.finalTotal)) }}
             </span>
           </td>
-          <td class="text-end">
-            <a href="#" class="btn btn-outline-primary"
+          <td class="text-end d-none d-md-block pe-3 pe-lg-0">
+            <a href="#" class="btn btn-outline-primary mt-2"
+            @click.prevent="$router.push('/cart/cartOrder')"
+            >填寫訂單資訊</a>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5" class="px-3">
+            <a href="#" class="btn btn-outline-primary d-md-none d-block"
             @click.prevent="$router.push('/cart/cartOrder')"
             >填寫訂單資訊</a>
           </td>
@@ -174,6 +181,14 @@ export default {
   },
   created() {
     this.getCarts();
+    // reveive code from footer
+    this.emitter.on('getCouponCode', (code) => {
+      this.coupon_code = code;
+      console.log(this.coupon_code);
+    });
+  },
+  unmounted() {
+    this.emitter.off('getCouponCode');
   },
   methods: {
     getCarts() {
@@ -205,7 +220,12 @@ export default {
           this.isLoading = false;
         }
       }).catch((err) => {
-        console.log(err);
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
       });
     },
     delCartItem(id) {
@@ -228,6 +248,13 @@ export default {
           });
           this.isLoading = false;
         }
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
       });
     },
     delAllCarts() {
@@ -250,7 +277,14 @@ export default {
           });
           this.isLoading = false;
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     addCouponCode() {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/coupon`;
@@ -276,7 +310,12 @@ export default {
           this.isLoading = false;
         }
       }).catch((err) => {
-        console.log(err);
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
       });
     },
   },

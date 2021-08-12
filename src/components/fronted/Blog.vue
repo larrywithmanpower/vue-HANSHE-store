@@ -77,7 +77,14 @@ export default {
           });
           this.isLoading = false;
         }
-      }).catch((err) => { console.log(err); });
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     goToBlog(article) {
       this.$router.push(`/blogs/blog/${article.id}`);

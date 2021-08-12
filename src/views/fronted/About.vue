@@ -1,6 +1,6 @@
 <template>
   <section class="banner d-flex justify-content-center align-items-center">
-    <h2 class="display-4 text-white routeFont" data-aos="fade-up">
+    <h2 class="display-4 text-white routeFont mt-5 mt-lg-0" data-aos="fade-up">
       {{ pageTitle }}
     </h2>
   </section>
@@ -203,6 +203,9 @@ export default {
     height: 400px;
     @media (max-width: 768px) {
       height: 300px;
+    }
+    @media (max-width: 414px) {
+      height: 260px;
     }
   }
 

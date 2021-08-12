@@ -133,7 +133,14 @@ export default {
           this.article = res.data.article;
           this.isLoading = false;
         }
-      }).catch((err) => { console.log(err); });
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     getArticles(page = 1) {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/articles?${page}`;
@@ -154,7 +161,14 @@ export default {
           });
           this.isLoading = false;
         }
-      }).catch((err) => { console.log(err); });
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     goToPage(id) {
       this.$router.push(`/blogs/blog/${id}`);

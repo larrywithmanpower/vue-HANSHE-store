@@ -302,7 +302,12 @@ export default {
           fileInput.value = '';
         }
       }).catch((err) => {
-        console.log(err);
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
       });
     },
     removeImages() {

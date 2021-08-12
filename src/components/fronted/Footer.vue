@@ -113,23 +113,8 @@
             </li>
           </ul>
         </div>
-        <div class="col-auto">
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control w-50"
-              placeholder="輸入Email訂閱最新資訊吧!!"
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
-            <button
-              class="btn btn-primary text-white"
-              type="button"
-              id="button-addon2"
-            >
-              訂閱我們
-            </button>
-          </div>
+        <div class="col-auto col-lg-6">
+          <Subcribe/>
         </div>
       </div>
     </div>
@@ -152,10 +137,13 @@
 
 <script>
 import LoginModal from '@/components/fronted/LoginModal.vue';
+import Subcribe from '@/components/fronted/Subcribe.vue';
 
 export default {
+  inject: ['emitter'],
   components: {
     LoginModal,
+    Subcribe,
   },
   data() {
     return {
@@ -175,7 +163,7 @@ export default {
       this.token = token;
 
       if (token || this.token !== token) {
-        this.$router.push('/admin');
+        this.$router.push('/admin/adminProducts');
       } else {
         this.$refs.LoginModal.showModal();
       }

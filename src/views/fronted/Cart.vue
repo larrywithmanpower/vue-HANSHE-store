@@ -1,7 +1,6 @@
 <template>
-  <div class="banner d-flex justify-content-center align-items-center position-relative">
-    <h2 class="display-4 text-white routeFont" data-aos="fade-up">
-    <!-- 使用mitt來解決取route不動的問題 -->
+  <div class="banner d-flex justify-content-center align-items-center">
+    <h2 class="display-4 text-white routeFont mt-5 mt-lg-0" data-aos="fade-up">
       {{ $route.name }}
     </h2>
   </div>
@@ -19,7 +18,7 @@
         <p class="py-4"
         :class="$route.name === '訂單資訊' ?
         ['bg-primary', 'text-white', 'rounded-2', 'fw-bold'] : ''">
-        2. 填寫訂單資訊
+        2. 訂單資訊
         </p>
       </div>
       <div class="col-4">

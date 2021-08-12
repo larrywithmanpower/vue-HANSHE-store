@@ -87,11 +87,11 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('../views/Dashboard.vue'),
-    redirect: { name: 'Products' },
+    redirect: { name: 'AdminProducts' },
     children: [
       {
-        path: 'products',
-        name: 'Products',
+        path: 'adminProducts',
+        name: 'AdminProducts',
         component: () => import('../views/admin/Products.vue'),
       },
       {

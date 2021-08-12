@@ -204,7 +204,7 @@ export default {
             style: 'success',
             title: res.data.message,
           });
-          this.getProducts(res.data.pagination.current_page);
+          this.getProducts(this.currentPage);
           this.$refs.DelModal.hideModal();
         } else {
           this.emitter.emit('push-message', {

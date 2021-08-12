@@ -32,13 +32,13 @@
             <p class="card-text mb-0">
               <small class="text-muted">{{ item.category }}</small>
             </p>
-            <h5 class="card-title mb-0">
+            <h5 class="card-title">
               {{ item.title }}
             </h5>
             <a
-              class="text-primary stretched-link"
-              @click.prevent="goDetail(item)"
               href="#"
+              class="text-primary stretched-link fw-bold"
+              @click.prevent="goDetail(item)"
             >
               去看看...
             </a>
@@ -88,7 +88,14 @@ export default {
             icon: 'error',
           });
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     goDetail(item) {
       this.$router.push({ path: `/products/product/${item.id}` });

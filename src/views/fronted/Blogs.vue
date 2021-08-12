@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="banner d-flex justify-content-center align-items-center">
-    <h2 class="display-4 text-white routeFont" data-aos="fade-up">
+    <h2 class="display-4 text-white routeFont mt-5 mt-lg-0" data-aos="fade-up">
       部落格
     </h2>
   </section>

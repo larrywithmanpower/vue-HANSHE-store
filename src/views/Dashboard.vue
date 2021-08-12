@@ -46,7 +46,7 @@
             </li>
             <li class="nav-item">
               <router-link
-                to="/admin/products"
+                to="/admin/adminProducts"
                 class="nav-link d-flex align-items-center"
                 exact
               >
@@ -156,6 +156,10 @@ export default {
         this.$http.post(url).then((res) => {
           if (res.data.success) {
             this.checkSuccess = true;
+            this.$swal({
+              title: '已成功登入',
+              icon: 'success',
+            });
           } else {
             this.$swal({
               title: res.data.message,
@@ -164,7 +168,12 @@ export default {
             this.$router.push('/');
           }
         }).catch((err) => {
-          console.log(err);
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: err,
+          });
         });
       } else {
         this.$swal({
@@ -185,7 +194,14 @@ export default {
           });
           this.$router.push('/');
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
   },
 };

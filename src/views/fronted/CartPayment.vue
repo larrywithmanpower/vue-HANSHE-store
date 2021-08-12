@@ -1,7 +1,7 @@
 <template>
   <div class="container d-flex justify-content-center">
-    <div class="card col-12 col-md-8">
-      <div class="card-body">
+    <div class="card col-12 col-md-10 border-0 mt-3">
+      <div class="card-body p-0">
         <h5 class="card-title text-center h3">確認付款</h5>
         <div class="card-body">
           <div class="table-responsive">
@@ -17,13 +17,13 @@
                 <tr v-for="item in order.products" :key="item.product.id">
                   <td>{{ item.product.title }}</td>
                   <td>{{ item.qty }}/{{ item.product.unit }}</td>
-                  <td>NT$ {{ item.final_total }}</td>
+                  <td>NT$ {{ $toCurrency(Math.round(item.final_total)) }}</td>
                 </tr>
               </tbody>
               <tfoot class=" border-top">
                 <tr>
                   <td colspan="2" class="text-center">總計</td>
-                  <td>NT$ {{ order.total }}</td>
+                  <td>NT$ {{ $toCurrency(Math.round(order.total)) }}</td>
                 </tr>
               </tfoot>
             </table>
@@ -105,7 +105,14 @@ export default {
       this.$http.get(url).then((res) => {
         this.orders = res.data.orders;
         this.isLoading = false;
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     getOrder() {
       this.isLoading = true;
@@ -113,7 +120,14 @@ export default {
       this.$http.get(url).then((res) => {
         this.order = res.data.order;
         this.isLoading = false;
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     payOrder() {
       this.isLoading = true;
@@ -133,7 +147,14 @@ export default {
           });
           this.isLoading = false;
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
   },
 };

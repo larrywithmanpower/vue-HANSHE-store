@@ -58,17 +58,21 @@
                 {{ item.category }}
               </small>
             </p>
-            <h5 class="card-title mb-0">
+            <h5 class="card-title">
               {{ item.title }}
             </h5>
             <a
               href="#"
-              class="stretched-link"
-              @click.prevent="goDetail(item)"
+              class="fw-bold"
             >
               詳細介紹
             </a>
           </div>
+          <a
+            href="#"
+            class="stretched-link"
+            @click.prevent="goDetail(item)"
+          ></a>
           <!-- 平板以下 -->
           <img
             class="card-img d-lg-none"
@@ -145,7 +149,14 @@ export default {
             icon: 'error',
           });
         }
-      }).catch((err) => { console.log(err); });
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     getFavorite() {
       this.myFavorite = getItem() || [];
@@ -186,6 +197,13 @@ export default {
           });
           this.isLoading = false;
         }
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
       });
     },
     goDetail(item) {

@@ -136,7 +136,12 @@ export default {
           this.$router.push('/home');
         }
       }).catch((err) => {
-        console.log(err);
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
       });
     },
   },

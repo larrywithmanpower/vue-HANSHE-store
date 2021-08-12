@@ -216,7 +216,14 @@ export default {
             title: res.data.message,
           });
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
   },
 };

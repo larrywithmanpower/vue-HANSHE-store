@@ -535,7 +535,14 @@ export default {
       const url = 'https://randomuser.me/api/?results=3';
       this.$http.get(url).then((res) => {
         this.users = res.data.results;
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     getProduct() {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/product/${this.id}`;
@@ -552,7 +559,14 @@ export default {
           });
           this.isLoading = false;
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     addCart(id) {
       this.isLoading = true;
@@ -576,7 +590,14 @@ export default {
           });
           this.isLoading = false;
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
   },
 };

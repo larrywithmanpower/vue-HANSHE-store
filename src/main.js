@@ -39,6 +39,9 @@ import { localize, setLocale } from '@vee-validate/i18n';
 // import JSON設定黨
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 
+// copy
+import { VueClipboard } from '@soerenmartius/vue3-clipboard';
+
 import App from './App.vue';
 import router from './router';
 import toCurrency from './methods/toCurrency';
@@ -47,7 +50,7 @@ import toCurrency from './methods/toCurrency';
 const options = {
   showConfirmButton: false,
   timer: 1500,
-  position: 'top',
+  position: 'top-end',
   toast: true,
   width: '240px',
 };
@@ -71,6 +74,7 @@ app.use(VueAxios, axios);
 app.use(CKEditor);
 app.use(VueSweetalert2, options);
 app.use(VueEasyLightbox);
+app.use(VueClipboard);
 app.component('Loading', Loading);
 app.component('Form', Form);
 app.component('Field', Field);

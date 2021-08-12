@@ -50,50 +50,56 @@
       <!-- products -->
       <div class="col-lg-9">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          <div class="col" v-for="item in filterCategories" :key="item.id" data-aos="zoom-in"
-          data-aos-once="true">
+          <div
+            class="col"
+            v-for="item in filterCategories"
+            :key="item.id"
+            data-aos="zoom-in"
+            data-aos-once="true"
+          >
             <div class="card card-product h-100">
-              <div
+              <div class="position-relative">
+                <div
                 class="card-product__img"
-              >
-                <div class="overflow-hidden">
-                  <img
-                    :src="item.imageUrl"
-                    class="card-img-top"
-                    :alt="item.title"
-                  />
+                >
+                  <div class="overflow-hidden">
+                    <img
+                      :src="item.imageUrl"
+                      class="card-img-top"
+                      :alt="item.title"
+                    />
+                  </div>
+                  <a
+                    href="#"
+                    class="fs-5"
+                    @click.prevent="addMyFavorite(item)"
+                  >
+                    <i class="bi bi-heart text-primary"
+                    v-if="!myFavorite.includes(item.id)"></i>
+                    <i class="bi bi-heart-fill text-primary"
+                    v-else></i>
+                  </a>
+                  <span
+                    class="badge bg-success position-absolute top-0 p-2 rounded-0"
+                    v-if="item.is_new"
+                  >
+                      新品
+                  </span>
+                  <span
+                    class="badge bg-danger position-absolute top-0 p-2 rounded-0"
+                    v-else-if="item.is_hot"
+                  >
+                    熱銷品
+                  </span>
+                  <span
+                    class="badge bg-warning position-absolute top-0 p-2 rounded-0"
+                    v-if="item.is_hot && item.is_new"
+                  >
+                    熱銷新品
+                  </span>
                 </div>
-                <a
-                  href="#"
-                  class="fs-5"
-                  @click.prevent="addMyFavorite(item)"
-                >
-                  <i class="bi bi-heart text-primary"
-                  v-if="!myFavorite.includes(item.id)"></i>
-                  <i class="bi bi-heart-fill text-primary"
-                  v-else></i>
-                </a>
-                <span
-                  class="badge bg-success position-absolute top-0 p-2 rounded-0"
-                  v-if="item.is_new"
-                >
-                    新品
-                </span>
-                <span
-                  class="badge bg-danger position-absolute top-0 p-2 rounded-0"
-                  v-else-if="item.is_hot"
-                >
-                  熱銷品
-                </span>
-                <span
-                  class="badge bg-warning position-absolute top-0 p-2 rounded-0"
-                  v-if="item.is_hot && item.is_new"
-                >
-                  熱銷新品
-                </span>
-              </div>
-              <div
-                class="card-body text-center position-relative"
+                <div
+                class="card-body text-center"
               >
                 <p class="card-text mb-0">
                   <small class="text-muted">
@@ -108,6 +114,7 @@
                     $ {{ item.price }}
                   </small>
                 </p>
+                </div>
                 <a
                   href="#"
                   class="stretched-link"
@@ -119,6 +126,7 @@
                 class="btn btn-primary text-white rounded-0 py-2"
                 @click="addCart(item.id)"
                 :disabled="item.storageNum === 0"
+                style="position: relative;"
                 >
                 <i class="bi bi-cart"></i>
                 加入購物車
@@ -194,7 +202,14 @@ export default {
           });
           this.isLoading = false;
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
     getCategories() {
       const categories = new Set();
@@ -243,7 +258,14 @@ export default {
           });
           this.isLoading = false;
         }
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        this.$swal({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: err,
+        });
+      });
     },
   },
   computed: {
