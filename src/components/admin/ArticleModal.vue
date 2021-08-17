@@ -129,37 +129,24 @@
                   placeholder="請輸入您的大名"
                 />
               </div>
-              <div class="form-group">
-                <div
-                  class="mb-1"
-                  v-for="(item, index) in tempArticle.tag"
-                  :key="index"
-                >
-                  <label for="tag">
-                    標籤{{ index + 1 }}
-                  </label>
-                  <input
-                    v-model="tempArticle.tag[index]"
-                    type="text"
-                    class="form-control"
-                    placeholder="請輸入標籤名稱"
-                  >
-                </div>
-                <div class="btn-group w-100">
-                  <button
-                    type="button"
-                    class="btn btn-outline-primary btn-sm d-block w-100"
-                    @click="tempArticle.tag.push('')"
-                  >
-                    加入標籤
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger btn-sm d-block w-100"
-                    @click="tempArticle.tag.pop()">
-                        刪除標籤
-                  </button>
-                </div>
+              <!-- tags -->
+              <div class="tag-input form-group mb-3">
+                <label for="category">標籤</label>
+                <ul class="tags">
+                  <li v-for="(tag, index) in tempArticle.tag" :key="tag" class="tag">
+                    {{ tag }}
+                    <button class="delete" @click="removeTag(index)">x</button>
+                  </li>
+                </ul>
+                <input
+                  v-model="newTag"
+                  class="form-control"
+                  type="text"
+                  :style="{ 'padding-left': `${paddingLeft}px` }"
+                  @keydown.enter="addTag(newTag)"
+                  @keydown.prevent.tab="addTag(newTag)"
+                  @keydown.delete="newTag.length || removeTag(tags.length - 1)"
+                />
               </div>
               <hr>
               <div class="form-group mb-3">
@@ -232,6 +219,8 @@ export default {
     return {
       articleModal: {},
       tempArticle: {},
+      newTag: '',
+      paddingLeft: 10,
       editor: ClassicEditor,
       editorData: '<p>Content of the editor.</p>',
       editorConfig: {
@@ -261,7 +250,6 @@ export default {
           ],
         },
         language: 'tw',
-        // 設定語言
       },
     };
   },
@@ -316,6 +304,13 @@ export default {
       } else {
         this.tempArticle.imageUrl = '';
       }
+    },
+    addTag(tag) {
+      this.tempArticle.tag.push(tag);
+      this.newTag = '';
+    },
+    removeTag(index) {
+      this.tempArticle.tag.splice(index, 1);
     },
   },
 };

@@ -97,7 +97,7 @@
             夏季大拍賣
             <span class="decoration-text">Discount</span>
           </h2>
-          <p class="fs-4 d-none d-md-block">不同的時間點，一定要有不同的優惠，在最困難的時間，寒舍給您最大的折扣</p>
+          <p class="fs-4 d-none d-md-block">不同的時間點，一定要有不同的優惠，<br>在最困難的時間，寒舍給您最大的折扣</p>
           <button
             type="button"
             class="btn-animation raise"
@@ -181,6 +181,9 @@ export default {
 .carousel-caption {
   background-color: rgba(0, 0, 0, 0.6);
   bottom: 21rem;
+  @media (max-width: 1024px) {
+    bottom: 14rem;
+  }
   @media (max-width: 768px) {
     bottom: 1.25rem;
   }

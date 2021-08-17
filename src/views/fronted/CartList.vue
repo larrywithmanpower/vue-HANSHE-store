@@ -195,10 +195,18 @@ export default {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
       this.$http.get(url).then((res) => {
-        this.emitter.emit('update-cart');
-        this.carts = res.data.data.carts;
-        this.total = res.data.data.total;
-        this.isLoading = false;
+        if (res.data.success) {
+          this.emitter.emit('update-cart');
+          this.carts = res.data.data.carts;
+          this.total = res.data.data.total;
+          this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+          this.isLoading = false;
+        }
       });
     },
     updateCart(item) {

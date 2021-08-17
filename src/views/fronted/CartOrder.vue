@@ -118,11 +118,19 @@ export default {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
       this.$http.get(url).then((res) => {
-        // 要使用emitter否則重新整理會有問題
-        this.emitter.emit('update-cart');
-        this.carts = res.data.data.carts;
-        this.finalTotal = res.data.data.final_total;
-        this.isLoading = false;
+        if (res.data.success) {
+          // 要使用emitter否則重新整理會有問題
+          this.emitter.emit('update-cart');
+          this.carts = res.data.data.carts;
+          this.finalTotal = res.data.data.final_total;
+          this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+          this.isLoading = false;
+        }
       }).catch((err) => {
         this.$swal({
           icon: 'error',

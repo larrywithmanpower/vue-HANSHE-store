@@ -173,8 +173,16 @@ export default {
     getProducts() {
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/products/all`;
       this.$http.get(url).then((res) => {
-        this.products = res.data.products;
-        this.getFavoriteProducts();
+        if (res.data.success) {
+          this.products = res.data.products;
+          this.getFavoriteProducts();
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+          this.isLoading = false;
+        }
       });
     },
     getFavoriteProducts() {

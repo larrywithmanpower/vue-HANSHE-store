@@ -40,8 +40,8 @@
                       placeholder="請輸入圖片連結"
                       required
                     />
-                    <div class="invalid-feedback">
-                      至少放入一張圖片
+                    <div class="invalid-feedback" id="validationServer05Feedback">
+                      必填
                     </div>
                   </div>
                   <img class="img-fluid" :src="editProduct.imageUrl" />
@@ -433,7 +433,7 @@ export default {
             e.stopPropagation();
           }
           form.classList.add('was-validated');
-        }, false);
+        }, true);
       });
     }());
   },

@@ -132,6 +132,12 @@ export default {
         if (res.data.success) {
           this.article = res.data.article;
           this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+          this.isLoading = false;
         }
       }).catch((err) => {
         this.$swal({

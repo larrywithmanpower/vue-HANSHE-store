@@ -126,7 +126,7 @@ export default {
           const { token, expired } = res.data;
           // ! 存取token至cookie
           document.cookie = `myToken=${token}; expires=${new Date(expired)}`;
-          this.$router.push('/admin/products');
+          this.$router.push('/admin/adminProducts');
           this.loginModal.hide();
         } else {
           this.$swal({

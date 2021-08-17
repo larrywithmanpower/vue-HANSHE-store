@@ -143,7 +143,7 @@ export default {
             e.stopPropagation();
           }
           form.classList.add('was-validated');
-        }, false);
+        }, true);
       });
     }());
   },

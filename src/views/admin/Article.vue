@@ -154,11 +154,20 @@ export default {
           break;
         case 'edit':
           this.isNew = false;
-          this.tempArticle = {
-            imagesUrl: [],
-            ...article,
-            content: '新品文章',
-          };
+          if (!article.tag) {
+            this.tempArticle = {
+              imagesUrl: [],
+              ...article,
+              tag: [],
+              content: '新品文章',
+            };
+          } else {
+            this.tempArticle = {
+              imagesUrl: [],
+              ...article,
+              content: '新品文章',
+            };
+          }
           this.$refs.ArticleModal.showModal();
           break;
         case 'delete':

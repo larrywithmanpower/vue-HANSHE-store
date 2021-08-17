@@ -534,7 +534,15 @@ export default {
     getUser() {
       const url = 'https://randomuser.me/api/?results=3';
       this.$http.get(url).then((res) => {
-        this.users = res.data.results;
+        if (res.data.success) {
+          this.users = res.data.results;
+        } else {
+          this.$swal({
+            title: '資料取得錯誤',
+            icon: 'error',
+          });
+          this.isLoading = false;
+        }
       }).catch((err) => {
         this.$swal({
           icon: 'error',

@@ -103,8 +103,16 @@ export default {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/orders?page=${page}`;
       this.$http.get(url).then((res) => {
-        this.orders = res.data.orders;
-        this.isLoading = false;
+        if (res.data.success) {
+          this.orders = res.data.orders;
+          this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+          this.isLoading = false;
+        }
       }).catch((err) => {
         this.$swal({
           icon: 'error',
@@ -118,8 +126,16 @@ export default {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/order/${this.id}`;
       this.$http.get(url).then((res) => {
-        this.order = res.data.order;
-        this.isLoading = false;
+        if (res.data.success) {
+          this.order = res.data.order;
+          this.isLoading = false;
+        } else {
+          this.$swal({
+            title: res.data.message,
+            icon: 'error',
+          });
+          this.isLoading = false;
+        }
       }).catch((err) => {
         this.$swal({
           icon: 'error',

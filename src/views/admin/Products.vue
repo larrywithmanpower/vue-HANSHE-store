@@ -147,6 +147,7 @@ export default {
           this.isNew = true;
           this.tempProduct = {
             imagesUrl: [],
+            storageNum: 0,
           };
           this.$refs.ProductModal.showModal();
           break;
