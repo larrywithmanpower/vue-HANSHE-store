@@ -214,50 +214,50 @@
                         class="form-check-input"
                         type="radio"
                         id="rate1"
-                        value="1.0"
-                        v-model="editProduct.rate"
+                        :value='1'
+                        v-model.number="editProduct.rate"
                       >
-                      <label class="form-check-label" for="rate1">1.0</label>
+                      <label class="form-check-label" for="rate1">1</label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input
                         class="form-check-input"
                         type="radio"
                         id="rate2"
-                        value="2.0"
-                        v-model="editProduct.rate"
+                        :value='2'
+                        v-model.number="editProduct.rate"
                       >
-                      <label class="form-check-label" for="rate2">2.0</label>
+                      <label class="form-check-label" for="rate2">2</label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input
                         class="form-check-input"
                         type="radio"
                         id="rate3"
-                        value="3.0"
-                        v-model="editProduct.rate"
+                        :value="3"
+                        v-model.number="editProduct.rate"
                       >
-                      <label class="form-check-label" for="rate3">3.0</label>
+                      <label class="form-check-label" for="rate3">3</label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input
                         class="form-check-input"
                         type="radio"
                         id="rate4"
-                        value="4.0"
-                        v-model="editProduct.rate"
+                        :value="4"
+                        v-model.number="editProduct.rate"
                       >
-                      <label class="form-check-label" for="rate4">4.0</label>
+                      <label class="form-check-label" for="rate4">4</label>
                     </div>
                     <div class="form-check form-check-inline">
                       <input
                         class="form-check-input"
                         type="radio"
                         id="rate5"
-                        value="5.0"
-                        v-model="editProduct.rate"
+                        :value="5"
+                        v-model.number="editProduct.rate"
                       >
-                      <label class="form-check-label" for="rate5">5.0</label>
+                      <label class="form-check-label" for="rate5">5</label>
                     </div>
                   </div>
                 </div>
@@ -382,7 +382,7 @@ export default {
       productModal: {},
       editProduct: {
         storageNum: 0,
-        rate: '3.0',
+        rate: '3',
         is_new: 0,
         is_hot: 0,
       },

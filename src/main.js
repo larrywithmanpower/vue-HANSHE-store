@@ -42,6 +42,8 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 // copy
 import { VueClipboard } from '@soerenmartius/vue3-clipboard';
 
+// rate
+
 import App from './App.vue';
 import router from './router';
 import toCurrency from './methods/toCurrency';
