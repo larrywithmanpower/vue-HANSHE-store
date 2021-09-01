@@ -39,7 +39,7 @@
       <h2 class="text-center text-primary mb-5">
         <span class="border-bottom border-primary border-2 pb-2">經典鞋款</span>
       </h2>
-      <routerLink data-aos="fade-right" to="/products/productList"
+      <routerLink data-aos="flip-right" to="/products/productList"
       class="row align-items-center mb-4 introduction">
         <div
           class="col-md-7 bg-cover introduction-area"
@@ -78,7 +78,7 @@
           </p>
         </div>
       </routerLink>
-      <routerLink data-aos="fade-left" to="/products/productList"
+      <routerLink data-aos="flip-left" to="/products/productList"
       class="row flex-row-reverse align-items-center mb-4 introduction">
         <div
           class="col-md-7 bg-cover introduction-area"
@@ -119,7 +119,7 @@
         </div>
       </routerLink>
       <routerLink
-        data-aos="fade-right"
+        data-aos="flip-right"
         to="/products/productList"
         class="
         row
