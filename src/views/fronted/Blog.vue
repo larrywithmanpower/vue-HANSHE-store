@@ -132,7 +132,7 @@ export default {
         if (res.data.success) {
           this.article = res.data.article;
           this.isLoading = false;
-        } else {
+        } else if (this.$route.name === 'Blog') {
           this.$swal({
             title: res.data.message,
             icon: 'error',
