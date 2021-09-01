@@ -18,7 +18,7 @@
           rules="email|required"
           :class="{ 'is-invalid': errors['email'] }"
         />
-        <Error-message name="email" class="invalid-feedback"/>
+        <ErrorMessage name="email" class="invalid-feedback"/>
       </div>
       <div class="mb-3">
         <label for="username" class="form-label">收件人姓名</label>
@@ -32,7 +32,7 @@
           rules="required"
           :class="{ 'is-invalid': errors['姓名'] }"
         />
-        <Error-message name="姓名" class="invalid-feedback"/>
+        <ErrorMessage name="姓名" class="invalid-feedback"/>
       </div>
       <div class="mb-3">
         <label for="tel" class="form-label">收件人電話</label>
@@ -46,7 +46,7 @@
           :rules="isPhone"
           :class="{ 'is-invalid': errors['電話'] }"
         />
-        <Error-message name="電話" class="invalid-feedback"/>
+        <ErrorMessage name="電話" class="invalid-feedback"/>
       </div>
       <div class="mb-3">
         <label for="address" class="form-label">收件人地址</label>
@@ -60,7 +60,7 @@
           rules="required"
           :class="{ 'is-invalid': errors['地址'] }"
         />
-        <Error-message name="地址" class="invalid-feedback"/>
+        <ErrorMessage name="地址" class="invalid-feedback"/>
       </div>
       <div class="mb-3">
         <label for="leaveMsg" class="form-label">留言</label>

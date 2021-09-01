@@ -92,7 +92,7 @@
 }
 
 // fronted loading效果
-@keyframes ldio-kc4k04s39o {
+@keyframes loading {
   0% {
     top: 96px;
     left: 96px;
@@ -108,30 +108,30 @@
     opacity: 0;
   }
 }
-.ldio-kc4k04s39o div {
+.loading div {
   position: absolute;
   border-width: 4px;
   border-style: solid;
   opacity: 1;
   border-radius: 50%;
-  animation: ldio-kc4k04s39o 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: loading 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
-.ldio-kc4k04s39o div:nth-child(1) {
+.loading div:nth-child(1) {
   border-color: #59ab6e;
   animation-delay: 0s;
 }
-.ldio-kc4k04s39o div:nth-child(2) {
+.loading div:nth-child(2) {
   border-color: #46dff0;
   animation-delay: -0.5s;
 }
-.loadingio-spinner-ripple-i0ld0lo9l1 {
+.loading-spinner-ripple {
   width: 200px;
   height: 200px;
   display: inline-block;
   overflow: hidden;
   background: rgba(146, 146, 146, 0);
 }
-.ldio-kc4k04s39o {
+.loading {
   width: 100%;
   height: 100%;
   position: relative;
@@ -139,7 +139,7 @@
   backface-visibility: hidden;
   transform-origin: 0 0; /* see note above */
 }
-.ldio-kc4k04s39o div {
+.loading div {
   box-sizing: content-box;
 }
 

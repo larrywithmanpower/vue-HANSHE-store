@@ -40,11 +40,11 @@
         <span class="border-bottom border-primary border-2 pb-2">經典鞋款</span>
       </h2>
       <routerLink to="/products/productList"
-      class="row align-items-center mb-md-4 introduction">
+      class="row align-items-center mb-4 introduction">
         <div
           class="col-md-7 bg-cover introduction-area"
           style="
-            background-image: url(https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80);
+            background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/larry/1630483248604.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=Pr6kZ4WoXW81DsKTJ9j%2FqE4foFgvptb5Y9YIXUkafITXxxxWHQiC2bwexDjDouB9ZV7u5ogwCpBfIuUdAmPTf1F%2FJmYE9kHZXZGejn2JUSaEylX86bOGU%2B36Il%2Fzg7X4aM2jTZ6O%2B%2F8yYdTKIT4N3LF6csfZBIZ7K70hIKf74WxH6TRSqO%2BRHQSakfhmwFseWrpHysJ8fdkijKpSH6OX4FCythVKKoUKJxsZ%2BLsShMZZwpw%2FNor0LR8lC9njj%2FQOvNsIC3KXEPqZ9BqMGzcj2xvqlSOu8hqU4tIwQ7jhlynhMMYUiS2xbXCDp9a6bZkqCgh95FqJBxFEQDlDBe1TdA%3D%3D);
             height: 320px;"
         >
           <h3 class="innerText--hover">
@@ -79,11 +79,11 @@
         </div>
       </routerLink>
       <routerLink to="/products/productList"
-      class="row flex-row-reverse align-items-center mb-md-4 introduction">
+      class="row flex-row-reverse align-items-center mb-4 introduction">
         <div
           class="col-md-7 bg-cover introduction-area"
           style="
-            background-image: url(https://images.unsplash.com/photo-1578118725665-f4097cd63964?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM1fHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60);
+            background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/larry/1630483255612.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=ZOrdwYqTQL5E7RE7YbcuMslFgPxPXPZAYX7uZnAsMNVee%2FYzfVl%2FgSSB7cy8jUXt9EkDCAF0qaKx15vB%2Bdcc0gDGc9aqxBqTl9NBb3DDH6rU5b2Ax7C4NP4wxnUBWHzo9lXJrx4VfX34YWdTQbOWBLj2q9ZoBMy%2BuKLhh4B7mtu8NFfCy%2FXgubTCau0mUSnPOQ7bFRHF6PtTeFWiWTYp%2FCgfaDWWp5KAtdN1M4R1UY%2F3Bnax4LUkwErv36b9m%2FtFZ62VrTJ4wxVP70j0k%2BHewFdTZ8kU49M1u8Xgx7yOugBQioT9TRIyi5bxHPAp3XEYohZCcOr6sUplbWQpZvoJMA%3D%3D);
             height: 320px;"
         >
           <h3 class="innerText--hover">
@@ -123,20 +123,20 @@
         class="
         row
         align-items-center
-        mb-md-4
+        mb-4
         introduction"
       >
         <div
           class="col-md-7 bg-cover introduction-area"
           style="
-            background-image: url(https://images.unsplash.com/photo-1581067675122-a07ed597f1ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjc3fHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60);
+            background-image: url(https://storage.googleapis.com/vue-course-api.appspot.com/larry/1630483264987.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=fVRZnrY7heu2zM8QvR7udQItbu%2Bsqp3kioRF6LuBcnc61LQQL14KgTpS0jZKJRz80jrqho8WSfEmhvBwdsQ2t6NOdckyqaNDdFQJM5J%2FAXTsTn1NCj34oVFH7s74Qpar%2Bb1YJluFjZAfVe2tIkvOJNwoZatl%2BCqQsviaKhlIIa3P5zneA84RnUjSLGwwnwihjDUW%2Fi83vRkQ%2BEeVhSXwfQSrTXKc07oJPuSQNQ6A1JRB6LTxtEvIM6E7l0desV1pUxZHV2djG7IHuqJ7R9V0RFVrs%2Be%2Fqhgp8QEjy4G3VEKPklpZ8hXF3Z4QP9YRjc50h4wAFDQ0Opv4yYFcaMpZHA%3D%3D);
             height: 320px;"
         >
         <h3 class="innerText--hover">
           <span class="d-none d-md-block">
             了解更多
           </span>
-          <span class="d-md-none">
+          <span class="d-none">
             <i class="bi bi-gender-ambiguous"></i>
             休閒混搭
           </span>

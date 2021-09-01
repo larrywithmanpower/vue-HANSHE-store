@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import { Modal } from 'bootstrap';
+import Modal from 'bootstrap/js/dist/modal';
 
 export default {
   props: ['isNew', 'coupon'],
@@ -133,8 +133,7 @@ export default {
   mounted() {
     this.couponModal = new Modal(this.$refs.couponModal);
     // validation
-    // eslint-disable-next-line func-names
-    (function () {
+    (function formValidate() {
       const forms = document.querySelectorAll('.needs-validation');
       Array.prototype.slice.call(forms).forEach((form) => {
         form.addEventListener('submit', (e) => {

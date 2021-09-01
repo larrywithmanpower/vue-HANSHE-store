@@ -83,7 +83,7 @@
     :is-new="isNew"
     @update-product="updateProduct"
     :tempProduct="tempProduct"
-  ></ProductModal>
+  />
 
   <DelModal
     ref="DelModal"

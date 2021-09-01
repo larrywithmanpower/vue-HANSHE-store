@@ -1,7 +1,7 @@
 <template>
   <Loading :active="isLoading">
-    <div class="loadingio-spinner-ripple-i0ld0lo9l1">
-      <div class="ldio-kc4k04s39o">
+    <div class="loading-spinner-ripple">
+      <div class="loading">
         <div></div>
         <div></div>
       </div>
@@ -62,7 +62,7 @@
           </h2>
           <div
             class="card mb-3"
-            v-for="(item, index) in searchArticle"
+            v-for="(item, index) in filterArticles"
             :key="index"
           >
             <img
@@ -154,11 +154,15 @@ export default {
       this.$http.get(url).then((res) => {
         if (res.data.success) {
           this.articles = res.data.articles;
+
+          const filterAry = [];
           this.articles.forEach((item) => {
             if (item.id !== this.id) {
-              this.filterArticles.push(item);
+              filterAry.push(item);
+              this.filterArticles = [...new Set(filterAry)];
             }
           });
+
           this.isLoading = false;
         } else {
           this.$swal({
@@ -178,6 +182,7 @@ export default {
     },
     goToPage(id) {
       this.$router.push(`/blogs/blog/${id}`);
+      this.getArticles();
     },
   },
   computed: {

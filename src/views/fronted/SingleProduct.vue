@@ -1,7 +1,7 @@
 <template>
   <Loading :active="isLoading">
-    <div class="loadingio-spinner-ripple-i0ld0lo9l1">
-      <div class="ldio-kc4k04s39o">
+    <div class="loading-spinner-ripple">
+      <div class="loading">
         <div></div>
         <div></div>
       </div>
@@ -13,7 +13,7 @@
         <img class="img-fluid" :src="product.imageUrl" alt="product.title" />
       </div>
       <div class="col-md-6 px-5">
-        <h1 class="fw-bold">{{ product.title }}</h1>
+        <h1 class="h2 fw-bold">{{ product.title }}</h1>
         <ul class="d-flex list-unstyled align-items-center">
           <li class="text-warning me-3">
             <StarRating
@@ -58,7 +58,7 @@
             :disabled="product.storageNum === 0"
           />
           <button
-            class="btn btn-primary"
+            class="btn btn-primary rounded-end"
             type="button"
             @click="qty++"
             :disabled="product.storageNum === 0"
@@ -66,7 +66,7 @@
             <i class="bi bi-plus"></i>
           </button>
           <button
-            class="btn btn-outline-primary d-none d-md-block"
+            class="btn btn-outline-primary d-none d-md-block ms-1 rounded fw-bold border-2"
             type="button"
             @click="addCart(product.id)"
             :disabled="product.storageNum === 0 || qty === 0"
@@ -78,7 +78,7 @@
           class="btn btn-outline-primary d-block d-md-none w-100"
           type="button"
           @click="addCart(product.id)"
-          :disabled="product.storageNum === 0"
+          :disabled="product.storageNum === 0 || qty === 0"
         >
           加入購物車
         </button>
@@ -222,6 +222,7 @@ export default {
     addCart(id) {
       this.isLoading = true;
       const url = `${process.env.VUE_APP_URL}/api/${process.env.VUE_APP_PATH}/cart`;
+
       const data = {
         product_id: id,
         qty: this.qty,

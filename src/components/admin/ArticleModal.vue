@@ -209,7 +209,7 @@
 </template>
 
 <script>
-import { Modal } from 'bootstrap';
+import Modal from 'bootstrap/js/dist/modal';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {

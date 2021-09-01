@@ -1,6 +1,6 @@
 <template>
   <div class="position-relative">
-      <Navbar />
+    <Navbar />
   </div>
   <div id="main"></div>
   <router-view></router-view>

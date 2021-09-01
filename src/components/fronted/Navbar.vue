@@ -192,7 +192,6 @@ export default {
   mounted() {
     window.addEventListener('scroll', this.navbarTransition);
     this.emitter.on('update-cart', this.getCarts);
-    // ! 要加上下面那行，不然重新整理會沒有值
     this.getCarts();
     this.getProducts();
     this.getFavorite();
@@ -201,7 +200,7 @@ export default {
       this.getFavoriteProducts();
     });
   },
-  unmounted() { // 離開頁面後移除監聽事件
+  unmounted() {
     window.removeEventListener('scroll', this.navbarTransition);
     this.emitter.off('update-cart', this.getCarts);
     this.emitter.off('get-favorite', () => {

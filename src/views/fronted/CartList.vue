@@ -1,7 +1,7 @@
 <template>
   <Loading :active="isLoading">
-    <div class="loadingio-spinner-ripple-i0ld0lo9l1">
-      <div class="ldio-kc4k04s39o">
+    <div class="loading-spinner-ripple">
+      <div class="loading">
         <div></div>
         <div></div>
       </div>
@@ -184,7 +184,6 @@ export default {
     // reveive code from footer
     this.emitter.on('getCouponCode', (code) => {
       this.coupon_code = code;
-      console.log(this.coupon_code);
     });
   },
   unmounted() {

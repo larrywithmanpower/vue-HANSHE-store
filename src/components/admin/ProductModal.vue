@@ -371,7 +371,7 @@
 </template>
 
 <script>
-import { Modal } from 'bootstrap';
+import Modal from 'bootstrap/js/dist/modal';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
@@ -423,8 +423,7 @@ export default {
   mounted() {
     this.productModal = new Modal(this.$refs.productModal);
     // validation
-    // eslint-disable-next-line func-names
-    (function () {
+    (function formaValidate() {
       const forms = document.querySelectorAll('.needs-validation');
       Array.prototype.slice.call(forms).forEach((form) => {
         form.addEventListener('submit', (e) => {

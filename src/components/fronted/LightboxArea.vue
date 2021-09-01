@@ -26,7 +26,6 @@
 </template>
 
 <script>
-// 如果VueApp已经注册组件，则这里不需要单独引入
 import VueEasyLightbox from 'vue-easy-lightbox';
 
 export default {
@@ -52,9 +51,9 @@ export default {
           src: 'https://images.unsplash.com/photo-1601138187846-c817edbb7d63?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTgwfHxzaG9lfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60',
           title: '生活品味',
         },
-      ], // Img Url , string or Array
+      ],
       visible: false,
-      index: 0, // default: 0
+      index: 0,
       fullWidth: 0,
       fullHeight: 0,
     };
@@ -142,8 +141,6 @@ export default {
           },
         ];
       }
-      // 允许混合imgs参数
-
       this.index = 1; // index of imgList
       this.show();
     },
