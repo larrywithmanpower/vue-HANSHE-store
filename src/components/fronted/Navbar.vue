@@ -159,7 +159,7 @@ export default {
       } else {
         this.classList = {
           navbarTop: ['bg-transparent-dark'],
-          navbarInner: ['navbar-dark', 'fw-bold', 'py-3', 'position-absolute', 'z-index-2', 'h5'],
+          navbarInner: ['navbar-dark', 'fw-bold', 'py-3', 'position-absolute', 'z-index-2', 'fs-5'],
         };
       }
     },
@@ -168,6 +168,7 @@ export default {
       this.$http.get(url).then((res) => {
         this.carts = res.data.data.carts;
         this.finalTotal = res.data.data.final_total;
+        console.log(this.$router);
       });
     },
     getProducts() {
@@ -190,6 +191,7 @@ export default {
     },
   },
   mounted() {
+    this.navbarTransition();
     window.addEventListener('scroll', this.navbarTransition);
     this.emitter.on('update-cart', this.getCarts);
     this.getCarts();
